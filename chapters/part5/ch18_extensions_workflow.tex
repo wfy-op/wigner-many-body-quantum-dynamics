@@ -1,0 +1,162 @@
+\chapter{开放系统、替代方法与研究工作流}
+\label{ch:extensions-workflow}
+
+\begin{learningobjectives}
+完成本章后，读者应能：
+\begin{enumerate}
+  \item 从 Lindblad 主方程识别 Wigner 漂移、扩散与额外截断；
+  \item 根据初态、维数、占据、观测量和时间尺度选择 TWA 或替代方法；
+  \item 把物理主张转化为带基准、收敛、元数据和停止条件的计算工作流；
+  \item 为可复现研究保存从输入、代码、随机数到最终图表的证据链。
+\end{enumerate}
+\end{learningobjectives}
+
+\section{开放系统的相空间方程}
+
+Markov 开放系统常写成 Lindblad 方程\cite{Lindblad1976}
+\begin{equation}
+  \partial_t\rhohat=-\frac{\ii}{\hbar}\comm{\Hhat}{\rhohat}
+  +\sum_\ell\left(
+  \hat L_\ell\rhohat\hat L_\ell^\dagger
+  -\frac12\acomm{\hat L_\ell^\dagger\hat L_\ell}{\rhohat}
+  \right).
+  \label{eq:lindblad-master-equation}
+\end{equation}
+Wigner 变换后，线性 Lindblad 算符通常产生至多二阶导数，得到真正的 Fokker--Planck 方程。以单模损耗
+$\hat L=\sqrt\kappa\,\ha$ 为例，在复 Wiener 增量满足
+$\ensavg{\dd W\dd W^*}=\dd t$、$\ensavg{\dd W^2}=0$ 的约定下，轨迹为
+\begin{equation}
+  \dd\alpha=\left[-\frac{\ii}{\hbar}
+  \frac{\partial H_W}{\partial\alpha^*}
+  -\frac\kappa2\alpha\right]\dd t
+  +\sqrt{\frac\kappa2}\,\dd W.
+  \label{eq:wigner-linear-loss-sde}
+\end{equation}
+噪声项不是数值误差，而是保持真空涨落所必需的扩散。若只给经典场加阻尼而不加相应噪声，会破坏量子稳态和涨落--耗散关系。
+
+非线性跳跃算符或非线性 Hamilton 量仍可能产生三阶及更高导数。此时把方程截为二阶是开放系统 TWA，既含 Hamilton 截断误差，也可能含耗散通道截断误差。还必须声明随机微分方程采用 It\^o 还是 Stratonovich 解释；两者漂移在乘性噪声下不同。
+
+\section{TWA 之外的相空间方法}
+
+\subsection{positive-P 表示}
+
+positive-P 把每个模式扩充为独立复变量 $\alpha,\beta$，不要求
+$\beta=\alpha^*$。对许多最多四次的玻色 Hamilton 量，主方程可精确映射为二阶 Fokker--Planck 方程，因此原则上没有 TWA 的 Moyal 截断。代价是轨迹权重和变量可能形成长尾，抽样方差随时间爆炸，边界项也需诊断。它是“动力学表示更精确但统计窗口可能更短”的方法，而不是无条件优于 TWA。
+这一加倍相空间构造的经典来源见文献\cite{Drummond1980}。
+
+\subsection{随机规范与混合表示}
+
+gauge-P 等方法通过附加权重和随机规范改变扩散路径，尝试延长可用时间；选择不当会带来权重离群和偏差。不同模式也可采用混合表示，例如高占据凝聚模用 Wigner、低占据量子模用正 P，但跨表示耦合必须从统一主方程推导。
+
+\subsection{Husimi Q 与 Glauber--Sudarshan P}
+
+Q 函数总为非负，却对应反正规排序，动力学方程未必易于抽样；传统 P 表示对应正规排序，但对非经典态可能比普通函数更奇异。相空间分布的正性、算符排序便利和动力学阶数是三项不同属性，不能只按“是否能画成概率密度”选方法。
+
+\section{非相空间替代方法}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.20\textwidth}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X}
+\toprule
+方法 & 强项 & 主要限制与交叉用途 \\
+\midrule
+精确对角化 & 小系统全量子谱与任意观测量 & Hilbert 空间指数增长；用于少模、低粒子数、短时基准 \\
+MPS/张量网络\cite{Vidal2003} & 一维局域模型、受控截断 & 纠缠增长限制长时与高维；用于一维短中时关联 \\
+量子蒙特卡洛 & 平衡态、无符号问题时高精度 & 实时与符号问题；用于平衡能量、刚度、结构因子 \\
+Bogoliubov 法 & 弱涨落、解析协方差 & 非线性饱和不足；用于早时、稳定谱和软模 \\
+Keldysh 动理学 & 弱耦合长时碰撞与输运 & 依赖闭合和梯度展开；用于模式占据与碰撞率 \\
+正 P 表示 & 某些玻色模型的无截断动力学 & 抽样爆炸和边界项；用于 TWA 早中时系统误差 \\
+实验模拟器 & 包含真实多体动力学 & 参数标定和观测有限；用于最终可测量预测 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+方法选择应围绕结论最敏感的量子信息。若目标是第17章的一维超流刚度，平衡 MPS 或量子 Monte Carlo 可能比延长经典场轨迹更直接；若目标是大占据三维凝聚体的短时密度，TWA 可能更经济；若目标是低占据模式的高阶计数，TWA 风险明显增大。
+
+\section{从物理主张反推计算设计}
+
+推荐以一句可证伪主张开始，而不是以“运行很多轨迹”开始。例如：
+\begin{quote}
+在固定密度、固定物理截止和指定时间窗内，目标波矢 $Q$ 的结构因子随粒子数线性增长，同时弱扭转响应给出非零尺寸外推刚度。
+\end{quote}
+这句话直接决定所需尺寸序列、观测量、误差模型和反例。完整工作流可分为：
+\begin{enumerate}
+  \item \textbf{模型冻结}：写明 Hamilton 量、维数、边界、单位和模式投影；
+  \item \textbf{初态冻结}：写明密度算符或匹配的矩、BdG 基、温度和粒子数约束；
+  \item \textbf{解析极限}：二次、无相互作用、弱涨落或守恒量结果；
+  \item \textbf{小系统基准}：与精确方法在可重叠参数和时间窗比较；
+  \item \textbf{数值收敛}：步长、计算域、模式截止和轨迹数分别变化；
+  \item \textbf{生产运行}：只在预先通过的参数窗中扩展规模；
+  \item \textbf{盲化分析}：预注册 $Q$、时间窗、拟合形式和排除规则；
+  \item \textbf{结论分级}：把主张限制在实际证据层级。
+\end{enumerate}
+
+\section{最小可复现记录}
+
+每个生产数据集至少应伴随一个机器可读清单：
+\begin{enumerate}
+  \item 代码版本或提交哈希，运行入口和依赖版本；
+  \item 所有物理参数及从 SI 到无量纲单位的转换；
+  \item 网格、边界、截止、投影和 FFT 归一化；
+  \item 主随机种子、子流派生规则和轨迹标识范围；
+  \item 初态生成器、被排除的 BdG 模和协方差验收结果；
+  \item 积分器、步长、输出间隔、守恒漂移和反向误差；
+  \item 原始轨迹或足够的无损统计量、分析脚本和图数据；
+  \item 所有失败运行及失败原因，而不只保存最好看的参数。
+\end{enumerate}
+图像不是数据归档。每一条曲线都应能追溯到参数清单、轻量数值表和生成脚本。
+
+\section{自动化测试层级}
+
+\subsection{单元测试}
+
+检查 Fourier 归一化、Weyl 修正、随机协方差、BdG 辛范数、守恒量和观测量估计器。输入应尽量使用解析可解状态。
+
+\subsection{集成测试}
+
+从固定种子初态经传播到最终观测量，比较小规模基准文件。允许统计容差，但容差必须由样本方差或数值阶数推导，不能任意放宽到“测试能过”。
+
+\subsection{科学回归测试}
+
+保存少量关键结论的无量纲指标，例如 Kerr 早时误差、二聚体精确基准、分步法阶数和条纹玩具模型斜率。代码重构后若这些量改变，应要求物理审查，而不是自动更新基线。
+
+\section{停止条件与负结果}
+
+以下任一情况出现时，应停止扩大规模并回到模型或方法层：
+\begin{enumerate}
+  \item 目标模式占据降到与半量子同量级，且结果对截止强敏感；
+  \item 精确小系统误差在目标时间前已经系统增长；
+  \item 步长减半不呈现预期阶数，或守恒量随轨迹数变化；
+  \item 不同初态、截止或分析窗给出互不兼容的“温度”；
+  \item 超固态判据的密度序和刚度不能在同一状态中同时成立；
+  \item 统计误差虽小，但系统方法差异远大于目标效应。
+\end{enumerate}
+负结果不是失败的计算。确定一个主张超出 TWA 的可控窗口，或证明条纹峰只随 $L^0$ 标度，都是可复现、可发表的知识。
+
+\section{全书工作流汇总}
+
+给定初态 $\rhohat_0$、Hamilton 量 $\Hhat$ 和观测量 $\Ohat$，本书的闭环是：
+\begin{enumerate}
+  \item 固定有限模式模型并求 $H_W$；
+  \item 构造或近似初态 Wigner 分布，回测目标矩；
+  \item 在 Moyal 截断后传播经典或随机场轨迹；
+  \item 用 Weyl 符号和排序修正重建观测量；
+  \item 分别量化抽样、积分、截止、初态和方法误差；
+  \item 用独立极限或方法决定结论能达到哪一层。
+\end{enumerate}
+TWA 的力量不在于把量子系统“变成经典系统”，而在于把初态量子涨落、非线性经典传播和可审计近似边界组织成一个可计算框架。
+
+\begin{chaptercheck}
+在项目开始前建立一页“主张--证据--反例--停止条件”表。每次增加轨迹或系统尺寸前，先判断新运行能排除哪个具体反例；若不能改变结论可信度，就不应仅为获得更平滑的图而消耗计算资源。
+\end{chaptercheck}
+
+\section*{本章小结}
+
+开放系统的 Wigner 方程可以包含物理扩散噪声，非线性跳跃仍可能需要截断。positive-P、张量网络、精确对角化和量子动理学保存不同的量子信息，应按目标主张组合使用。可靠研究从可证伪结论反推模型、基准、收敛和元数据，并设置明确停止条件。至此，全书从 Wigner 基础、TWA 推导、玻色场实现走到双分量淬火与超固态证据标准，形成完整计算闭环。
+
+\begin{exercises}
+  \item 验证式\eqref{eq:wigner-linear-loss-sde}使真空稳态保持 $\ensavg{|\alpha|^2}=1/2$。
+  \item 为两体损耗跳跃算符列出 Wigner 方程可能出现的最高导数阶数，并说明为何需要额外截断。
+  \item 针对一维双分量淬火，设计 TWA、MPS 与 Bogoliubov 三种方法的重叠验证窗口。
+  \item 写一个包含随机种子、单位、截止和代码哈希的最小 JSON 运行清单。
+  \item 为一项“观察到晚时量子热化”的主张制定三条停止条件。
+\end{exercises}

@@ -1,0 +1,175 @@
+\chapter{相位扩散、模式耦合与预热化}
+\label{ch:phase-dynamics}
+
+\begin{learningobjectives}
+完成本章后，读者应能：
+\begin{enumerate}
+  \item 区分全局相位扩散、有限波数去相位和非线性碰撞再分配；
+  \item 由相对数涨落推导相干因子的 Gaussian 衰减；
+  \item 用模式占据、反常关联和守恒量识别预热化时间窗；
+  \item 说明为什么非线性 TWA 轨迹中的阻尼不能单独证明不可逆量子热化。
+\end{enumerate}
+\end{learningobjectives}
+
+\section{三种容易混淆的“失相干”}
+
+关闭线性耦合后，跨分量相干
+\begin{equation}
+  C_{LR}(t)=
+  \frac{\int\dd x\,\qavg{\hat\Psi_L^\dagger(x,t)\hat\Psi_R(x,t)}}
+  {\sqrt{\qavg{\hat N_L}\qavg{\hat N_R}}}
+  \label{eq:intercomponent-coherence}
+\end{equation}
+通常下降，但至少有三种不同机制：
+\begin{enumerate}
+  \item \textbf{全局相位扩散}：不同相对粒子数分量具有不同化学势差；
+  \item \textbf{线性模式去相位}：不同 $k$ 的稳定 Bogoliubov 模以不同频率旋转；
+  \item \textbf{非线性模式耦合}：三波、四波过程改变模式占据并可能建立动理学松弛。
+\end{enumerate}
+它们可以在同一曲线上叠加，却对应不同可逆性、尺寸标度和理论近似。只拟合一个指数衰减常数不能识别机制。
+
+跨分量算符 $\hat\Psi_L^\dagger\hat\Psi_R$ 已是两个不同正则模式的双线性乘积，其 Wigner 估计器直接是
+$\ensavg{\psi_L^*\psi_R}$，没有同分量密度的半量子接触扣除。
+
+\section{零模的相位扩散}
+
+令相对数差为 $\delta N=(N_L-N_R)/2$，相对相位为
+$\phi=\theta_R-\theta_L$。在小涨落集体坐标中，淬火前可写成
+\begin{equation}
+  H_{\rm rel}=\frac{E_C}{2}(\delta N)^2
+  +\frac{E_J}{2}\phi^2,
+  \label{eq:relative-collective-hamiltonian}
+\end{equation}
+其中 $E_J$ 来自式\eqref{eq:josephson-phase-energy}在极小值附近的展开。关闭 $J$ 后取 $E_J=0$，Hamilton 方程给出
+\begin{equation}
+  \delta N(t)=\delta N(0),
+  \qquad
+  \phi(t)=\phi(0)+\frac{E_Ct}{\hbar}\delta N(0).
+  \label{eq:phase-diffusion-trajectory}
+\end{equation}
+若初态是 Gaussian，便有
+\begin{align}
+  \Var[\phi(t)]={}&\Var[\phi(0)]
+  +2\frac{E_Ct}{\hbar}\Cov[\phi(0),\delta N(0)]
+  +\left(\frac{E_Ct}{\hbar}\right)^2\Var[\delta N(0)].
+  \label{eq:phase-variance-growth}
+\end{align}
+当均值为零时，圆相干因子为
+\begin{equation}
+  \qavg{\ee^{\ii\phi(t)}}
+  =\exp\!\left[-\frac12\Var[\phi(t)]\right].
+  \label{eq:gaussian-phase-coherence}
+\end{equation}
+若初始交叉协方差可忽略，可定义尺度
+\begin{equation}
+  \tau_\phi=\frac{\hbar}{E_C\sqrt{\Var(\delta N)}}.
+  \label{eq:phase-diffusion-time}
+\end{equation}
+它控制 Gaussian 包络，而不是普适的指数寿命。
+
+相位扩散来自相对数的不确定度。若数守恒初态固定在单一 $\delta N$ 扇区，并且没有空间模式或其他噪声使化学势差变化，式\eqref{eq:phase-diffusion-trajectory}只给确定性相位转动，不产生该系综去相位。反之，相干态抽样天然含相对数涨落。
+
+有限量子转子的数谱离散，长时间可以出现回复。把 $\delta N$ 当连续变量的 Gaussian TWA 能准确描述早期展开，却通常丢失离散谱干涉造成的精确回复。这与第6章 Kerr 反例是同一种限制。
+
+\section{空间相位场与线性去相位}
+
+低能自旋通道可用相对相位 $\phi(x)$ 与相对密度 $s(x)$ 描述：
+\begin{equation}
+  H_s^{(2)}=\frac12\int\dd x\left[
+  \chi_s^{-1}s(x)^2+\rho_s(\partial_x\phi)^2
+  +M_J^2\phi(x)^2\right].
+  \label{eq:spin-hydrodynamic-hamiltonian}
+\end{equation}
+$M_J$ 在耦合关闭后消失。每个稳定 Fourier 模都是独立谐振子；第15章的淬火协方差在这些模式中旋转。局域相干满足 Gaussian 恒等式
+\begin{equation}
+  \qavg{\ee^{\ii[\phi(x,t)-\phi(x',t)]}}
+  =\exp\!\left[-\frac12
+  \qavg{[\phi(x,t)-\phi(x',t)]^2}\right].
+  \label{eq:gaussian-spatial-coherence}
+\end{equation}
+不同波数的非公度频率会使简单观测量趋于平滑平台，即使每个模式占据在严格二次理论中保持不变。这是相位混合或去相位，不是能量在模式间碰撞转移。
+
+在近线性色散中，关联变化还会呈现有限传播速度形成的“光锥”结构。计算域必须大到使该前沿在分析窗口内不绕过周期边界。
+
+\section{预热化平台}
+
+若存在时间尺度分离
+\begin{equation}
+  \tau_{\rm dephase}\ll t\ll\tau_{\rm collision},
+  \label{eq:prethermal-window}
+\end{equation}
+局域观测量可能已经近似平稳，而近似守恒的线性模式占据仍保留初态信息。这一中间状态称为预热化平台；孤立一维量子气体中已有相应实验观测\cite{Gring2012}。它常可由 Gaussian 协方差或广义统计系综描述，但“有效温度”可能依赖观测通道和波数范围。
+
+识别预热化至少应同时展示：
+\begin{enumerate}
+  \item 一些实空间观测量已进入平台；
+  \item 线性模式占据在该窗口内近似不变；
+  \item 反常关联通过去相位下降或振荡平均；
+  \item 更晚时非线性占据再分配尚未显著；
+  \item 平台随系统尺寸和截止的变化受控。
+\end{enumerate}
+
+\section{非线性模式耦合}
+
+把完整 Hamilton 量在凝聚背景附近展开，除了 $H^{(2)}$ 外还有
+\begin{equation}
+  H=H^{(0)}+H^{(2)}+H^{(3)}+H^{(4)}+\cdots.
+\end{equation}
+$H^{(3)}$ 允许满足能量--动量条件的一模衰变为两模及其逆过程，通常与 Beliaev 和 Landau 过程相关；$H^{(4)}$ 产生四波散射与频率重整化。是否存在共振取决于实际色散、维数、陷阱和 SOC，自旋“Cherenkov 发射”不是所有双分量模型的普适标签。
+
+非线性 GPE/TWA 轨迹确实包含这些经典场模式耦合顶角，无需手工附加碰撞项。但由此观察到模式占据变化，只能说明所模拟的截断经典场发生了再分配。要把速率解释成量子 Beliaev--Landau 碰撞，还需在弱耦合重叠区与量子动理学或微扰计算比较，并检查每个参与模式的占据与截止依赖。
+
+\section{“不可逆”需要操作定义}
+
+闭合 TWA 轨迹的 Hamilton 流是微观可逆的。若保存终态并用负时间步长精确反演，理想数值程序应回到初态；系综平均阻尼来自相空间剪切、混合和信息粗粒化。真正的实验不可逆性可以由不可控自由度、开放系统或热力学极限中的极长回归时间产生，但不能由一条平滑衰减曲线单独证明。
+
+可以设计三类区分实验：
+\begin{enumerate}
+  \item \textbf{回波}：在 $t_e$ 反转可控 Hamilton 参数，检查相干是否恢复；
+  \item \textbf{占据账本}：区分固定占据的去相位与随时间改变的碰撞再分配；
+  \item \textbf{分布检验}：比较晚时模式分布与 Bose--Einstein、Rayleigh--Jeans 及广义系综，并做截止稳定性。
+\end{enumerate}
+TWA 的晚时经典场常趋向截止相关的 Rayleigh--Jeans 型分布，因此仅凭“拟合出温度”不能声称量子热化。
+
+\section{实际相位扩散基准}
+
+配套程序对式\eqref{eq:phase-diffusion-trajectory}抽样 $2\times10^5$ 条 Gaussian 轨迹，并与式\eqref{eq:phase-variance-growth}和\eqref{eq:gaussian-phase-coherence}比较：
+\begin{center}
+  \includegraphics[width=0.78\textwidth]{figures/ch16/phase_diffusion.pdf}
+\end{center}
+图中相干衰减完全来自相对数导致的可逆相空间剪切，没有加入碰撞或耗散。指标保存在
+\path{data/ch16/phase_diffusion_metrics.json}。
+
+\section{从轨迹提取相对相位}
+
+低密度点的局域相位噪声会发散，直接平均
+$\arg\psi_R(x)-\arg\psi_L(x)$ 不稳健。全局相位可由复重叠
+\begin{equation}
+  A_{LR}^{(s)}(t)=\int\dd x\,
+  \psi_L^{(s)*}(x,t)\psi_R^{(s)}(x,t),
+  \qquad
+  \phi_s=\arg A_{LR}^{(s)}
+  \label{eq:trajectory-relative-phase}
+\end{equation}
+定义，并用圆统计量
+\begin{equation}
+  R_\phi=\left|\frac1{N_s}\sum_s\ee^{\ii\phi_s}\right|
+  \label{eq:circular-resultant}
+\end{equation}
+衡量相位锁定。均匀分布在有限样本下也给出正的 $R_\phi$，应通过随机均匀相位空模型或已知的圆统计分布校准，而不是把任何非零值解释为残余相干。
+
+\begin{chaptercheck}
+当相干因子下降时，同时画出：相对相位圆分布、零模相对数、各 $k$ 正常占据、反常关联、总能量和反向传播误差。只有这些量的联合变化才能区分相位扩散、线性去相位、非线性再分配和数值伪阻尼。
+\end{chaptercheck}
+
+\section*{本章小结}
+
+全局相位扩散由相对数不确定度造成，Gaussian 相干包络可由协方差精确预测；空间模式的线性去相位可以产生预热化平台，却不改变二次理论中的模式占据。非线性场方程包含模式耦合，但 TWA 晚时阻尼仍可能是可逆混合或截止相关经典化。碰撞热化与不可逆性需要回波、占据再分配、分布和独立量子方法共同支持。
+
+\begin{exercises}
+  \item 从式\eqref{eq:phase-diffusion-trajectory}推导含非零初始交叉协方差的式\eqref{eq:phase-variance-growth}。
+  \item 对固定相对数态解释为什么 Gaussian 相位扩散公式不适用。
+  \item 在二次模式理论中证明正常模式占据不变而反常矩发生相位旋转。
+  \item 设计一个回波协议，分别对纯去相位与弱碰撞情形给出预期结果。
+  \item 提出至少三项证据，区分 Bose--Einstein 热分布与截止相关 Rayleigh--Jeans 分布。
+\end{exercises}

@@ -1,0 +1,12 @@
+{
+  "seed": 20260714,
+  "trajectories": 200000,
+  "hbar": 1.0,
+  "charging_energy": 0.1,
+  "sigma_number": 3.0,
+  "sigma_phase": 0.15,
+  "initial_phase_number_covariance": 0.0,
+  "phase_diffusion_time": 3.333333333333333,
+  "max_phase_variance_absolute_error": 0.024872276090361467,
+  "max_coherence_absolute_error": 0.0021517595079774132
+}

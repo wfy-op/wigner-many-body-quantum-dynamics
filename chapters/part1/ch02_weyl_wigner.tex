@@ -1,0 +1,181 @@
+\chapter{Weyl 变换与 Wigner 函数}
+\label{ch:weyl-wigner}
+
+\begin{learningobjectives}
+完成本章后，读者应能：
+\begin{enumerate}
+  \item 从密度矩阵写出 Wigner 函数，并验证归一化和边缘分布；
+  \item 计算简单算符的 Weyl 符号；
+  \item 解释为什么 Wigner 平均对应对称排序；
+  \item 正确抽样相干态和真空态的单模 Wigner 分布。
+\end{enumerate}
+\end{learningobjectives}
+
+\section{从密度矩阵到实函数}
+
+考虑一对正则变量 $\hat q,\hat p$，满足
+\begin{equation}
+  \comm{\hat q}{\hat p}=\ii\hbar.
+\end{equation}
+密度算符 $\rhohat$ 在坐标表象中的矩阵元 $\mel{q_1}{\rhohat}{q_2}$ 依赖两个坐标。引入中心坐标 $q=(q_1+q_2)/2$ 和相对坐标 $y=q_1-q_2$，再对 $y$ 作 Fourier 变换，得到 Wigner 函数
+\begin{equation}
+  W(q,p)=\frac{1}{2\pi\hbar}
+  \int_{-\infty}^{\infty}\dd y\,
+  \ee^{-\ii p y/\hbar}
+  \mel{q+y/2}{\rhohat}{q-y/2}.
+  \label{eq:wigner-coordinate-definition}
+\end{equation}
+这里选择的系数使
+\begin{equation}
+  \int\dd q\,\dd p\,W(q,p)=\Tr\rhohat=1.
+  \label{eq:wigner-normalization}
+\end{equation}
+
+\begin{derivationbox}
+对\cref{eq:wigner-coordinate-definition} 先积分 $p$，利用
+\[
+  \int\dd p\,\ee^{-\ii p y/\hbar}=2\pi\hbar\,\delta(y),
+\]
+便得到 $\int\dd p\,W(q,p)=\mel{q}{\rhohat}{q}$。再积分 $q$ 即为迹。这个计算也说明 Wigner 函数的位置边缘分布是真正的概率密度。
+\end{derivationbox}
+
+Hermitian 性 $\rhohat^\dagger=\rhohat$ 保证 $W$ 为实函数。实函数并不意味着正函数；允许负值正是它能够同时编码不对易量信息的代价。另一方面，负值不是“量子性的必要条件”，真空态、相干态、热态和所有单模高斯态都可以具有处处非负的 Wigner 函数。
+
+\section{边缘分布与可测正交分量}
+
+直接积分\cref{eq:wigner-coordinate-definition} 得
+\begin{align}
+  \int\dd p\,W(q,p)&=\mel{q}{\rhohat}{q},\\
+  \int\dd q\,W(q,p)&=\mel{p}{\rhohat}{p}.
+  \label{eq:wigner-marginals}
+\end{align}
+更一般地，对旋转正交分量
+\begin{equation}
+  \hat X_\theta=\hat q\cos\theta+\hat p\sin\theta
+\end{equation}
+作垂直于 $X_\theta$ 的线积分，可以得到该正交分量的概率分布。这是量子层析中 Radon 反演的基础。不过，\cref{eq:wigner-marginals} 不能解释为一次实验同时测得了确定的 $q$ 和 $p$；它只说明同一个准分布能够产生不同测量设置的边缘统计。
+
+\section{Weyl 符号}
+
+任意算符 $\hat A$ 的 Weyl 符号定义为
+\begin{equation}
+  A_W(q,p)=\int_{-\infty}^{\infty}\dd y\,
+  \ee^{-\ii p y/\hbar}
+  \mel{q+y/2}{\hat A}{q-y/2}.
+  \label{eq:weyl-symbol-definition}
+\end{equation}
+密度算符的 Weyl 符号与 Wigner 函数相差归一化因子。两者配对给出迹公式
+\begin{equation}
+  \Tr(\rhohat\hat A)
+  =\int\dd q\,\dd p\,W(q,p)A_W(q,p).
+  \label{eq:weyl-trace-rule}
+\end{equation}
+
+Weyl 映射把完全对称排序的算符积映射为普通乘积。例如
+\begin{align}
+  (\hat q)_W&=q, & (\hat p)_W&=p,\\
+  \left(\frac{\hat q\hat p+\hat p\hat q}{2}\right)_W&=qp,
+  & (\hat q^2)_W&=q^2.
+\end{align}
+但一般情况下 $(\hat A\hat B)_W\neq A_WB_W$。算符乘积对应的星积将在第3章推导。
+
+\section{玻色模式的复相空间}
+
+对单个玻色模式，定义无量纲正交分量
+\begin{equation}
+  \ha=\frac{\hat q+\ii\hat p}{\sqrt{2}},
+  \qquad
+  \alpha=\frac{q+\ii p}{\sqrt{2}},
+  \qquad \comm{\ha}{\had}=1.
+  \label{eq:mode-quadratures}
+\end{equation}
+复平面面积元为 $\dd^2\alpha=\dd(\Re\alpha)\dd(\Im\alpha)=\dd q\dd p/2$。本书在复振幅表象中把 Wigner 函数归一化为
+\begin{equation}
+  \int\dd^2\alpha\,W(\alpha,\alpha^*)=1.
+\end{equation}
+
+另一种常用定义从对称特征函数开始：
+\begin{align}
+  \chi_W(\lambda)&=\Tr\!\left[\rhohat\,
+  \ee^{\lambda\had-\lambda^*\ha}\right],\\
+  W(\alpha,\alpha^*)&=\frac{1}{\pi^2}
+  \int\dd^2\lambda\,\chi_W(\lambda)
+  \ee^{\lambda^*\alpha-\lambda\alpha^*}.
+  \label{eq:wigner-characteristic}
+\end{align}
+指数中的位移算符同时包含 $\ha$ 和 $\had$，这正是对称排序出现的来源。
+
+\section{真空态与相干态}
+
+相干态满足 $\ha\ket{\alpha_0}=\alpha_0\ket{\alpha_0}$，其 Wigner 函数为
+\begin{equation}
+  W_{\alpha_0}(\alpha)
+  =\frac{2}{\pi}\exp\!\left[-2|\alpha-\alpha_0|^2\right].
+  \label{eq:coherent-wigner}
+\end{equation}
+真空态是 $\alpha_0=0$ 的特例。对\cref{eq:coherent-wigner} 的直接抽样为
+\begin{equation}
+  \alpha=\alpha_0+\frac{\xi_1+\ii\xi_2}{2},
+  \qquad \xi_1,\xi_2\sim\mathcal{N}(0,1),
+  \label{eq:coherent-sampling}
+\end{equation}
+其中两个实高斯变量相互独立。因此
+\begin{equation}
+  \ensavg{\alpha}=\alpha_0,
+  \qquad
+  \ensavg{|\alpha-\alpha_0|^2}=\frac12.
+  \label{eq:vacuum-half-quantum}
+\end{equation}
+这个“半个量子”是正交分量真空噪声的相空间表示。
+
+\begin{numericalbox}
+抽样程序的第一项单元测试应检查\cref{eq:vacuum-half-quantum}，而不是只检查随机数看起来是否像高斯。若复噪声误写成 $(\xi_1+\ii\xi_2)/\sqrt{2}$，每个模式会被加入一个而不是半个量子的对称排序噪声。
+\end{numericalbox}
+
+\section{排序修正：粒子数的例子}
+
+由 $\comm{\ha}{\had}=1$，
+\begin{equation}
+  \frac{\had\ha+\ha\had}{2}=\had\ha+\frac12.
+\end{equation}
+左侧是对称排序形式，其 Weyl 符号为 $|\alpha|^2$，所以
+\begin{equation}
+  (\had\ha)_W=|\alpha|^2-\frac12,
+  \qquad
+  \qavg{\had\ha}=\ensavg{|\alpha|^2}-\frac12.
+  \label{eq:number-weyl-symbol}
+\end{equation}
+对相干态使用\cref{eq:coherent-sampling}，可得 $\ensavg{|\alpha|^2}=|\alpha_0|^2+1/2$，从而恢复 $\qavg{\had\ha}=|\alpha_0|^2$。
+
+更高阶正常排序矩需要更多收缩项。例如
+\begin{equation}
+  (\had\had\ha\ha)_W
+  =|\alpha|^4-2|\alpha|^2+\frac12.
+  \label{eq:quartic-weyl-symbol}
+\end{equation}
+这类修正在接触相互作用和二阶关联函数中不可忽略。
+
+\section{Wigner 函数能告诉我们什么}
+
+归一化、边缘分布和矩使 Wigner 函数成为连接状态与实验统计的工具。它还满足纯度关系
+\begin{equation}
+  \Tr(\rhohat^2)=2\pi\hbar\int\dd q\,\dd p\,W(q,p)^2.
+  \label{eq:wigner-purity}
+\end{equation}
+但不能仅凭一幅 Wigner 图断言动力学机制。负值可以见证某些非高斯非经典性；处处为正则不代表状态可以由经典统计完全解释。对多模场，完整 Wigner 函数存在于高维空间，实际计算主要依赖抽样和低阶边缘量，而不是绘制整个函数。
+
+\begin{warningbox}
+文献中的 Wigner 函数可能使用不同的面积元、$\pi$ 因子和正交分量归一化。引用抽样公式前必须同时核对：$[q,p]$、$\alpha$ 的定义、积分测度和真空方差。
+\end{warningbox}
+
+\section*{本章小结}
+
+Wigner 函数是密度矩阵相对坐标的 Fourier 变换，能够正确给出正交分量边缘分布。Weyl 符号把算符期望转化为相空间积分，并天然对应完全对称排序。相干态 Wigner 函数的真空宽度产生每模半量子噪声，正常排序观测量必须再作相应修正。
+
+\begin{exercises}
+  \item 从\cref{eq:wigner-coordinate-definition} 证明动量边缘分布，即\cref{eq:wigner-marginals} 的第二式。
+  \item 验证\cref{eq:coherent-wigner} 在 $\dd^2\alpha$ 测度下归一化为 $1$。
+  \item 使用对称排序推导\cref{eq:number-weyl-symbol}。
+  \item 对真空态计算 $\ensavg{|\alpha|^4}$，再用\cref{eq:quartic-weyl-symbol} 验证 $\qavg{\had\had\ha\ha}=0$。
+  \item 证明纯态的 Wigner 函数满足\cref{eq:wigner-purity} 右侧等于 $1$。
+\end{exercises}

@@ -1,0 +1,23 @@
+{
+  "seed": 20260714,
+  "points": 64,
+  "length": 20.0,
+  "dx": 0.3125,
+  "g": 0.05,
+  "trap_strength": 0.02,
+  "delta_c": 3.2,
+  "final_time": 0.5,
+  "step_sizes": [
+    0.004,
+    0.002,
+    0.001,
+    0.0005
+  ],
+  "coarse_pair_error": 8.43604921217305e-06,
+  "medium_pair_error": 2.105219704298918e-06,
+  "fine_pair_error": 5.260685439017586e-07,
+  "observed_order_from_two_finest_pairs": 2.000648110968519,
+  "max_relative_norm_drift": 1.3102298113357883e-13,
+  "max_relative_energy_drift": 5.611008498719457e-07,
+  "reversibility_relative_l2_error": 2.286527900893808e-13
+}

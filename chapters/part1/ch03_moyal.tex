@@ -1,0 +1,202 @@
+\chapter{星积、Moyal 括号与算符对应}
+\label{ch:moyal}
+
+\begin{learningobjectives}
+完成本章后，读者应能：
+\begin{enumerate}
+  \item 用星积计算算符乘积的 Weyl 符号；
+  \item 从 von Neumann 方程得到 Moyal 演化方程；
+  \item 识别经典 Liouville 项和领先量子修正；
+  \item 使用 Bopp 算符把主方程转换成相空间偏微分方程。
+\end{enumerate}
+\end{learningobjectives}
+
+\section{普通乘积为什么不够}
+
+Weyl 映射保持线性，却不把算符乘积直接映射为普通函数乘积。记
+\begin{equation*}
+  \hat A\leftrightarrow A_W(q,p),
+  \qquad
+  \hat B\leftrightarrow B_W(q,p),
+\end{equation*}
+则
+\begin{equation}
+  (\hat A\hat B)_W=A_W\star B_W,
+  \label{eq:star-product-correspondence}
+\end{equation}
+其中星积定义为
+\begin{equation}
+  A\star B
+  =A\exp\!\left[
+  \frac{\ii\hbar}{2}
+  \left(
+  \overleftarrow{\partial_q}\overrightarrow{\partial_p}
+  -\overleftarrow{\partial_p}\overrightarrow{\partial_q}
+  \right)\right]B.
+  \label{eq:star-product}
+\end{equation}
+箭头说明导数作用在哪一侧。定义双向微分算符
+\begin{equation}
+  \Lambda=
+  \overleftarrow{\partial_q}\overrightarrow{\partial_p}
+  -\overleftarrow{\partial_p}\overrightarrow{\partial_q},
+\end{equation}
+则 $A\star B=A\exp(\ii\hbar\Lambda/2)B$。
+
+把指数展开，得到
+\begin{equation}
+  A\star B=AB+\frac{\ii\hbar}{2}\{A,B\}_{\mathrm{PB}}
+  +\order(\hbar^2),
+  \label{eq:star-expansion}
+\end{equation}
+其中
+\begin{equation}
+  \{A,B\}_{\mathrm{PB}}
+  =\pder{A}{q}\pder{B}{p}
+  -\pder{A}{p}\pder{B}{q}
+\end{equation}
+是 Poisson 括号。星积由普通乘积、Poisson 几何和更高阶导数共同组成。
+
+\begin{example}
+取 $A=q$、$B=p$。因为二阶以上导数全部为零，
+\begin{equation}
+  q\star p=qp+\frac{\ii\hbar}{2},
+  \qquad
+  p\star q=pq-\frac{\ii\hbar}{2}.
+\end{equation}
+因此 $(\comm{\hat q}{\hat p})_W=q\star p-p\star q=\ii\hbar$。不对易性没有消失，而是进入星积。
+\end{example}
+
+\section{Moyal 括号}
+
+算符对易子的 Weyl 符号定义 Moyal 括号：
+\begin{align}
+  \{A,B\}_{\mathrm{M}}
+  &\equiv\frac{1}{\ii\hbar}(A\star B-B\star A)\\
+  &=\frac{2}{\hbar}A
+  \sin\!\left(\frac{\hbar}{2}\Lambda\right)B.
+  \label{eq:moyal-bracket}
+\end{align}
+展开正弦可见
+\begin{equation}
+  \{A,B\}_{\mathrm{M}}
+  =\{A,B\}_{\mathrm{PB}}
+  -\frac{\hbar^2}{24}A\Lambda^3B
+  +\order(\hbar^4).
+  \label{eq:moyal-expansion}
+\end{equation}
+经典极限不是简单令 $\hbar=0$，而是要求高阶导数项相对于 Poisson 项可忽略。若 Wigner 函数在相空间中形成很细的振荡结构，即使 $\hbar$ 数值很小，高阶导数也可能变得重要。
+
+\section{从 von Neumann 方程到 Wigner 演化}
+
+闭合系统的密度算符满足
+\begin{equation}
+  \pder{\rhohat}{t}=-\frac{\ii}{\hbar}\comm{\Hhat}{\rhohat}.
+  \label{eq:von-neumann}
+\end{equation}
+对\cref{eq:von-neumann} 作 Weyl 变换，利用\cref{eq:star-product-correspondence}，得到精确的 Moyal 方程
+\begin{equation}
+  \pder{W}{t}=\{H_W,W\}_{\mathrm{M}}.
+  \label{eq:moyal-evolution}
+\end{equation}
+第一项是经典 Liouville 流，后续奇数阶导数包含量子修正。
+
+对
+\begin{equation}
+  H_W(q,p)=\frac{p^2}{2m}+V(q),
+\end{equation}
+\cref{eq:moyal-evolution} 可写成
+\begin{equation}
+  \pder{W}{t}
+  =-\frac{p}{m}\pder{W}{q}
+  +\sum_{\ell=0}^{\infty}
+  \frac{(-1)^\ell}{(2\ell+1)!}
+  \left(\frac{\hbar}{2}\right)^{2\ell}
+  \frac{\dd^{2\ell+1}V}{\dd q^{2\ell+1}}
+  \frac{\partial^{2\ell+1}W}{\partial p^{2\ell+1}}.
+  \label{eq:moyal-potential-series}
+\end{equation}
+当 $V$ 至多为二次多项式时，$V^{(3)}$ 及更高导数全部为零，精确量子传播便与经典 Liouville 传播一致。准确条件是 Hamiltonian 的 Weyl 符号对全部相空间变量至多二次，而不只是“势能看起来像抛物线”。
+
+\section{非线性怎样产生高阶导数}
+
+考虑四次势
+\begin{equation}
+  V(q)=\frac{\lambda}{4}q^4.
+\end{equation}
+因为 $V'''(q)=6\lambda q$ 且五阶以上导数为零，精确方程为
+\begin{equation}
+  \pder{W}{t}
+  =-\frac{p}{m}\pder{W}{q}
+  +\lambda q^3\pder{W}{p}
+  -\frac{\hbar^2\lambda q}{4}\frac{\partial^3W}{\partial p^3}.
+  \label{eq:quartic-wigner-evolution}
+\end{equation}
+前两项沿经典非线性轨迹剪切分布，第三项不能表示成普通确定性轨迹的概率守恒流。舍弃第三项便得到这一模型的截断 Wigner 演化。
+
+\begin{intuitionbox}
+非线性先把一个平滑相空间云团拉伸和折叠，再使分布出现越来越细的结构。精确量子项对这些结构敏感。TWA 在结构仍比量子相空间尺度粗时较有希望，在干涉条纹和回复形成后通常失效。
+\end{intuitionbox}
+
+\section{Bopp 算符：另一条推导路线}
+
+与其每次显式展开星积，也可以用 Bopp 对应规则。对坐标变量，
+\begin{align}
+  \hat q\rhohat&\leftrightarrow
+  \left(q+\frac{\ii\hbar}{2}\partial_p\right)W,
+  &\rhohat\hat q&\leftrightarrow
+  \left(q-\frac{\ii\hbar}{2}\partial_p\right)W,\\
+  \hat p\rhohat&\leftrightarrow
+  \left(p-\frac{\ii\hbar}{2}\partial_q\right)W,
+  &\rhohat\hat p&\leftrightarrow
+  \left(p+\frac{\ii\hbar}{2}\partial_q\right)W.
+  \label{eq:bopp-real}
+\end{align}
+对玻色复振幅，令 $\alpha$ 与 $\alpha^*$ 在微分时相互独立，则
+\begin{align}
+  \ha\rhohat&\leftrightarrow
+  \left(\alpha+\frac12\partial_{\alpha^*}\right)W,
+  &\rhohat\ha&\leftrightarrow
+  \left(\alpha-\frac12\partial_{\alpha^*}\right)W,\\
+  \had\rhohat&\leftrightarrow
+  \left(\alpha^*-\frac12\partial_\alpha\right)W,
+  &\rhohat\had&\leftrightarrow
+  \left(\alpha^*+\frac12\partial_\alpha\right)W.
+  \label{eq:bopp-complex}
+\end{align}
+把 Hamiltonian 或 Lindblad 主方程左右两侧的算符依次替换为\cref{eq:bopp-real,eq:bopp-complex}，即可得到 Wigner 偏微分方程。
+
+\section{从偏微分方程到随机过程}
+
+标准 Fokker--Planck 方程只含一阶和二阶导数：
+\begin{equation}
+  \pder{W}{t}
+  =-\partial_i(A_iW)
+  +\frac12\partial_i\partial_j(D_{ij}W).
+  \label{eq:fokker-planck}
+\end{equation}
+当扩散矩阵可以适当分解时，\cref{eq:fokker-planck} 与随机微分方程对应。一阶项给出漂移，二阶项给出演化过程中持续注入的噪声。闭合、幺正、含四次相互作用的玻色系统在 Wigner 表象中通常出现一阶和三阶导数；TWA 丢弃三阶项后只剩确定性漂移，因此量子噪声只通过初始抽样进入。开放系统则可能保留二阶扩散，演化过程中仍有随机噪声。
+
+\begin{warningbox}
+“TWA 轨迹是确定性的”只适用于截断后的闭合幺正模型。含 Lindblad 损耗、测量或热浴时，Wigner 方程可以产生真正的二阶扩散，轨迹方程也会含随时间变化的噪声。
+\end{warningbox}
+
+\section{矩方程为何有时比整个分布更可靠}
+
+高阶导数对低阶多项式矩的直接贡献可能因分部积分而消失。例如\cref{eq:quartic-wigner-evolution} 中的三阶 $p$ 导数不直接改变 $p^0,p^1,p^2$ 矩。然而，非线性会使低阶矩与更高阶矩耦合，高阶结构随后仍可能反馈回来。因此，某个低阶观测量在一段时间内准确，不代表完整 Wigner 函数或所有高阶关联都同样准确。
+
+\begin{chaptercheck}
+看到“经典轨迹”时，检查它来自精确的二次 Hamiltonian，还是来自对高阶 Moyal 导数的截断；看到“随机轨迹”时，检查噪声只在初态出现，还是由二阶扩散在演化中持续产生。
+\end{chaptercheck}
+
+\section*{本章小结}
+
+星积保存了算符乘法和不对易性，Moyal 括号把 von Neumann 方程精确转写为相空间演化。Poisson 括号是其领先项，非线性 Hamiltonian 产生高阶导数。TWA 的核心数学操作正是舍弃无法由普通轨迹表示的高阶项，而 Bopp 算符提供了对具体玻色 Hamiltonian 进行这一推导的实用途径。
+
+\begin{exercises}
+  \item 使用\cref{eq:star-product} 计算 $q^2\star p^2$，保留全部非零项。
+  \item 证明 Moyal 括号满足反对称性，并验证 $\{q,p\}_{\mathrm{M}}=1$。
+  \item 从\cref{eq:moyal-potential-series} 推导四次势的\cref{eq:quartic-wigner-evolution}。
+  \item 使用 Bopp 规则重新推导 $(\had\ha)_W=|\alpha|^2-1/2$。
+  \item 对六次势 $V(q)=gq^6/6$，写出 Wigner 演化中最高阶的 $p$ 导数。
+\end{exercises}

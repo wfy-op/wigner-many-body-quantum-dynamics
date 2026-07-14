@@ -1,0 +1,27 @@
+{
+  "seed": 20260714,
+  "trajectories_per_state": 400000,
+  "jackknife_groups": 200,
+  "coherent": {
+    "number_estimate": 3.9935578363206172,
+    "number_standard_error": 0.003258496014341758,
+    "number_exact": 4.0,
+    "factorial_second_estimate": 15.952054248113367,
+    "factorial_second_standard_error": 0.02922180743191446,
+    "factorial_second_exact": 16.0,
+    "g2_estimate": 1.000222594923813,
+    "g2_jackknife_standard_error": 0.0006269511900933239,
+    "g2_exact": 1.0
+  },
+  "thermal": {
+    "number_estimate": 1.995343539383402,
+    "number_standard_error": 0.003936327313339912,
+    "number_exact": 2.0,
+    "factorial_second_estimate": 7.93390589320129,
+    "factorial_second_standard_error": 0.03688094395407341,
+    "factorial_second_exact": 8.0,
+    "g2_estimate": 1.9927448090376967,
+    "g2_jackknife_standard_error": 0.0048604181714794895,
+    "g2_exact": 2.0
+  }
+}

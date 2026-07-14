@@ -1,0 +1,201 @@
+\chapter{从玻色模式到离散量子场}
+\label{ch:bose-field}
+
+\begin{learningobjectives}
+完成本章后，读者应能：
+\begin{enumerate}
+  \item 从连续玻色场构造保持正则对易关系的有限模式表示；
+  \item 推导格点场的半量子修正及其对粒子数和相互作用漂移的影响；
+  \item 区分物理场、数值场、投影场与裸格点变量；
+  \item 把模式截止看作模型定义的一部分，而不只是计算精度旋钮。
+\end{enumerate}
+\end{learningobjectives}
+
+\section{连续场只是起点}
+
+一分量玻色场满足
+\begin{equation}
+  \comm{\hpsi(x)}{\hpsid(x')}=\delta(x-x'),
+  \qquad
+  \comm{\hpsi(x)}{\hpsi(x')}=0 .
+  \label{eq:continuous-commutator}
+\end{equation}
+以一维接触相互作用为例，二次量子化 Hamilton 量写成
+\begin{equation}
+  \Hhat=\int\dd x\,\hpsid(x)h_0\hpsi(x)
+  +\frac{g}{2}\int\dd x\,\hpsid(x)^2\hpsi(x)^2,
+  \qquad
+  h_0=-\frac{\hbar^2}{2m}\partial_x^2+V(x).
+  \label{eq:continuum-bose-hamiltonian}
+\end{equation}
+这里的 $g$ 是与维数和降维方案相匹配的有效耦合常数。三维散射长度不能在一维代码中未经降维就直接充当 $g$。
+
+计算机不能直接保存无穷多个场自由度。选择有限模式并不是无害的排版步骤：它规定了哪些量子涨落被保留、每个模式的半量子噪声进入何处，以及接触相互作用的裸参数应如何解释。因此，本章先固定有限维模型，再讨论其 TWA。
+
+\section{有限模式投影}
+
+取一组正交单粒子模式 $\{\phi_n(x)\}_{n\in\mathcal C}$，保留集合记作 $\mathcal C$：
+\begin{equation}
+  \hpsi_{\mathcal C}(x)=\sum_{n\in\mathcal C}\phi_n(x)\ha_n,
+  \qquad
+  \comm{\ha_n}{\had_m}=\delta_{nm}.
+  \label{eq:projected-field}
+\end{equation}
+投影场不再满足完整 Dirac delta，而满足
+\begin{equation}
+  \comm{\hpsi_{\mathcal C}(x)}{\hpsid_{\mathcal C}(x')}
+  =\delta_{\mathcal C}(x,x'),
+  \qquad
+  \delta_{\mathcal C}(x,x')
+  =\sum_{n\in\mathcal C}\phi_n(x)\phi_n^*(x').
+  \label{eq:projected-delta}
+\end{equation}
+$\delta_{\mathcal C}(x,x)$ 是单位长度内的保留模式密度。它将在排序修正中取代形式上发散的 $\delta(0)$。
+
+模式振幅 $\alpha_n$ 是无量纲变量，经典投影场定义为
+\begin{equation}
+  \psi_{\mathcal C}(x)=\sum_{n\in\mathcal C}\phi_n(x)\alpha_n .
+  \label{eq:classical-projected-field}
+\end{equation}
+真空对每个 $\alpha_n$ 贡献 $\ensavg{|\alpha_n|^2}=1/2$，所以
+\begin{equation}
+  \ensavg{|\psi_{\mathcal C}(x)|^2}_{\rm vac}
+  =\frac{1}{2}\delta_{\mathcal C}(x,x).
+  \label{eq:projected-vacuum-density}
+\end{equation}
+这不是实际粒子密度，而是对称排序的半量子基线。
+
+\section{均匀格点与变量归一化}
+
+在长度 $L$ 的周期区间上取 $M$ 个格点，$\Delta x=L/M$。定义格点模式
+\begin{equation}
+  \ha_j=\sqrt{\Delta x}\,\hpsi(x_j),
+  \qquad
+  \comm{\ha_j}{\had_k}=\delta_{jk},
+  \label{eq:grid-mode-definition}
+\end{equation}
+并令
+\begin{equation}
+  \psi_j=\frac{\alpha_j}{\sqrt{\Delta x}}.
+  \label{eq:grid-field-normalization}
+\end{equation}
+$\alpha_j$ 无量纲，而 $\psi_j$ 的量纲为长度$^{-1/2}$。二者混用会令噪声、耦合常数和粒子数同时错一个 $\Delta x$ 因子。
+
+格点真空抽样可写成
+\begin{equation}
+  \alpha_j^{\rm vac}=\frac{\xi_{1j}+\ii\xi_{2j}}{2},
+  \qquad \xi_{1j},\xi_{2j}\sim\mathcal N(0,1),
+  \label{eq:grid-vacuum-sampling}
+\end{equation}
+因而 $\ensavg{|\alpha_j^{\rm vac}|^2}=1/2$，以及
+\begin{equation}
+  \ensavg{|\psi_j^{\rm vac}|^2}=\frac{1}{2\Delta x}.
+  \label{eq:grid-vacuum-density}
+\end{equation}
+格点密度的正规排序估计器是
+\begin{equation}
+  \qavg{\hpsid(x_j)\hpsi(x_j)}
+  \approx \ensavg{|\psi_j|^2}-\frac{1}{2\Delta x}.
+  \label{eq:grid-density-estimator}
+\end{equation}
+相应的总粒子数为
+\begin{equation}
+  N=\Delta x\sum_{j=0}^{M-1}\ensavg{|\psi_j|^2}-\frac{M}{2}
+  =\sum_j\ensavg{|\alpha_j|^2}-\frac{M}{2}.
+  \label{eq:grid-total-number}
+\end{equation}
+
+\begin{warningbox}
+若代码输出 $\Delta x\sum_j|\psi_j|^2$ 而没有减去 $M/2$，它输出的是对称排序范数，不是物理粒子数。这个差异在 $N\gg M$ 时可能相对很小，却会系统污染耗尽量、低密度尾部和模式占据。
+\end{warningbox}
+
+\section{离散 Hamilton 量与 Weyl 漂移}
+
+连续相互作用在实空间格点上变为
+\begin{equation}
+  \Hhat_{\rm int}=\frac{g}{2\Delta x}\sum_j\had_j{}^2\ha_j^2.
+  \label{eq:grid-interaction-hamiltonian}
+\end{equation}
+因此单格点等效 Bose--Hubbard 参数为 $U=g/\Delta x$。利用第7章的单模对应，省略不影响漂移的常数后，其 Weyl 符号是
+\begin{equation}
+  H_{{\rm int},W}
+  =\frac{g\Delta x}{2}\sum_j
+  \left(
+  |\psi_j|^4-\frac{2}{\Delta x}|\psi_j|^2
+  +\frac{1}{2\Delta x^2}
+  \right).
+  \label{eq:grid-interaction-weyl}
+\end{equation}
+取 Hamilton 方程得到格点 TWA 漂移
+\begin{equation}
+  \ii\hbar\frac{\dd\psi_j}{\dd t}
+  =\sum_k (h_0)_{jk}\psi_k
+  +g\left(|\psi_j|^2-\frac{1}{\Delta x}\right)\psi_j.
+  \label{eq:grid-twa-equation}
+\end{equation}
+这里的 $1/\Delta x$ 是相互作用漂移的 Weyl 修正；密度估计器中的修正则是 $1/(2\Delta x)$。二者来自不同次数的算符乘积，不能因为都与“半量子”有关就互相替换。
+
+在一般投影基中，局域表达的对应结构是
+\begin{equation}
+  \ii\hbar\partial_t\psi_{\mathcal C}(x)
+  =\mathcal P_{\mathcal C}\!\left\{
+  \left[h_0+g\left(|\psi_{\mathcal C}(x)|^2
+  -\delta_{\mathcal C}(x,x)\right)\right]
+  \psi_{\mathcal C}(x)\right\},
+  \label{eq:projected-twa-equation}
+\end{equation}
+其中 $\mathcal P_{\mathcal C}$ 把非线性项投回保留子空间。若省略该投影，非线性乘积会生成截止之外的模式，并通过混叠折回低波数区。
+
+\section{动能离散：有限差分还是谱方法}
+
+二阶中心差分给出
+\begin{equation}
+  -\partial_x^2\psi_j\approx
+  -\frac{\psi_{j+1}-2\psi_j+\psi_{j-1}}{\Delta x^2},
+  \label{eq:finite-difference-laplacian}
+\end{equation}
+其优点是边界条件直观、矩阵稀疏；缺点是高波数色散偏离连续谱。周期体系常采用 Fourier 谱方法：先变换到 $k$ 空间，再把动能乘子取为 $\hbar^2k^2/(2m)$。谱方法对光滑周期场具有高精度，但隐含周期边界，并要求显式处理非线性混叠。
+
+两种离散并不定义同一个有限维模型。比较结果时应报告：区间长度、边界条件、格点数、动能算符、最大波数、相互作用参数的离散约定，以及是否投影非线性项。
+
+\section{截止、重整化与连续极限}
+
+保持 $L$ 固定并令 $M\to\infty$ 时，半量子总数 $M/2$ 发散，$\delta_{\mathcal C}(x,x)$ 也随截止增大。正规排序估计器可以在初时抵消真空基线，却不能阻止非线性轨迹让紫外噪声参与散射。因此，裸接触相互作用的 TWA 不应通过盲目加密网格来宣称已经取得连续极限。
+
+实践中应区分三种问题：
+\begin{enumerate}
+  \item \textbf{数值收敛}：固定有限模式模型，减小时间步长和积分误差；
+  \item \textbf{表示稳定}：在一组物理合理的截止内改变 $M$，检查目标观测量；
+  \item \textbf{理论重整化}：若要求真正的截止无关连续预测，重新匹配耦合常数或采用保留量子紫外行为的方法。
+\end{enumerate}
+第1项通过并不自动证明第2、3项。
+
+\section{实现前的量纲检查}
+
+选取长度 $x_0$、能量 $E_0=\hbar^2/(2mx_0^2)$ 和时间 $t_0=\hbar/E_0$ 后，可定义
+\begin{equation}
+  \tilde x=x/x_0,
+  \qquad
+  \tilde t=t/t_0,
+  \qquad
+  \tilde\psi=\sqrt{x_0}\,\psi,
+  \qquad
+  \tilde g=g/(E_0x_0).
+\end{equation}
+无量纲粒子数仍为 $N=\int\dd\tilde x\,|\tilde\psi|^2$。建议代码只传播无量纲变量，并在输入与输出边界统一转换；不要让带单位的 $g$、无量纲 $\Delta x$ 和 SI 制的时间混在同一个右端函数中。
+
+\begin{chaptercheck}
+对真空运行一次零相互作用测试。程序应得到：每格点 $\ensavg{|\alpha_j|^2}=1/2$，对称排序总范数约为 $M/2$，而式\eqref{eq:grid-total-number}给出的正规排序粒子数在统计误差内为零。若三项不能同时成立，先修复归一化，再进行任何动力学模拟。
+\end{chaptercheck}
+
+\section*{本章小结}
+
+连续玻色场必须先投影到有限模式子空间，才成为可计算且定义良好的相空间模型。格点变量 $\alpha_j$ 与物理场 $\psi_j$ 相差 $\sqrt{\Delta x}$；真空密度基线、正规排序密度修正和相互作用 Weyl 漂移分别由这一归一化决定。模式截止同时控制空间分辨率和半量子噪声，因而是模型和验证协议的一部分。
+
+\begin{exercises}
+  \item 从式\eqref{eq:grid-interaction-hamiltonian}的单模 Weyl 符号推导式\eqref{eq:grid-interaction-weyl}和\eqref{eq:grid-twa-equation}。
+  \item 对长度固定的周期网格，把格点数从 $M$ 增至 $2M$，比较 $\Delta x$、真空场方差、半量子总数和最大波数的变化。
+  \item 证明式\eqref{eq:projected-vacuum-density}，并在平面波基中计算 $\delta_{\mathcal C}(x,x)$。
+  \item 写出周期边界下中心差分 Laplace 算符的本征值，并与连续 $k^2$ 色散比较。
+  \item 设计一个能够分别检验时间步长误差与模式截止敏感性的两层收敛实验。
+\end{exercises}

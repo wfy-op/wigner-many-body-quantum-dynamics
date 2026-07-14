@@ -1,0 +1,173 @@
+\chapter{习题提示与部分答案}
+\label{app:exercises}
+
+本附录给出部分习题的推导骨架，重点用于核对约定与关键中间结果。其余习题保留为课程作业或研究型练习。
+
+\section{第一部分}
+
+\subsection*{第2章：Wigner 边缘分布}
+
+从
+\[
+  W(q,p)=\frac1{2\pi\hbar}\int\dd y\,
+  \ee^{-\ii py/\hbar}\rho(q+y/2,q-y/2)
+\]
+出发，对 $p$ 积分得到 $2\pi\hbar\delta(y)$，故
+\[
+  \int\dd p\,W(q,p)=\rho(q,q)=\qavg{q|\rhohat|q}.
+\]
+对 $q$ 积分并插入动量完备关系，同理得到动量概率密度。若采用不同归一化，$2\pi\hbar$ 应在定义与测度间成套移动。
+
+\subsection*{第3章：二次 Hamilton 量为何精确经典}
+
+Moyal 括号中第一项之后的修正含 $H_W$ 的三阶及更高相空间导数。二次多项式的这些导数恒为零，因此
+\[
+  \partial_tW=\{H_W,W\}_{\rm P}
+\]
+没有截断误差。注意这不要求初态 Wigner 函数为正；负值分布也沿同一线性辛流搬运。
+
+\subsection*{第4章：数态的负值}
+
+单模数态 Wigner 函数含 Laguerre 多项式
+\[
+  W_n(\alpha)=\frac{2}{\pi}(-1)^n
+  L_n(4|\alpha|^2)\ee^{-2|\alpha|^2}.
+\]
+在原点 $W_n(0)=2(-1)^n/\pi$，奇数态立即给出负值。偶数态也可由 Laguerre 多项式的零点判断存在符号振荡。
+
+\section{第二部分}
+
+\subsection*{第5章：谐振子的协方差旋转}
+
+令 $\bm R=(q,p)^T$，无量纲谐振子流为
+\[
+  \bm R(t)=
+  \begin{pmatrix}\cos t&\sin t\\-\sin t&\cos t\end{pmatrix}\bm R(0).
+\]
+均值和协方差分别满足
+$\bar{\bm R}(t)=S(t)\bar{\bm R}(0)$、
+$V(t)=S(t)V(0)S(t)^T$。相干态 $V=\identity/2$ 在旋转下不变。
+
+\subsection*{第6章：Kerr 回复时间}
+
+若
+$\Hhat=(\hbar\chi/2)\hat n(\hat n-1)$，数态分量获得相位
+$\exp[-\ii\chi t n(n-1)/2]$。由于 $n(n-1)$ 总为偶数，在
+$t=2\pi/\chi$ 所有分量相位重新对齐，出现完整回复。经典连续占据没有这一离散谱同相条件。
+
+\subsection*{第7章：四次相互作用的 TWA 漂移}
+
+从
+\[
+  (\had{}^2\ha^2)_W=|\alpha|^4-2|\alpha|^2+\frac12
+\]
+求 $\partial/\partial\alpha^*$，得到
+$2(|\alpha|^2-1)\alpha$。乘上 Hamilton 量中的系数 $U/2$ 后，漂移为
+$U(|\alpha|^2-1)\alpha$。
+
+\subsection*{第8章：二聚体守恒量}
+
+无显式时间依赖时，经典二聚体方程保持
+$N_W=|\alpha_1|^2+|\alpha_2|^2$ 与 Weyl Hamilton 量。直接对时间求导，把
+$\dot\alpha_j=-\ii\partial H_W/\partial\alpha_j^*$ 及其共轭代入，成对项抵消。物理总粒子数的系综平均是 $\ensavg{N_W}-1$。
+
+\subsection*{第9章：网格加倍}
+
+固定长度 $L$，格点从 $M$ 加倍至 $2M$ 时，$\Delta x$ 减半，每格点物理场真空方差
+$1/(2\Delta x)$ 加倍，半量子总数从 $M/2$ 增至 $M$，Nyquist 波数也加倍。因此它不是只提高空间分辨率的一项变化。
+
+\section{第三部分}
+
+\subsection*{第10章：投影真空密度}
+
+由
+$\psi_{\mathcal C}(x)=\sum_n\phi_n(x)\alpha_n$ 与
+$\ensavg{\alpha_n\alpha_m^*}=\delta_{nm}/2$，有
+\[
+  \ensavg{|\psi_{\mathcal C}(x)|^2}
+  =\frac12\sum_n|\phi_n(x)|^2
+  =\frac12\delta_{\mathcal C}(x,x).
+\]
+
+\subsection*{第11章：单模压缩协方差}
+
+取
+$c=\cosh r\,b+\sinh r\,b^*$，则
+$q_c=\ee^r q_b$、$p_c=\ee^{-r}p_b$。真空
+$\Var(q_b)=\Var(p_b)=1/2$，故
+\[
+  \Var(q_c)=\frac12\ee^{2r},
+  \qquad
+  \Var(p_c)=\frac12\ee^{-2r}.
+\]
+两者乘积仍为 $1/4$，纯 Gaussian 态饱和不确定关系。
+
+\subsection*{第12章：对称分裂阶数}
+
+令 $A=-\ii T\Delta t/\hbar$、$B=-\ii U\Delta t/\hbar$。Baker--Campbell--Hausdorff 展开
+$\ee^{A/2}\ee^B\ee^{A/2}$ 时，所有偶次的时间反对称误差因映射满足
+$S(-\Delta t)=S(\Delta t)^{-1}$ 而消失，首个局域误差由嵌套对易子
+$[A,[A,B]]$ 与 $[B,[A,B]]$ 给出，量级为 $\Delta t^3$。
+
+\subsection*{第13章：相干态与热态的二阶相干}
+
+相干态粒子数服从 Poisson 分布，
+$\qavg{n(n-1)}=\bar n^2$，故 $g^{(2)}=1$。单模热态满足
+$\Var(n)=\bar n(\bar n+1)$，因此
+\[
+  \qavg{n(n-1)}=\qavg{n^2}-\bar n
+  =2\bar n^2,
+\]
+故 $g^{(2)}=2$。
+
+\section{第四与第五部分}
+
+\subsection*{第14章：密度--自旋分解}
+
+代入 $n_L=(n+s)/2$、$n_R=(n-s)/2$：
+\[
+  \frac g2(n_L^2+n_R^2)+g_{12}n_Ln_R
+  =\frac{g+g_{12}}4n^2+\frac{g-g_{12}}4s^2.
+\]
+当 $g_{12}>g$，$s^2$ 系数为负，均匀混合背景倾向自旋密度增大；动能和其他耦合决定实际不稳定波段与畴尺度。
+
+\subsection*{第15章：不稳定波数区间}
+
+关闭 $J$ 后
+\[
+  E_s^2=\epsilon_k[\epsilon_k+n(g-g_{12})].
+\]
+若 $g_{12}>g$，则
+$0<\epsilon_k<n(g_{12}-g)$ 时 $E_s^2<0$。等价地
+\[
+  0<|k|<\frac{\sqrt{2mn(g_{12}-g)}}{\hbar}.
+\]
+$k=0$ 是零模，需要与虚频有限波数模分开处理。
+
+\subsection*{第16章：相位扩散}
+
+由 $\phi(t)=\phi_0+at\,\delta N_0$，方差的双线性展开直接给出
+\[
+  \Var\phi(t)=\Var\phi_0+2at\Cov(\phi_0,\delta N_0)
+  +a^2t^2\Var(\delta N_0),
+\]
+其中 $a=E_C/\hbar$。对零均值 Gaussian 变量，特征函数
+$\qavg{\ee^{\ii\phi}}=\ee^{-\Var\phi/2}$。
+
+\subsection*{第17章：随机相位与畴标度}
+
+对
+$n(x)=n_0[1+A\cos(Qx+\theta)]$，在包含整数周期的大系统中
+$m_Q=(A/2)\ee^{\ii\theta}$（相位符号随 Fourier 约定而变）。若
+$\theta$ 均匀，$\ensavg{m_Q}=0$，但
+$\ensavg{|m_Q|^2}=A^2/4$。若有 $D=L/\xi$ 个独立等权相位畴，随机复矢量和给出
+$\ensavg{|m_Q|^2}=A^2/(4D)\propto\xi/L$。
+
+\subsection*{第18章：损耗下真空稳态}
+
+由式\eqref{eq:wigner-linear-loss-sde}的 It\^o 规则，忽略 Hamilton 漂移时
+\[
+  \frac{\dd}{\dd t}\ensavg{|\alpha|^2}
+  =-\kappa\ensavg{|\alpha|^2}+\frac\kappa2.
+\]
+稳态为 $\ensavg{|\alpha|^2}=1/2$，正规排序占据为零。删除噪声项会错误地把对称排序方差压到零。

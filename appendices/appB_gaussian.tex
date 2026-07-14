@@ -1,0 +1,117 @@
+\chapter{高斯态与协方差抽样}
+\label{app:gaussian}
+
+本附录给出可直接实现的 Gaussian 态检查与抽样流程。采用
+\begin{equation}
+  \bm R=(q_1,p_1,\ldots,q_M,p_M)^T,
+  \qquad
+  \comm{\hat R_j}{\hat R_k}=\ii\Omega_{jk},
+\end{equation}
+其中
+$\Omega=\bigoplus_{n=1}^M\begin{pmatrix}0&1\\-1&0\end{pmatrix}$。
+
+\section{均值、协方差和物理性}
+
+Gaussian 态由
+\begin{equation}
+  \bar{\bm R}=\qavg{\hat{\bm R}},
+  \qquad
+  V_{jk}=\frac12\qavg{
+  \Delta\hat R_j\Delta\hat R_k+
+  \Delta\hat R_k\Delta\hat R_j}
+\end{equation}
+完全确定。必要且充分的物理性条件是
+\begin{equation}
+  V+\frac{\ii}{2}\Omega\succeq0.
+  \label{eq:appendix-gaussian-physicality}
+\end{equation}
+真空的 $V=\identity/2$ 恰好饱和该不等式。
+
+Williamson 定理保证存在辛矩阵 $S$ 使
+\begin{equation}
+  V=S\diag(\nu_1,\nu_1,\ldots,\nu_M,\nu_M)S^T,
+\end{equation}
+其中辛本征值 $\nu_j\ge1/2$。数值上可由
+$|\ii\Omega V|$ 的本征值成对得到 $\nu_j$。普通矩阵特征值全为正并不足以保证式\eqref{eq:appendix-gaussian-physicality}。
+
+\section{常见单模协方差}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+状态 & 均值 & 协方差 \\
+\midrule
+真空 & $(0,0)$ & $\diag(1/2,1/2)$ \\
+相干态 $\alpha_0$ & $(\sqrt2\Re\alpha_0,\sqrt2\Im\alpha_0)$ & $\identity_2/2$ \\
+热态 $\bar n$ & $(0,0)$ & $(\bar n+1/2)\identity_2$ \\
+实参数压缩真空 & $(0,0)$ & $\tfrac12\diag(\ee^{2r},\ee^{-2r})$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+最后一行对应本书代码中的变换
+$\alpha=\cosh r\,\beta+\sinh r\,\beta^*$；若压缩算符号约定相反，两个正交分量交换。
+
+\section{Cholesky 抽样算法}
+
+给定 $\bar{\bm R},V$：
+\begin{enumerate}
+  \item 以双精度读入并对称化 $V\leftarrow(V+V^T)/2$；
+  \item 检查维数为偶数、单位与正交变量顺序一致；
+  \item 计算辛本征值，确认最小值在容差内不小于 $1/2$；
+  \item 作 $V=LL^T$ 的 Cholesky 分解；
+  \item 为每条轨迹生成 $2M$ 个独立标准正态数 $\bm\xi$；
+  \item 令 $\bm R=\bar{\bm R}+L\bm\xi$，再转换为
+  $\alpha_n=(q_n+\ii p_n)/\sqrt2$；
+  \item 用独立统计代码回测均值、协方差和目标正规排序量。
+\end{enumerate}
+若 $V$ 半正定但因纯态饱和不确定关系而在数值上接近奇异，可用对称本征分解构造平方根。任何特征值裁剪都要记录裁剪阈值及其对目标矩的影响。
+
+\section{复协方差形式}
+
+对零均值复模式向量 $\bm\alpha$，定义
+\begin{equation}
+  C_{ij}=\ensavg{\alpha_i\alpha_j^*},
+  \qquad
+  M_{ij}=\ensavg{\alpha_i\alpha_j}.
+\end{equation}
+$C$ 是正常的对称排序协方差，$M$ 是反常协方差。它们与实协方差等价。例如
+\begin{align}
+  \ensavg{q_iq_j}&=\Re(C_{ij}+M_{ij}),\\
+  \ensavg{p_ip_j}&=\Re(C_{ij}-M_{ij}),\\
+  \frac12\ensavg{q_ip_j+p_jq_i}&=\Im(M_{ij}-C_{ij}),
+\end{align}
+具体下标转置取决于向量排序，实施时应通过单模真空和已知压缩态核对符号。
+
+对于无压缩独立热模式，$C_{ij}=(\bar n_i+1/2)\delta_{ij}$、$M=0$。突然淬火后 $M$ 一般非零；若代码只保存每模占据 $C_{ii}-1/2$，就丢失了成对关联。
+
+\section{BdG 模式抽样清单}
+
+对 Nambu 模式 $\bm w_\nu=(\bm u_\nu,\bm v_\nu)^T$：
+\begin{enumerate}
+  \item 使用 $\Sigma_z=\diag(\identity,-\identity)$ 检查
+  $\bm w_\nu^\dagger\Sigma_z\bm w_\mu=\delta_{\nu\mu}$；
+  \item 检查正能模与负能共轭模成对；
+  \item 在简并子空间内作辛正交化，而不是依赖求解器任意返回的线性组合；
+  \item 排除或单独处理 Goldstone 零模；
+  \item 由 $b_\nu$ 的热 Wigner 方差生成式\eqref{eq:old-bdg-direct-field-sampling}；
+  \item 从原子场样本反投影回 $b_\nu$，检查协方差闭环；
+  \item 比较重构的投影核与目标 $\delta_{\mathcal C}$。
+\end{enumerate}
+
+\section{数守恒近似的验收}
+
+若采用固定总粒子数抽样，至少报告
+\begin{equation}
+  \ensavg{N},\quad \Var(N),\quad
+  \ensavg{N_0},\quad \ensavg{N_{\rm dep}},\quad
+  \Cov(N_0,N_{\rm dep}).
+\end{equation}
+还应比较重缩放前后的一体密度矩阵与异常协方差。固定每条轨迹范数只保证粒子数方差为零；它不能保证其他矩仍对应目标量子态。
+
+\section{抽样误差的预期尺度}
+
+对独立 Gaussian 样本，协方差元素的标准误按 $N_s^{-1/2}$ 缩小，但系数取决于四阶矩。零均值单变量的样本方差近似满足
+\begin{equation}
+  {\rm SD}(s^2)\simeq V\sqrt{\frac{2}{N_s-1}}.
+\end{equation}
+因此协方差验收阈值应随目标方差和轨迹数变化，不能对所有模式使用同一个绝对误差。低占据模式宜检查标准化残差，高占据模式同时检查相对误差。

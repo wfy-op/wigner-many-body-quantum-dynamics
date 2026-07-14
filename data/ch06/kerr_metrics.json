@@ -1,0 +1,10 @@
+{
+  "seed": 20260714,
+  "trajectories": 100000,
+  "initial_occupation": 9.0,
+  "max_early_coherence_error_tau_le_0.25": 0.00874148014241849,
+  "exact_revival_coherence": 1.0,
+  "twa_revival_coherence": 0.0016491893251474113,
+  "twa_number_estimate_initial": 8.99431259410505,
+  "exact_number": 9.0
+}

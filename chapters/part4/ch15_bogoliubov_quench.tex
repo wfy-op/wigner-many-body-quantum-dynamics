@@ -1,0 +1,200 @@
+\chapter{Bogoliubov 模式与淬火协方差}
+\label{ch:bogoliubov-quench}
+
+\begin{learningobjectives}
+完成本章后，读者应能：
+\begin{enumerate}
+  \item 把对称双分量凝聚体的线性涨落分解为密度与自旋通道；
+  \item 由淬火前 Bogoliubov 真空构造淬火后的正常与反常协方差；
+  \item 用旧基直接生成 Wigner 场样本，并检验新旧基之间的辛变换；
+  \item 区分稳定准粒子压缩与动力学不稳定模的指数放大。
+\end{enumerate}
+\end{learningobjectives}
+
+\section{均匀平衡背景}
+
+先研究第14章均匀耦合模型，取失谐为零、无陷阱、总密度为 $n$，平均场背景为
+\begin{equation}
+  \psi_L^{(0)}=\psi_R^{(0)}=\sqrt{\frac n2}\,\ee^{-\ii\mu t/\hbar},
+  \qquad
+  \mu=\frac n2(g+g_{12})-J.
+  \label{eq:balanced-two-component-background}
+\end{equation}
+定义对称与反对称涨落
+\begin{equation}
+  \delta\psi_d=\frac{\delta\psi_L+\delta\psi_R}{\sqrt2},
+  \qquad
+  \delta\psi_s=\frac{\delta\psi_L-\delta\psi_R}{\sqrt2}.
+  \label{eq:density-spin-fluctuations}
+\end{equation}
+在 $g_{LL}=g_{RR}$、两分量平衡时，线性化 Hamilton 量在密度 $d$ 与自旋 $s$ 通道间分块对角。对自由色散
+$\epsilon_k=\hbar^2k^2/(2m)$，两支能谱为
+\begin{align}
+  E_d(k)^2&=\epsilon_k\left[\epsilon_k+n(g+g_{12})\right],
+  \label{eq:density-bogoliubov-dispersion}\\
+  E_s(k)^2&=(\epsilon_k+2J)
+  \left[\epsilon_k+2J+n(g-g_{12})\right].
+  \label{eq:spin-bogoliubov-dispersion}
+\end{align}
+密度支不依赖均匀 $J$，因为背景化学势与对称单粒子能量的 $J$ 位移抵消。自旋支在 $J>0$ 时有能隙；关闭 $J$ 后，若 $g_{12}<g$，它成为稳定的线性色散 Goldstone 模；若 $g_{12}>g$，一段低波数范围满足 $E_s^2<0$，背景发生动力学相分离不稳定。
+
+\section{单个通道的 Bogoliubov 变换}
+
+对每个通道与成对波矢 $\pm k$，二次 Hamilton 量可写成
+\begin{equation}
+  \Hhat_k^{(2)}=
+  A_k(\had_k\ha_k+\had_{-k}\ha_{-k})
+  +B_k(\ha_k\ha_{-k}+\had_k\had_{-k})+{\rm const.}
+  \label{eq:paired-bogoliubov-hamiltonian}
+\end{equation}
+在 $A_k>|B_k|$ 时，$E_k=\sqrt{A_k^2-B_k^2}$ 为实数。取实系数约定
+\begin{equation}
+  \ha_k=u_k\hb_k-v_k\hbd_{-k},
+  \qquad
+  u_k^2-v_k^2=1,
+  \label{eq:single-channel-bogoliubov-map}
+\end{equation}
+可选
+\begin{equation}
+  u_k=\sqrt{\frac12\left(\frac{A_k}{E_k}+1\right)},
+  \qquad
+  v_k={\rm sgn}(B_k)
+  \sqrt{\frac12\left(\frac{A_k}{E_k}-1\right)}.
+  \label{eq:bogoliubov-uv}
+\end{equation}
+若更换式\eqref{eq:single-channel-bogoliubov-map}中 $v$ 的符号约定，后续反常矩符号也会改变，但可观测协方差不变。代码中不应只保存 $E_k$；还要保存完整的模式相位与辛归一化约定。
+
+对自旋支，有
+\begin{equation}
+  A_{s,k}=\epsilon_k+2J+\frac n2(g-g_{12}),
+  \qquad
+  B_{s,k}=\frac n2(g-g_{12}),
+\end{equation}
+代入即可复现式\eqref{eq:spin-bogoliubov-dispersion}。
+
+\section{突然淬火产生两模压缩}
+
+设淬火前后参数分别记为 $i,f$。同一通道的两套系数是
+$(u_{i,k},v_{i,k})$ 和 $(u_{f,k},v_{f,k})$。消去原子涨落算符后，新旧准粒子满足
+\begin{equation}
+  c_k=\mathcal A_k b_k+\mathcal B_k b_{-k}^\dagger,
+  \label{eq:quench-mode-map}
+\end{equation}
+其中在上述实系数约定下
+\begin{equation}
+  \mathcal A_k=u_{f,k}u_{i,k}-v_{f,k}v_{i,k},
+  \qquad
+  \mathcal B_k=v_{f,k}u_{i,k}-u_{f,k}v_{i,k},
+  \label{eq:quench-ab-coefficients}
+\end{equation}
+并满足 $\mathcal A_k^2-\mathcal B_k^2=1$。若初态是旧准粒子真空，则
+\begin{equation}
+  \qavg{\hat c_k^\dagger\hat c_k}=\mathcal B_k^2,
+  \qquad
+  \qavg{\hat c_k\hat c_{-k}}=\mathcal A_k\mathcal B_k,
+  \label{eq:postquench-normal-anomalous}
+\end{equation}
+这里为简洁把新准粒子算符记作 $\hat c_k$。第一项是淬火产生的模式占据，第二项是相反动量之间的反常配对关联。对应量子态是相对于新真空的两模压缩 Gaussian 态。
+
+有限温旧态的占据为 $\bar n_{i,k}$ 时，式\eqref{eq:postquench-normal-anomalous}推广为
+\begin{align}
+  \qavg{\hat c_k^\dagger\hat c_k}
+  &=(\mathcal A_k^2+\mathcal B_k^2)\bar n_{i,k}+\mathcal B_k^2,\\
+  \qavg{\hat c_k\hat c_{-k}}
+  &=(2\bar n_{i,k}+1)\mathcal A_k\mathcal B_k.
+  \label{eq:finite-temperature-quench-covariance}
+\end{align}
+
+\section{Wigner 协方差与直接抽样}
+
+在 Wigner 表示中，旧准粒子样本为
+\begin{equation}
+  b_k=\sqrt{\frac{\bar n_{i,k}+1/2}{2}}
+  (\xi_{1k}+\ii\xi_{2k}).
+  \label{eq:old-mode-wigner-sample}
+\end{equation}
+把式\eqref{eq:quench-mode-map}中的算符替换为复数及其共轭，得到
+\begin{equation}
+  c_k=\mathcal A_k b_k+\mathcal B_k b_{-k}^*.
+  \label{eq:new-mode-wigner-sample}
+\end{equation}
+其对称排序矩为
+\begin{align}
+  \ensavg{|c_k|^2}
+  &=(\bar n_{i,k}+1/2)(\mathcal A_k^2+\mathcal B_k^2),\\
+  \ensavg{c_kc_{-k}}
+  &=(2\bar n_{i,k}+1)\mathcal A_k\mathcal B_k.
+  \label{eq:new-mode-wigner-covariance}
+\end{align}
+第一式减去 $1/2$ 后正好得到式\eqref{eq:finite-temperature-quench-covariance}的正常占据。
+
+实际 TWA 不必先生成新准粒子。更直接且较少出错的方法是用淬火前 BdG 模抽样，并立即重构原子场：
+\begin{equation}
+  \psi_\sigma(x,0)=\psi_\sigma^{(0)}(x)
+  +\sum_{\nu\in\mathcal B_i}
+  \left[u^{(i)}_{\sigma\nu}(x)b_\nu
+  -v^{(i)*}_{\sigma\nu}(x)b_\nu^*\right].
+  \label{eq:old-bdg-direct-field-sampling}
+\end{equation}
+随后直接用新 Hamilton 量的非线性场方程传播。新基协方差主要用于解析解释和抽样验收，而不是必需的中间数据格式。
+
+\section{一般非均匀 BdG 问题}
+
+在陷阱、SOC 或不对称耦合下，密度/自旋分块通常失效。把 Nambu 向量写成
+\begin{equation}
+  \bm w_\nu=(u_{L\nu},u_{R\nu},v_{L\nu},v_{R\nu})^T,
+\end{equation}
+线性化方程具有广义辛本征结构
+\begin{equation}
+  \mathcal L\bm w_\nu=\epsilon_\nu\bm w_\nu,
+  \qquad
+  \bm w_\nu^\dagger\Sigma_z\bm w_\mu=\delta_{\nu\mu},
+  \qquad
+  \Sigma_z=\diag(1,1,-1,-1).
+  \label{eq:spinor-bdg-symplectic-norm}
+\end{equation}
+离散后要用与 TWA 相同的格点内积和边界条件。普通 Euclidean 归一化 $\bm w^\dagger\bm w=1$ 不能保证准粒子对易关系。
+
+若把所有正范数旧模式组成辛矩阵 $S_i$，新模式组成 $S_f$，则完整基变换为
+\begin{equation}
+  \bm\beta_f=S_f^{-1}S_i\bm\beta_i.
+  \label{eq:general-bdg-basis-map}
+\end{equation}
+用矩阵形式计算比逐个手写重叠公式更能容纳复模式、SOC 和简并子空间。验收条件是该变换保持 Nambu 辛度量，并在数值容差内重构单位矩阵。
+
+\section{稳定压缩与不稳定放大}
+
+“旧真空是新基中的压缩态”要求新二次 Hamilton 量存在实频率、正范数的稳定准粒子基。若式\eqref{eq:spin-bogoliubov-dispersion}给出 $E_s(k)^2<0$，相应模的频率为虚数，不存在以该不稳定背景为中心的正规新真空。此时仍可从旧态协方差出发，但应直接用线性辛传播
+\begin{equation}
+  V(t)=S_f(t)V(0)S_f(t)^T
+  \label{eq:linear-covariance-propagation}
+\end{equation}
+或完整 TWA 演化。早期涨落指数增长是动力学不稳定，而不是平稳压缩准粒子振荡。非线性随后会饱和增长并耦合其他模式。
+
+关闭 $J$ 还会使均匀自旋支的 $k=0$ 模成为零模。其 $u,v$ 在热力学参数化中可能发散，不能机械代入式\eqref{eq:bogoliubov-uv}。应改用相对相位--相对数的集体坐标，固定守恒粒子数扇区，或在有限体积数守恒 BdG 中单独处理。
+
+\section{实际淬火协方差基准}
+
+配套程序选取稳定参数 $g=1$、$g_{12}=0.6$，把均匀耦合从
+$J_i=1$ 淬火到 $J_f=0.1$。程序直接抽样旧自旋准粒子真空，再变换到新基，比较正常占据和反常矩：
+\begin{center}
+  \includegraphics[width=0.78\textwidth]{figures/ch15/quench_covariance.pdf}
+\end{center}
+图中点来自实际 Gaussian Monte Carlo；解析曲线由式\eqref{eq:quench-ab-coefficients}--\eqref{eq:new-mode-wigner-covariance}给出。全部参数与最大误差保存在
+\path{data/ch15/quench_covariance_metrics.json}。
+
+\begin{chaptercheck}
+完成 BdG 求解后先做四项机器测试：正负能成对、辛范数为正负一、不同正能模辛正交、由全部保留模重构投影单位算符。随后用至少一个稳定淬火比较“旧基直接抽样”和“新基协方差抽样”的原子场一、二阶矩。
+\end{chaptercheck}
+
+\section*{本章小结}
+
+对称双分量凝聚体的线性涨落分成密度与自旋支，均匀耦合主要给自旋支开隙。稳定参数淬火把旧准粒子真空映射为新基中的两模压缩态，其正常与反常协方差由一个辛 Bogoliubov 变换确定。实际 TWA 可直接在旧基抽样并重构原子场。若新谱含虚频或零模，则应使用集体坐标或协方差传播，不能假定存在普通的新准粒子真空。
+
+\begin{exercises}
+  \item 从双分量线性化方程推导式\eqref{eq:density-bogoliubov-dispersion}和\eqref{eq:spin-bogoliubov-dispersion}。
+  \item 证明式\eqref{eq:quench-ab-coefficients}满足 $\mathcal A_k^2-\mathcal B_k^2=1$。
+  \item 由式\eqref{eq:new-mode-wigner-sample}推导有限温协方差式\eqref{eq:new-mode-wigner-covariance}。
+  \item 求 $J_f=0$、$g_{12}>g$ 时虚频波数区间。
+  \item 设计一个数值测试，区分不稳定模的指数增长与稳定压缩模的周期振荡。
+\end{exercises}

@@ -1,0 +1,159 @@
+\chapter{相空间计算公式}
+\label{app:math}
+
+本附录集中列出正文反复使用的变换、对应规则与排序公式。除特别说明外，单模复振幅满足
+$\alpha=(q+\ii p)/\sqrt2$，从而 $\comm{\hat q}{\hat p}=\ii$。
+
+\section{Weyl 符号与反变换}
+
+对一维正则坐标，算符 $\Ohat$ 的 Weyl 符号为
+\begin{equation}
+  O_W(q,p)=\int_{-\infty}^{\infty}\dd y\,
+  \ee^{-\ii py/\hbar}
+  \mel{q+y/2}{\Ohat}{q-y/2}.
+\end{equation}
+反变换写成
+\begin{equation}
+  \mel{x}{\Ohat}{x'}=
+  \int\frac{\dd p}{2\pi\hbar}\,
+  \ee^{\ii p(x-x')/\hbar}
+  O_W\!\left(\frac{x+x'}2,p\right).
+\end{equation}
+密度算符的 Wigner 函数采用
+\begin{equation}
+  W(q,p)=\frac{1}{2\pi\hbar}
+  \int\dd y\,\ee^{-\ii py/\hbar}
+  \mel{q+y/2}{\rhohat}{q-y/2},
+\end{equation}
+于是 $\int\dd q\dd p\,W=1$，且
+\begin{equation}
+  \qavg{\Ohat}=\int\dd q\dd p\,W(q,p)O_W(q,p).
+\end{equation}
+不同文献会把 $2\pi\hbar$ 放在 $W$ 或相空间测度中；只要正反变换、归一化和求迹公式成套一致即可。
+
+\section{星积与 Moyal 括号}
+
+一维星积是
+\begin{equation}
+  A_W\star B_W=A_W
+  \exp\!\left[
+  \frac{\ii\hbar}{2}
+  \left(
+  \overleftarrow\partial_q\overrightarrow\partial_p-
+  \overleftarrow\partial_p\overrightarrow\partial_q
+  \right)\right]B_W.
+\end{equation}
+算符乘积、对易子和反对易子分别映射为
+\begin{align}
+  (\hat A\hat B)_W&=A_W\star B_W,\\
+  \frac{1}{\ii\hbar}[\hat A,\hat B]_W
+  &=\frac{2}{\hbar}A_W\sin\!\left(\frac{\hbar\Lambda}{2}\right)B_W,\\
+  \frac12\{\hat A,\hat B\}_W
+  &=A_W\cos\!\left(\frac{\hbar\Lambda}{2}\right)B_W,
+\end{align}
+其中
+$\Lambda=\overleftarrow\partial_q\overrightarrow\partial_p-
+\overleftarrow\partial_p\overrightarrow\partial_q$。Moyal 括号的低阶展开为
+\begin{equation}
+  \{A,B\}_{\rm M}=\{A,B\}_{\rm P}
+  -\frac{\hbar^2}{24}A\Lambda^3B+\order(\hbar^4).
+\end{equation}
+
+\section{复变量 Bopp 对应}
+
+单模密度算符左右乘法对应
+\begin{align}
+  \ha\rhohat &\longleftrightarrow
+  \left(\alpha+\frac12\partial_{\alpha^*}\right)W,&
+  \had\rhohat &\longleftrightarrow
+  \left(\alpha^*-\frac12\partial_\alpha\right)W,\\
+  \rhohat\ha &\longleftrightarrow
+  \left(\alpha-\frac12\partial_{\alpha^*}\right)W,&
+  \rhohat\had &\longleftrightarrow
+  \left(\alpha^*+\frac12\partial_\alpha\right)W.
+\end{align}
+这些规则可直接生成主方程的 Wigner 偏微分方程。使用时应把导数作用到其右侧的完整乘积，不能只作用到紧邻因子。
+
+\section{常用单模 Weyl 符号}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+算符 & Weyl 符号 \\
+\midrule
+$\ha$，$\had$ & $\alpha$，$\alpha^*$ \\
+$\hat n=\had\ha$ & $|\alpha|^2-1/2$ \\
+$\hat n^2$ & $|\alpha|^4-|\alpha|^2$ \\
+$\had{}^2\ha^2=\hat n(\hat n-1)$
+& $|\alpha|^4-2|\alpha|^2+1/2$ \\
+$\hat q^2$，$\hat p^2$ & $q^2$，$p^2$ \\
+$\tfrac12(\hat q\hat p+\hat p\hat q)$ & $qp$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+由此得到
+\begin{align}
+  \qavg{\hat n}&=\ensavg{|\alpha|^2}-\frac12,\\
+  \qavg{\hat n(\hat n-1)}
+  &=\ensavg{|\alpha|^4-2|\alpha|^2+1/2}.
+\end{align}
+
+\section{多模正规排序四次项}
+
+对正则模式指标 $i,j,k,l$，
+\begin{align}
+  (\had_i\had_j\ha_k\ha_l)_W
+  ={}&\alpha_i^*\alpha_j^*\alpha_k\alpha_l\\
+  &-\frac12\left(
+  \delta_{ik}\alpha_j^*\alpha_l+
+  \delta_{il}\alpha_j^*\alpha_k+
+  \delta_{jk}\alpha_i^*\alpha_l+
+  \delta_{jl}\alpha_i^*\alpha_k\right)\\
+  &+\frac14(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk}).
+\end{align}
+令所有指标相同即得到单模四次公式；令 $i=l$、$j=k$ 且 $i\neq j$，得到
+$(\hat n_i\hat n_j)_W=(|\alpha_i|^2-1/2)(|\alpha_j|^2-1/2)$。
+
+\section{投影场公式}
+
+有限模式场及投影核为
+\begin{equation}
+  \hpsi_{\mathcal C}(x)=\sum_{n\in\mathcal C}\phi_n(x)\ha_n,
+  \qquad
+  \delta_{\mathcal C}(x,x')=\sum_{n\in\mathcal C}
+  \phi_n(x)\phi_n^*(x').
+\end{equation}
+常用估计器汇总为
+\begin{align}
+  \qavg{\hpsid(x)\hpsi(x')}
+  &=\ensavg{\psi^*(x)\psi(x')}
+  -\frac12\delta_{\mathcal C}(x,x'),\\
+  \qavg{\hpsid(x)^2\hpsi(x)^2}
+  &=\ensavg{|\psi|^4-2\delta_{\mathcal C}|\psi|^2
+  +\frac12\delta_{\mathcal C}^2}.
+\end{align}
+接触相互作用的单分量 TWA 漂移为
+\begin{equation}
+  \ii\hbar\partial_t\psi_{\mathcal C}
+  =\mathcal P_{\mathcal C}\left\{
+  [h_0+g(|\psi_{\mathcal C}|^2-\delta_{\mathcal C}(x,x))]
+  \psi_{\mathcal C}\right\}.
+\end{equation}
+
+\section{Fourier 约定速查}
+
+对 $M$ 点周期格点，$x_j=j\Delta x$、$k_\ell=2\pi\ell/L$，使用幺正变换
+\begin{equation}
+  \alpha_\ell^{(k)}=\frac1{\sqrt M}\sum_j
+  \ee^{-\ii k_\ell x_j}\alpha_j,
+  \qquad
+  \alpha_j=\frac1{\sqrt M}\sum_\ell
+  \ee^{\ii k_\ell x_j}\alpha_\ell^{(k)}.
+\end{equation}
+于是
+\begin{equation}
+  \sum_j|\alpha_j|^2=\sum_\ell|\alpha_\ell^{(k)}|^2,
+  \qquad
+  N=\sum_\ell\left(\ensavg{|\alpha_\ell^{(k)}|^2}-\frac12\right).
+\end{equation}
+若程序库采用未归一化正变换和 $1/M$ 反变换，应在代码封装层显式补上 $1/\sqrt M$，而不是在每个观测量中分别猜测因子。

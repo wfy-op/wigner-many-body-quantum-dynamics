@@ -1,0 +1,195 @@
+{
+  "python_executable": "C:\\ProgramData\\anaconda3\\envs\\AI_group\\python.exe",
+  "benchmark_count": 9,
+  "passed_count": 9,
+  "all_passed": true,
+  "results": [
+    {
+      "script": "code/ch05_quadratic/harmonic_wigner.py",
+      "passed": true,
+      "returncode": 0,
+      "elapsed_seconds": 2.624410500000522,
+      "stdout_tail": [
+        "    ],",
+        "    [",
+        "      0.49847166437138024,",
+        "      0.5051308381435574",
+        "    ],",
+        "    [",
+        "      0.5051308381435574,",
+        "      0.49847166437138024",
+        "    ]",
+        "  ],",
+        "  \"exact_quadrature_variance\": 0.5",
+        "}"
+      ],
+      "stderr_tail": []
+    },
+    {
+      "script": "code/ch06_kerr/kerr_exact_vs_twa.py",
+      "passed": true,
+      "returncode": 0,
+      "elapsed_seconds": 4.779461600002833,
+      "stdout_tail": [
+        "{",
+        "  \"seed\": 20260714,",
+        "  \"trajectories\": 100000,",
+        "  \"initial_occupation\": 9.0,",
+        "  \"max_early_coherence_error_tau_le_0.25\": 0.00874148014241849,",
+        "  \"exact_revival_coherence\": 1.0,",
+        "  \"twa_revival_coherence\": 0.0016491893251474113,",
+        "  \"twa_number_estimate_initial\": 8.99431259410505,",
+        "  \"exact_number\": 9.0",
+        "}"
+      ],
+      "stderr_tail": []
+    },
+    {
+      "script": "code/ch08_dimer/dimer_exact_vs_twa.py",
+      "passed": true,
+      "returncode": 0,
+      "elapsed_seconds": 3.7252099999968777,
+      "stdout_tail": [
+        "{",
+        "  \"seed\": 20260714,",
+        "  \"trajectories\": 20000,",
+        "  \"mean_particles\": 8.0,",
+        "  \"J\": 1.0,",
+        "  \"U\": 0.15,",
+        "  \"fock_cutoff_per_mode\": 24,",
+        "  \"retained_initial_norm_before_renormalization\": 0.9999962745279244,",
+        "  \"max_early_imbalance_error_t_le_2\": 0.008034778553375643,",
+        "  \"rms_full_window_error\": 0.021309323532378757,",
+        "  \"twa_total_number_absolute_drift\": 2.4518447450105896e-07",
+        "}"
+      ],
+      "stderr_tail": []
+    },
+    {
+      "script": "code/ch11_sampling/gaussian_sampling.py",
+      "passed": true,
+      "returncode": 0,
+      "elapsed_seconds": 1.9688797000053455,
+      "stdout_tail": [
+        "      2.4765162121975575,",
+        "      0.0",
+        "    ],",
+        "    [",
+        "      0.0,",
+        "      0.10094825899732769",
+        "    ]",
+        "  ],",
+        "  \"max_abs_covariance_error\": 0.0039608917004039235,",
+        "  \"sample_anomalous_moment_real\": 1.185612246456262,",
+        "  \"exact_anomalous_moment_real\": 1.187783976600115",
+        "}"
+      ],
+      "stderr_tail": []
+    },
+    {
+      "script": "code/ch12_propagation/split_step_benchmark.py",
+      "passed": true,
+      "returncode": 0,
+      "elapsed_seconds": 2.1161266999988584,
+      "stdout_tail": [
+        "    0.002,",
+        "    0.001,",
+        "    0.0005",
+        "  ],",
+        "  \"coarse_pair_error\": 8.43604921217305e-06,",
+        "  \"medium_pair_error\": 2.105219704298918e-06,",
+        "  \"fine_pair_error\": 5.260685439017586e-07,",
+        "  \"observed_order_from_two_finest_pairs\": 2.000648110968519,",
+        "  \"max_relative_norm_drift\": 1.3102298113357883e-13,",
+        "  \"max_relative_energy_drift\": 5.611008498719457e-07,",
+        "  \"reversibility_relative_l2_error\": 2.286527900893808e-13",
+        "}"
+      ],
+      "stderr_tail": []
+    },
+    {
+      "script": "code/ch13_observables/ordering_estimator_benchmark.py",
+      "passed": true,
+      "returncode": 0,
+      "elapsed_seconds": 2.8499857999995584,
+      "stdout_tail": [
+        "  \"thermal\": {",
+        "    \"number_estimate\": 1.995343539383402,",
+        "    \"number_standard_error\": 0.003936327313339912,",
+        "    \"number_exact\": 2.0,",
+        "    \"factorial_second_estimate\": 7.93390589320129,",
+        "    \"factorial_second_standard_error\": 0.03688094395407341,",
+        "    \"factorial_second_exact\": 8.0,",
+        "    \"g2_estimate\": 1.9927448090376967,",
+        "    \"g2_jackknife_standard_error\": 0.0048604181714794895,",
+        "    \"g2_exact\": 2.0",
+        "  }",
+        "}"
+      ],
+      "stderr_tail": []
+    },
+    {
+      "script": "code/ch15_quench/quench_covariance.py",
+      "passed": true,
+      "returncode": 0,
+      "elapsed_seconds": 2.5937928999992437,
+      "stdout_tail": [
+        "  \"g\": 1.0,",
+        "  \"g12\": 0.6,",
+        "  \"coupling_initial\": 1.0,",
+        "  \"coupling_final\": 0.1,",
+        "  \"momentum_min\": 0.15,",
+        "  \"momentum_max\": 3.0,",
+        "  \"momentum_count\": 24,",
+        "  \"minimum_final_energy\": 0.35934184629680976,",
+        "  \"max_symplectic_constraint_error\": 5.551115123125783e-16,",
+        "  \"max_occupation_absolute_error\": 0.002615515688394472,",
+        "  \"max_anomalous_absolute_error\": 0.0028798840578887624",
+        "}"
+      ],
+      "stderr_tail": []
+    },
+    {
+      "script": "code/ch16_phase/phase_diffusion.py",
+      "passed": true,
+      "returncode": 0,
+      "elapsed_seconds": 4.336286999998265,
+      "stdout_tail": [
+        "{",
+        "  \"seed\": 20260714,",
+        "  \"trajectories\": 200000,",
+        "  \"hbar\": 1.0,",
+        "  \"charging_energy\": 0.1,",
+        "  \"sigma_number\": 3.0,",
+        "  \"sigma_phase\": 0.15,",
+        "  \"initial_phase_number_covariance\": 0.0,",
+        "  \"phase_diffusion_time\": 3.333333333333333,",
+        "  \"max_phase_variance_absolute_error\": 0.024872276090361467,",
+        "  \"max_coherence_absolute_error\": 0.0021517595079774132",
+        "}"
+      ],
+      "stderr_tail": []
+    },
+    {
+      "script": "code/ch17_order/stripe_scaling_toy.py",
+      "passed": true,
+      "returncode": 0,
+      "elapsed_seconds": 3.6081632999994326,
+      "stdout_tail": [
+        "    0.0225",
+        "  ],",
+        "  \"finite_domain_mean_abs_mq_squared\": [",
+        "    0.002858894321220879,",
+        "    0.0014101344362029119,",
+        "    0.000689419547537452,",
+        "    0.00035460978915474717",
+        "  ],",
+        "  \"ordered_loglog_slope\": -5.828427276698152e-16,",
+        "  \"finite_domain_loglog_slope\": -1.0065837670792221,",
+        "  \"exact_ordered_plateau\": 0.0225",
+        "}"
+      ],
+      "stderr_tail": []
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "seed": 20260714,
+  "trajectories_per_momentum_pair": 120000,
+  "density": 1.0,
+  "g": 1.0,
+  "g12": 0.6,
+  "coupling_initial": 1.0,
+  "coupling_final": 0.1,
+  "momentum_min": 0.15,
+  "momentum_max": 3.0,
+  "momentum_count": 24,
+  "minimum_final_energy": 0.35934184629680976,
+  "max_symplectic_constraint_error": 5.551115123125783e-16,
+  "max_occupation_absolute_error": 0.002615515688394472,
+  "max_anomalous_absolute_error": 0.0028798840578887624
+}

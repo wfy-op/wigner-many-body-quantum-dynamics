@@ -1,0 +1,35 @@
+{
+  "seed": 20260714,
+  "trajectories_per_length": 2000,
+  "lengths": [
+    32.0,
+    64.0,
+    128.0,
+    256.0
+  ],
+  "dx": 0.25,
+  "stripe_period": 4.0,
+  "domain_length": 4.0,
+  "stripe_amplitude": 0.3,
+  "ordered_abs_mean_mq": [
+    0.0020998630068973824,
+    0.004463358998843026,
+    0.004171900131774577,
+    0.0035538250656806515
+  ],
+  "ordered_mean_abs_mq_squared": [
+    0.0225,
+    0.0225,
+    0.0225,
+    0.0225
+  ],
+  "finite_domain_mean_abs_mq_squared": [
+    0.002858894321220879,
+    0.0014101344362029119,
+    0.000689419547537452,
+    0.00035460978915474717
+  ],
+  "ordered_loglog_slope": -5.828427276698152e-16,
+  "finite_domain_loglog_slope": -1.0065837670792221,
+  "exact_ordered_plateau": 0.0225
+}

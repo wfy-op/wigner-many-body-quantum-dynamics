@@ -1,0 +1,190 @@
+\chapter{双分量凝聚体的模型与对称性}
+\label{ch:two-component-model}
+
+\begin{learningobjectives}
+完成本章后，读者应能：
+\begin{enumerate}
+  \item 区分均匀 Josephson/Rabi 耦合双组分模型与具有动量转移的 Raman 自旋轨道耦合模型；
+  \item 从 Hamilton 量识别全局相位、相对相位、粒子数和平移对称性；
+  \item 写出双分量接触相互作用的 TWA 场方程及正确 Weyl 修正；
+  \item 判断参数淬火改变了哪些守恒量，以及哪些“条纹”结论不能由模型自动推出。
+\end{enumerate}
+\end{learningobjectives}
+
+\section{最小双分量 Hamilton 量}
+
+考虑准一维赝自旋分量 $L,R$，场算符满足
+\begin{equation}
+  \comm{\hat\Psi_\sigma(x)}{\hat\Psi_{\sigma'}^\dagger(x')}
+  =\delta_{\sigma\sigma'}\delta(x-x').
+\end{equation}
+均匀线性耦合模型写成
+\begin{align}
+  \Hhat_0={}&\int\dd x\,
+  \hat{\bm\Psi}^\dagger
+  \left[h_0\identity_2+\frac{\delta}{2}\sigma_z-J\sigma_x\right]
+  \hat{\bm\Psi},
+  \qquad
+  \hat{\bm\Psi}=\begin{pmatrix}\hat\Psi_L\\\hat\Psi_R\end{pmatrix},
+  \label{eq:uniform-two-component-h0}\\
+  \Hhat_{\rm int}={}&\int\dd x\left[
+  \frac{g}{2}\left(
+  \hat\Psi_L^{\dagger2}\hat\Psi_L^2+
+  \hat\Psi_R^{\dagger2}\hat\Psi_R^2\right)
+  +g_{12}\hat\Psi_L^\dagger\hat\Psi_R^\dagger
+  \hat\Psi_R\hat\Psi_L\right],
+  \label{eq:two-component-interaction}
+\end{align}
+其中 $h_0=-\hbar^2\partial_x^2/(2m)+V(x)$，$2J$ 是本书约定下单粒子对称与反对称态的能级劈裂，$\delta$ 是失谐。文献也常把 Rabi 频率记为 $\Omega=2J$；比较公式时必须先统一这一因子。
+
+式\eqref{eq:uniform-two-component-h0}适用于内部态的零动量转移 Rabi 耦合，也适用于两条腿或两个局域模之间的 Josephson 耦合。它本身没有有限波矢，因而在均匀系统中不能单独选择一个非零条纹波数。
+
+\section{Raman 耦合与自旋轨道项}
+
+两束反向传播 Raman 光在实验室表象中产生带位置相位的耦合，例如
+\begin{equation}
+  -J\int\dd x\left(
+  \ee^{2\ii k_Rx}\hat\Psi_L^\dagger\hat\Psi_R+{\rm h.c.}
+  \right).
+  \label{eq:raman-lab-coupling}
+\end{equation}
+通过自旋依赖规范变换去掉该相位后，单粒子 Hamilton 量可写成
+\begin{equation}
+  h_{\rm soc}=
+  \frac{(p_x-\hbar k_R\sigma_z)^2}{2m}
+  +\frac{\delta}{2}\sigma_z-J\sigma_x+V(x).
+  \label{eq:raman-soc-hamiltonian}
+\end{equation}
+这里 $k_R$ 提供有限动量尺度，低能带可以具有两个极小值。两个不同准动量凝聚分量的相干叠加才可能在密度或自旋密度中产生有限 $Q$ 的干涉条纹；这一模型结构和相图可参见实验与综述文献\cite{Lin2011,Li2012,Zhai2015}。
+
+因此，后续章节将明确区分两条问题线：
+\begin{enumerate}
+  \item 式\eqref{eq:uniform-two-component-h0}的相对相位淬火、去相位与相分离动力学；
+  \item 式\eqref{eq:raman-soc-hamiltonian}中由双极小值、相互作用和相干叠加共同形成的条纹候选态。
+\end{enumerate}
+均匀 $J$ 模型中的两分量相干性下降，不等同于 Raman 自旋轨道体系中条纹序的建立或消失。
+
+\section{密度与自旋通道}
+
+在平均场或正规排序层面定义
+\begin{equation}
+  n=n_L+n_R,
+  \qquad
+  s=n_L-n_R.
+\end{equation}
+对称耦合 $g_{LL}=g_{RR}=g$ 时，相互作用能密度可重写为
+\begin{equation}
+  \mathcal E_{\rm int}
+  =\frac{g+g_{12}}{4}n^2
+  +\frac{g-g_{12}}{4}s^2.
+  \label{eq:density-spin-interaction}
+\end{equation}
+于是 $g+g_{12}$ 控制总密度通道的刚度，$g-g_{12}$ 控制自旋/相对密度通道。无 Rabi 耦合的均匀混合物在 $g_{12}>g$ 时对低波数自旋涨落不稳定，倾向于相分离；这并不自动意味着总密度形成周期条纹。Rabi 耦合、动能、有限尺寸与 SOC 带结构可以改变稳定边界，必须对具体模型求解。
+
+写
+\begin{equation}
+  \psi_L=\sqrt{n_L}\ee^{\ii\theta_L},
+  \qquad
+  \psi_R=\sqrt{n_R}\ee^{\ii\theta_R},
+  \qquad
+  \phi=\theta_R-\theta_L,
+\end{equation}
+则均匀线性耦合能为
+\begin{equation}
+  \mathcal E_J=-2J\sqrt{n_Ln_R}\cos\phi.
+  \label{eq:josephson-phase-energy}
+\end{equation}
+$J>0$ 把平衡相对相位钉扎在 $\phi=0$；相对密度 $s$ 是其共轭变量。大 $J$ 会增大相对相位涨落的恢复力，但“钉死”只是在低能近似中的说法，量子基态仍有有限宽度。
+
+\section{对称性与守恒量账本}
+
+\subsection{均匀线性耦合存在时}
+
+全局变换 $\hat\Psi_{L,R}\to\ee^{\ii\chi}\hat\Psi_{L,R}$ 保持 Hamilton 量不变，总粒子数
+$\hat N=\hat N_L+\hat N_R$ 守恒。若 $J\neq0$，独立的相对相位旋转不是对称性，$N_L-N_R$ 不守恒。均匀无陷阱时还具有连续平移对称和总动量守恒。
+
+\subsection{淬火后关闭线性耦合}
+
+若没有其他自旋翻转项，Hamilton 量恢复
+$U(1)_L\times U(1)_R$，$N_L$ 与 $N_R$ 分别守恒。相对相位不再被显式势能钉扎，但其空间梯度和相互作用仍产生动力学。一个瞬时淬火改变 Hamilton 量而不改变 $t=0$ 的量子态；新能量
+\begin{equation}
+  E_{\rm new}=\qavg{\psi_{\rm old}|\Hhat_{\rm new}|\psi_{\rm old}}
+  \label{eq:postquench-energy}
+\end{equation}
+随后守恒。它一般高于新 Hamilton 量基态能，差值是淬火注入能量，而不是与热浴交换的热量。
+
+\subsection{Raman SOC 的对称性}
+
+规范变换后的式\eqref{eq:raman-soc-hamiltonian}保持平移不变，但自旋与动量被锁定；实验室表象的普通平移要与 Raman 相位变换联合考虑。零失谐时还可能存在交换两个极小值的离散对称。条纹态涉及有限波矢密度相干，并可能破坏连续或由外场剩余的离散平移对称；具体对称群取决于 Raman 几何和边界。
+
+\section{双分量 TWA 场方程}
+
+在同一正交实空间格点上，双分量接触项的 Weyl 漂移并不完全相同。令
+$\delta_{\mathcal C}=1/\Delta x$，则均匀耦合模型的闭合系统 TWA 为
+\begin{align}
+  \ii\hbar\partial_t\psi_L={}&\left[
+  h_0+\frac{\delta}{2}
+  +g(|\psi_L|^2-\delta_{\mathcal C})
+  +g_{12}\left(|\psi_R|^2-\frac12\delta_{\mathcal C}\right)
+  \right]\psi_L-J\psi_R,
+  \label{eq:two-component-twa-l}\\
+  \ii\hbar\partial_t\psi_R={}&\left[
+  h_0-\frac{\delta}{2}
+  +g(|\psi_R|^2-\delta_{\mathcal C})
+  +g_{12}\left(|\psi_L|^2-\frac12\delta_{\mathcal C}\right)
+  \right]\psi_R-J\psi_L.
+  \label{eq:two-component-twa-r}
+\end{align}
+同分量四次项的漂移扣除一个投影基线；跨分量密度乘积的另一分量只扣除半个基线。这可由
+\begin{equation}
+  (\hat n_L\hat n_R)_W
+  =\left(|\alpha_L|^2-\frac12\right)
+   \left(|\alpha_R|^2-\frac12\right)
+  \label{eq:cross-interaction-weyl}
+\end{equation}
+直接求导得到。双线性 $J$ 项是二次 Hamilton 量，不产生额外排序修正。
+
+对 SOC 模型，把单粒子矩阵 $h_{\rm soc}$ 代入式\eqref{eq:two-component-twa-l}--\eqref{eq:two-component-twa-r}即可，但传播器必须处理自旋依赖动量项。初态的噪声则要在同一个有限自旋--空间模式基中生成，每个保留正则玻色模式贡献半量子。
+
+\section{无量纲控制参数}
+
+均匀系统可用总密度 $n$ 和密度相互作用能
+$E_n=n(g+g_{12})/2$ 建立尺度。常见无量纲量包括
+\begin{equation}
+  \gamma_s=\frac{g-g_{12}}{g+g_{12}},
+  \qquad
+  j=\frac{J}{E_n},
+  \qquad
+  \tilde\delta=\frac{\delta}{E_n},
+  \qquad
+  \kappa=\frac{\hbar^2k_R^2/(2m)}{E_n}.
+\end{equation}
+但真正的 TWA 风险还取决于每个截止模式的占据、系统长度、温度和淬火后演化时间。仅保持这些平均场比值相同，并不保证不同网格的量子涨落等价。
+
+\section{模型建立检查表}
+
+进入 BdG 或 TWA 前应逐项回答：
+\begin{enumerate}
+  \item $L,R$ 是内部态、空间双阱还是动量态？
+  \item 线性耦合是否携带空间相位或动量转移？$J$ 与实验 Rabi 频率如何换算？
+  \item $g,g_{12}$ 是哪一维度和哪种正规化约定下的参数？
+  \item 淬火前后分别守恒哪些粒子数、动量和离散对称量？
+  \item 条纹指总密度、自旋密度，还是释放后干涉图样？
+  \item 候选有序相究竟破坏哪个 Hamilton 对称性？
+\end{enumerate}
+
+\begin{chaptercheck}
+若只给出式\eqref{eq:uniform-two-component-h0}而没有 $k_R$、非局域相互作用、晶格或其他有限波矢机制，就不能把任何密度起伏自动解释成 Raman 条纹相。先从单粒子色散和线性稳定谱中证明存在目标波矢，再设计序参量。
+\end{chaptercheck}
+
+\section*{本章小结}
+
+均匀 Josephson/Rabi 耦合与 Raman 自旋轨道耦合是不同模型：后者包含动量转移并可产生双极小值。$g_{12}>g$ 表示自旋通道趋向相分离，却不自动建立总密度条纹。淬火到 $J=0$ 恢复相对 $U(1)$ 对称并使两分量粒子数分别守恒。双分量 TWA 中，同分量和跨分量相互作用具有不同 Weyl 基线修正，必须在固定模式投影下实现。
+
+\begin{exercises}
+  \item 从 $n_L=(n+s)/2$、$n_R=(n-s)/2$ 推导式\eqref{eq:density-spin-interaction}。
+  \item 对式\eqref{eq:uniform-two-component-h0}计算单粒子对称、反对称态能量并核对劈裂为 $2J$。
+  \item 从式\eqref{eq:cross-interaction-weyl}推导式\eqref{eq:two-component-twa-l}中的跨分量修正。
+  \item 列出 $J\neq0$ 与 $J=0$ 时所有连续对称性及对应守恒量。
+  \item 说明实验室表象式\eqref{eq:raman-lab-coupling}怎样通过自旋依赖规范变换产生式\eqref{eq:raman-soc-hamiltonian}。
+\end{exercises}

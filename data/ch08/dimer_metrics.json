@@ -1,0 +1,12 @@
+{
+  "seed": 20260714,
+  "trajectories": 20000,
+  "mean_particles": 8.0,
+  "J": 1.0,
+  "U": 0.15,
+  "fock_cutoff_per_mode": 24,
+  "retained_initial_norm_before_renormalization": 0.9999962745279244,
+  "max_early_imbalance_error_t_le_2": 0.008034778553375643,
+  "rms_full_window_error": 0.021309323532378757,
+  "twa_total_number_absolute_drift": 2.4518447450105896e-07
+}

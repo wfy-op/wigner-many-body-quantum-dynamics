@@ -1,0 +1,141 @@
+\chapter{从量子态到可计算动力学}
+\label{ch:motivation}
+
+\begin{learningobjectives}
+完成本章后，读者应能：
+\begin{enumerate}
+  \item 把一个动力学问题写成初态 $\rhohat_0$、哈密顿量 $\Hhat$ 和观测量 $\Ohat$ 的三元组；
+  \item 区分相空间表象、经典场近似和截断维格纳近似；
+  \item 画出从初始 Wigner 分布到量子观测量的完整计算链；
+  \item 为一项数值结论列出最低限度的验证证据。
+\end{enumerate}
+\end{learningobjectives}
+
+\section{问题不是“解出波函数”}
+
+教科书中的量子动力学常从 Schrödinger 方程开始：
+\begin{equation}
+  \ii\hbar\pder{}{t}\ket{\psi(t)}=\Hhat\ket{\psi(t)}.
+  \label{eq:schrodinger}
+\end{equation}
+对于少数自由度，\cref{eq:schrodinger} 几乎就是问题的完整定义。然而，实际的多体问题通常不是要求写下整个 $\ket{\psi(t)}$，而是要求回答一个有限的问题，例如粒子数是否重新分配、相干性以什么时间尺度衰减、某个动量峰是否随系统尺寸保持，或者一个密度波序参量是否建立。
+
+因此，更有操作性的起点是三元组
+\begin{equation}
+  \mathcal{P}=\bigl(\rhohat_0,\Hhat,\Ohat\bigr),
+  \label{eq:problem-triple}
+\end{equation}
+其中 $\rhohat_0$ 给出初态，$\Hhat$ 给出演化规律，$\Ohat$ 给出最终要回答的问题。目标量为
+\begin{equation}
+  \qavg{\Ohat(t)}
+  =\Tr\!\left[\rhohat_0\,ee^{\ii\Hhat t/\hbar}
+  \Ohat\ee^{-\ii\Hhat t/\hbar}\right].
+  \label{eq:heisenberg-expectation}
+\end{equation}
+这个表达式完全精确，但“写得出来”不等于“算得出来”。对于每个格点最多容纳 $n_{\max}$ 个玻色子的 $M$ 模系统，截断 Hilbert 空间的维数为 $(n_{\max}+1)^M$；即使利用总粒子数守恒，维数仍随 $M$ 和粒子数迅速增长。
+
+\begin{intuitionbox}
+多体数值方法的核心不是消灭量子复杂性，而是选择问题真正需要保存的信息。Wigner 方法保存相空间分布及其矩，而不显式保存完整的多体态矢量。
+\end{intuitionbox}
+
+\section{相空间表象改变了什么}
+
+经典统计力学用概率密度 $P(q,p)$ 表示对初始条件的不确定性，并沿 Hamilton 方程传播每个样本。量子力学不能直接照搬这一做法，因为 $\hat q$ 与 $\hat p$ 不对易，也不存在同时给出二者任意精确取值的正概率分布。Wigner 在 1932 年引入的分布以实函数 $W(q,p)$ 编码密度算符，同时允许分布出现负值\cite{Wigner1932,Hillery1984}。
+
+对采用本书归一化的单自由度系统，Wigner 表象满足
+\begin{equation}
+  \int\dd q\,\dd p\,W(q,p)=1,
+  \qquad
+  \qavg{\Ohat}=\int\dd q\,\dd p\,W(q,p)O_W(q,p),
+  \label{eq:wigner-average-preview}
+\end{equation}
+其中 $O_W$ 是算符 $\Ohat$ 的 Weyl 符号。\cref{eq:wigner-average-preview} 看起来像经典统计平均，但两个细节使它仍然是量子力学：$W$ 未必非负，且 $O_W$ 不是把算符简单替换为数，而是由对称排序确定。
+
+相空间表象本身是精确的变量变换。近似出现在我们怎样传播 $W$。精确传播由 Moyal 方程给出；对于至多二次的 Hamiltonian，它退化为经典 Liouville 方程；对于非线性相互作用，它还包含更高阶相空间导数。TWA 舍弃其中高于一阶漂移的项，把传播变成经典场轨迹系综\cite{Moyal1949,Polkovnikov2010}。
+
+\section{本书的计算闭环}
+
+给定\cref{eq:problem-triple}，一项完整的 Wigner/TWA 计算包含五步：
+\begin{equation}
+  (\rhohat_0,\Hhat,\Ohat)
+  \longrightarrow W_0
+  \longrightarrow \{\phasevec^{(s)}_0\}_{s=1}^{N_s}
+  \longrightarrow \{\phasevec^{(s)}(t)\}_{s=1}^{N_s}
+  \longrightarrow \qavg{\Ohat(t)}.
+  \label{eq:book-pipeline}
+\end{equation}
+
+第一步选择有限模式或有限网格，并求初态的 Wigner 表象。第二步从 $W_0$ 生成 $N_s$ 个随机初值。若 $W_0$ 不是非负分布，这一步不能直接使用普通 Monte Carlo 抽样，必须采用近似、高斯重构或其他相空间表象。第三步对每个样本独立积分经典场方程。第四步把轨迹函数转化为 Weyl 排序的统计量。第五步根据目标算符的排序关系减去半量子等修正，得到正常排序或实验定义的观测量。
+
+用符号写，若 $O_W$ 已知，则样本估计量为
+\begin{equation}
+  \widehat{\qavg{\Ohat(t)}}
+  =\frac{1}{N_s}\sum_{s=1}^{N_s}
+  O_W\!\left(\phasevec^{(s)}(t)\right).
+  \label{eq:monte-carlo-estimator}
+\end{equation}
+有限样本误差通常按 $N_s^{-1/2}$ 缩小，但这只控制 Monte Carlo 误差，不控制 TWA 截断误差、空间离散误差和时间积分误差。
+
+\section{三个层次不能混为一谈}
+
+\subsection{精确 Wigner 表象}
+
+密度算符与 Wigner 函数之间的变换是可逆的。在这一层次上，量子动力学没有被经典化；不对易性进入星积，非局域量子干涉进入 $W$ 的精细结构与负值区域。
+
+\subsection{平均场轨迹}
+
+平均场方法只传播一个典型复振幅或一个变分态。它可以准确描述高占据、涨落较弱的短时间动力学，但单条轨迹没有初态量子涨落的统计信息。确定性 Gross--Pitaevskii 方程本身不能给出由量子初态分布引起的轨迹间去相位。
+
+\subsection{截断维格纳系综}
+
+TWA 传播很多满足平均场型方程的轨迹，但初值由 Wigner 分布决定。非线性传播把初始涨落转换成观测量涨落、模式占据和系综去相位。因此，TWA 不等于“带随机数的 GPE”，随机数的协方差、基底和排序修正都由量子态决定。
+
+\begin{warningbox}
+“每条轨迹服从经典方程”不意味着“结果在任意时间都可靠”。非线性会形成越来越细的相空间结构，而被截去的高阶导数正负责其中一部分量子干涉。增加轨迹数只能降低抽样误差，不能修复系统性的截断误差。
+\end{warningbox}
+
+\section{一个最小例子：相干态谐振子}
+
+考虑
+\begin{equation}
+  \Hhat=\hbar\omega\left(\had\ha+\frac12\right),
+  \qquad \rhohat_0=\ket{\alpha_0}\bra{\alpha_0}.
+\end{equation}
+相干态的 Wigner 函数是以 $\alpha_0$ 为中心的正高斯分布。每个样本按
+\begin{equation}
+  \alpha^{(s)}(t)=\alpha^{(s)}(0)\ee^{-\ii\omega t}
+  \label{eq:harmonic-trajectory-preview}
+\end{equation}
+旋转。由于 Hamiltonian 对正交分量至多二次，这不是近似，而是精确 Wigner 演化。若目标是粒子数，则不能直接把 $|\alpha|^2$ 当作 $\qavg{\had\ha}$，而要使用
+\begin{equation}
+  \qavg{\had\ha}
+  =\ensavg{|\alpha|^2}-\frac12.
+  \label{eq:number-half-preview}
+\end{equation}
+这里的 $1/2$ 是对称排序与正常排序之间的差，不是可选的数值修正。后续章节将从 Weyl 变换严格推出\cref{eq:number-half-preview}。
+
+\section{怎样判断一个结果值得相信}
+
+数值输出不是证据的终点。对本书中的每个计算，我们区分四类误差：
+\begin{enumerate}
+  \item \textbf{抽样误差}：改变轨迹数并报告置信区间；
+  \item \textbf{积分误差}：改变时间步长并检查守恒量；
+  \item \textbf{表示误差}：改变网格、模式数或局域占据截断；
+  \item \textbf{方法误差}：与解析解、精确小系统或独立方法比较。
+\end{enumerate}
+前三类误差都很小，也不能自动证明 TWA 逼近了真实量子演化。方法误差必须通过具有重叠适用区的基准来估计。Kerr 振子与 Bose--Hubbard 二聚体将在后文承担这一任务。
+
+\begin{chaptercheck}
+面对一个新问题，先写清 $\rhohat_0$、$\Hhat$ 和 $\Ohat$，再决定是否使用 Wigner 方法。若目标观测量、初态抽样或排序修正有一项没有定义，计算闭环就尚未建立。
+\end{chaptercheck}
+
+\section*{本章小结}
+
+Wigner 表象提供了从密度算符到相空间准分布的精确桥梁。TWA 在此基础上使用随机初值和经典漂移近似量子动力学。可信的工作流程必须同时说明初态怎样抽样、轨迹怎样传播、观测量怎样还原，以及近似怎样被独立验证。
+
+\begin{exercises}
+  \item 对两能级系统，说明为什么连续的 $(q,p)$ 相空间不是唯一自然选择，并列出一种替代表象。
+  \item 设 $N_s$ 条独立轨迹给出样本 $O_s$。写出样本均值的标准误差估计，并说明它为什么不包含时间离散误差。
+  \item 对相干态谐振子，利用\cref{eq:harmonic-trajectory-preview,eq:number-half-preview} 证明平均粒子数不随时间改变。
+  \item 选取一个你关心的多体模型，把问题写成\cref{eq:problem-triple}，并为四类误差各提出一个检查。
+\end{exercises}

@@ -1,0 +1,175 @@
+\chapter{常见量子态、非经典性与观测量}
+\label{ch:states-observables}
+
+\begin{learningobjectives}
+完成本章后，读者应能：
+\begin{enumerate}
+  \item 写出相干态、热态、压缩高斯态和 Fock 态的 Wigner 函数；
+  \item 根据协方差矩阵抽样多模高斯态；
+  \item 区分 Wigner 负值、量子性和普通概率可抽样性；
+  \item 把等时正常排序观测量转换为 Wigner 样本估计量。
+\end{enumerate}
+\end{learningobjectives}
+
+\section{选择初态就是选择物理假设}
+
+在 TWA 中，初态不是给平均场加一点任意噪声。初态的粒子数涨落、相位涨落、模间关联和反常关联都由 $\rhohat_0$ 决定。两个具有相同平均粒子数的状态，若一个是相干态、另一个是数态，其长期相位扩散可以完全不同。因此，抽样算法必须从态的矩或协方差出发，而不能只匹配一条平均密度曲线。
+
+\section{相干态与热态}
+
+第2章已经得到相干态
+\begin{equation}
+  W_{\alpha_0}(\alpha)=\frac{2}{\pi}
+  \exp[-2|\alpha-\alpha_0|^2].
+\end{equation}
+它的位置由 $\alpha_0$ 决定，宽度固定为真空宽度。相干态粒子数服从 Poisson 分布，满足
+\begin{equation}
+  \qavg{\hat n}=|\alpha_0|^2,
+  \qquad
+  \Var(\hat n)=|\alpha_0|^2.
+\end{equation}
+如果实际制备固定总粒子数，直接使用相干态会额外引入全局数涨落；是否可接受取决于目标观测量是否对该涨落敏感。
+
+平均热占据为 $\bar n$ 的单模热态具有
+\begin{equation}
+  W_{\mathrm{th}}(\alpha)
+  =\frac{2}{\pi(2\bar n+1)}
+  \exp\!\left[-\frac{2|\alpha|^2}{2\bar n+1}\right].
+  \label{eq:thermal-wigner}
+\end{equation}
+其直接抽样为
+\begin{equation}
+  \alpha=\sqrt{\frac{\bar n+1/2}{2}}
+  (\xi_1+\ii\xi_2),
+  \qquad \xi_j\sim\mathcal{N}(0,1).
+  \label{eq:thermal-sampling}
+\end{equation}
+于是 $\ensavg{|\alpha|^2}=\bar n+1/2$，减去排序修正后恢复 $\qavg{\hat n}=\bar n$。
+
+\section{高斯态与协方差矩阵}
+
+对 $M$ 个模式，把正交分量排列为
+\begin{equation}
+  \hat{\bm R}=(\hat q_1,\hat p_1,\ldots,\hat q_M,\hat p_M)^{\mathsf T}.
+\end{equation}
+定义均值和对称协方差
+\begin{align}
+  d_j&=\qavg{\hat R_j},\\
+  V_{jk}&=\frac12\qavg{
+  \acomm{\hat R_j-d_j}{\hat R_k-d_k}}.
+  \label{eq:gaussian-covariance}
+\end{align}
+采用 $\comm{\hat q_j}{\hat p_k}=\ii\delta_{jk}$ 时，物理协方差必须满足
+\begin{equation}
+  V+\frac{\ii}{2}\Omega\succeq0,
+  \qquad
+  \Omega=\bigoplus_{j=1}^{M}
+  \begin{pmatrix}0&1\\-1&0\end{pmatrix}.
+  \label{eq:uncertainty-matrix}
+\end{equation}
+高斯态的 Wigner 函数就是均值为 $\bm d$、协方差为 $V$ 的普通多元高斯：
+\begin{equation}
+  W(\bm R)=\frac{1}{(2\pi)^M\sqrt{\det V}}
+  \exp\!\left[-\frac12(\bm R-\bm d)^{\mathsf T}
+  V^{-1}(\bm R-\bm d)\right].
+  \label{eq:multimode-gaussian-wigner}
+\end{equation}
+若 $V=LL^{\mathsf T}$，则
+\begin{equation}
+  \bm R=\bm d+L\bm\xi,
+  \qquad \bm\xi\sim\mathcal{N}(\bm0,I)
+  \label{eq:gaussian-cholesky-sampling}
+\end{equation}
+给出直接抽样。$L$ 可以取 Cholesky 因子；当 $V$ 半正定但数值上接近奇异时，可使用特征分解并设置与机器精度相容的容差。
+
+\subsection{单模压缩真空}
+
+若压缩轴与 $q$ 轴重合，实压缩参数为 $r$，则
+\begin{equation}
+  V=\frac12
+  \begin{pmatrix}
+    \ee^{-2r}&0\\
+    0&\ee^{2r}
+  \end{pmatrix}.
+  \label{eq:squeezed-covariance}
+\end{equation}
+一个正交分量的噪声低于真空，另一个按不确定关系增大。该态具有明确的量子压缩，却仍有处处非负的 Wigner 函数。这再次说明“Wigner 负值”等价于“量子性”的说法过强。
+
+\subsection{模间关联}
+
+两模压缩态的协方差矩阵含非零的模间块。若只按每个模式的边缘方差独立抽样，就会丢掉 $\qavg{\ha_k\ha_{-k}}$ 一类反常关联。淬火后的 Bogoliubov 初态正需要保留这种 $k$ 与 $-k$ 的关联；第15章将给出从准粒子变换构造 $V$ 的方法。
+
+\begin{numericalbox}
+高斯抽样至少检查三项：样本均值与 $\bm d$ 的偏差、样本协方差与 $V$ 的矩阵范数误差，以及 $V+\ii\Omega/2$ 的最小特征值。只检查每个对角方差不能发现模间关联丢失。
+\end{numericalbox}
+
+\section{Fock 态与 Wigner 负值}
+
+粒子数态 $\ket{n}$ 的单模 Wigner 函数为
+\begin{equation}
+  W_n(\alpha)=\frac{2}{\pi}(-1)^n
+  L_n(4|\alpha|^2)\ee^{-2|\alpha|^2},
+  \label{eq:fock-wigner}
+\end{equation}
+其中 $L_n$ 是 Laguerre 多项式。除真空外，分布通常含正负交替的环。普通 Monte Carlo 需要非负抽样权重，因此不能把\cref{eq:fock-wigner} 直接当作概率密度。
+
+实际工作中有三种选择：使用能够处理复权重或扩展相空间的表示；构造只匹配目标低阶矩的近似正分布；或者在小系统中直接使用精确态作为基准。第二种选择不是精确表示，必须说明匹配了哪些矩，以及结论是否对未匹配的高阶矩敏感。
+
+猫态
+\begin{equation}
+  \ket{\psi_{\mathrm{cat}}}\propto
+  \ket{\alpha_0}+\ee^{\ii\phi}\ket{-\alpha_0}
+\end{equation}
+的 Wigner 函数由两个高斯峰和中间的干涉条纹组成。若只抽样两个峰的经典混合，就会保留“在左或在右”的统计，却丢失相干叠加。Wigner 图中最细的干涉条纹也往往最先暴露半经典截断的局限。
+
+\section{三种常用相空间分布}
+
+不同相空间表示对应不同算符排序：
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+表示 & 典型排序 & 主要特征 \\
+\midrule
+Glauber--Sudarshan $P$ & 正常排序 & 可能比普通函数更奇异 \\
+Wigner $W$ & 对称排序 & 实函数，但可为负 \\
+Husimi $Q$ & 反正常排序 & 始终非负，但额外平滑 \\
+\bottomrule
+\end{tabular}
+\end{center}
+不存在对所有问题都最优的表示。Wigner 表象的优势是漂移方程常接近经典场动力学，且高占据玻色系统的半量子修正清楚；它的限制是非正初态难以直接抽样，非线性演化又会产生高阶导数。
+
+\section{等时观测量的估计器}
+
+对单模玻色子，常用估计器包括
+\begin{align}
+  \qavg{\hat n}
+  &=\ensavg{|\alpha|^2-\frac12},\\
+  \qavg{\hat n(\hat n-1)}
+  &=\ensavg{|\alpha|^4-2|\alpha|^2+\frac12},
+  \label{eq:wigner-factorial-moments}
+\end{align}
+从而
+\begin{equation}
+  g^{(2)}=
+  \frac{\qavg{\had\had\ha\ha}}
+  {\qavg{\had\ha}^2}.
+\end{equation}
+对不同模式 $j\neq k$，算符彼此对易，但每个同模的产生湮灭配对仍需排序修正。连续场中的 $1/2$ 会变成含网格尺度的 $1/(2\Delta x)$，第10章将详细推导。
+
+以上规则直接适用于单一时刻的对称排序量。多时关联如 $\qavg{\had(t_1)\ha(t_2)}$ 不能总是把两个轨迹值直接相乘；时间排序、对易子和响应修正可能参与。若目标是谱函数或响应函数，必须从所需的时间排序重新推导估计器。
+
+\begin{warningbox}
+状态抽样正确，不代表观测量估计器自动正确。初态分布、动力学方程和算符排序是三项独立输入；任何一项使用了另一种相空间约定，最终结果都可能相差一个随模式数累积的真空修正。
+\end{warningbox}
+
+\section*{本章小结}
+
+相干态和热态可以逐模直接抽样，一般高斯态应由完整协方差矩阵抽样。压缩态说明正 Wigner 函数仍能代表量子态，Fock 态和猫态则展示普通概率抽样的限制。等时观测量必须从 Weyl 符号构造；正常排序、多时排序和连续场极限需要分别处理。
+
+\begin{exercises}
+  \item 用\cref{eq:thermal-sampling} 计算 $\ensavg{|\alpha|^2}$ 和 $\ensavg{|\alpha|^4}$，验证热态的 $g^{(2)}=2$。
+  \item 验证压缩真空协方差\cref{eq:squeezed-covariance} 饱和不确定关系。
+  \item 对给定的 $4\times4$ 两模协方差矩阵，写出检查其物理性的步骤和抽样算法。
+  \item 计算 $n=1$ Fock 态 Wigner 函数在 $\alpha=0$ 处的值，并解释为什么不能直接作正概率抽样。
+  \item 比较相干态与固定粒子数态作为双阱初态时，总粒子数方差的差别，并讨论它可能怎样影响相位扩散。
+\end{exercises}

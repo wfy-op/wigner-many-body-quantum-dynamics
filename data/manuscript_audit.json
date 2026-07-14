@@ -1,0 +1,20 @@
+{
+  "chapter_file_count": 18,
+  "appendix_file_count": 4,
+  "review_file_count": 18,
+  "tex_file_count": 30,
+  "label_count": 194,
+  "duplicate_labels": [],
+  "citation_key_count": 17,
+  "bibliography_entry_count": 17,
+  "missing_bibliography_keys": [],
+  "unused_bibliography_keys": [],
+  "figure_reference_count": 9,
+  "missing_graphics": [],
+  "missing_includes": [],
+  "placeholder_hits": [],
+  "missing_chapter_reviews": [],
+  "numerical_benchmarks_all_passed": true,
+  "numerical_benchmarks_passed": 9,
+  "passed": true
+}

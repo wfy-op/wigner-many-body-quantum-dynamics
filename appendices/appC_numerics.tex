@@ -1,0 +1,134 @@
+\chapter{数值算法与测试规范}
+\label{app:numerics}
+
+本附录把正文中的数值要求整理成可执行规范。所有阈值都应由解析误差、算法阶数或样本方差决定；本书程序内的数值只适用于其固定基准参数。
+
+\section{推荐目录与数据流}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+目录 & 内容 \\
+\midrule
+\path{code/} & 可独立运行的模拟与分析程序 \\
+\path{data/} & JSON/CSV 轻量指标与图数据 \\
+\path{figures/} & 由代码生成的矢量或高分辨率图 \\
+\path{chapters/} & 只引用稳定产物路径的正文 \\
+\path{reviews/} & 逐章科学、公式、数值和编译审核 \\
+\path{output/pdf/} & 可交付 PDF，不作为唯一数据存档 \\
+\bottomrule
+\end{tabular}
+\end{center}
+推荐数据流为
+\[
+  \text{参数清单}\longrightarrow
+  \text{初态样本}\longrightarrow
+  \text{轨迹/统计量}\longrightarrow
+  \text{分析指标}\longrightarrow
+  \text{图与表}.
+\]
+下游步骤不得静默修改上游参数；必要变换应生成新文件并记录来源。
+
+\section{FFT 分步法伪代码}
+
+对无量纲方程
+\begin{equation}
+  \ii\partial_t\psi=
+  \left[-\frac12\partial_x^2+V+g(|\psi|^2-\delta_{\mathcal C})\right]\psi,
+\end{equation}
+一时间步可写为：
+\begin{lstlisting}[style=bookpython]
+kinetic_half = exp(-0.25j * k**2 * dt)
+psi = ifft(kinetic_half * fft(psi))
+local = V + g * (abs(psi)**2 - delta_c)
+psi = exp(-1j * local * dt) * psi
+psi = ifft(kinetic_half * fft(psi))
+\end{lstlisting}
+必须用实际 FFT 库验证 Parseval 约定。若将场从实空间模式振幅 $\alpha_j$ 转为幺正动量振幅，NumPy 默认变换需要额外除以 $\sqrt M$。
+
+\section{最低测试矩阵}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{p{0.22\textwidth}XX}
+\toprule
+测试 & 输入 & 通过标准 \\
+\midrule
+真空抽样 & 独立零均值模式 & 每模 $\ensavg{|\alpha|^2}=1/2$，正规粒子数为零 \\
+相干/热估计器 & 解析 Gaussian 态 & $n$ 与 $g^{(2)}$ 在统计区间内 \\
+二次传播 & 谐振子或线性场 & Wigner 分布按解析辛流演化 \\
+时间步长 & $\Delta t,\Delta t/2,\Delta t/4$ & 误差比符合算法阶数 \\
+守恒与反演 & 时间无关闭合方程 & 范数、能量与反向误差低于预设阈值 \\
+BdG 模式 & 稳定均匀模型 & 辛范数、配对与解析色散一致 \\
+淬火协方差 & 稳定解析淬火 & 正常、反常矩与辛变换一致 \\
+精确小系统 & Kerr 或二聚体 & 预注册时间窗内误差低于阈值 \\
+截止稳定 & 至少三档物理截止 & 目标观测量存在稳定窗或报告失败 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{本书可运行基准}
+
+在项目根目录使用当前 Python 环境运行
+\begin{lstlisting}[style=bookpython]
+python code/run_all.py
+\end{lstlisting}
+Windows 本机推荐显式使用项目说明中的 \texttt{AI\_group} 环境 Python。总入口依次执行：
+\begin{enumerate}
+  \item 第5章谐振子精确 Wigner 旋转；
+  \item 第6章 Kerr 精确解与 TWA；
+  \item 第8章 Bose--Hubbard 二聚体精确解与 TWA；
+  \item 第11章压缩 Gaussian 协方差；
+  \item 第12章分步法守恒、反演与阶数；
+  \item 第13章排序估计器与 jackknife；
+  \item 第15章双分量稳定淬火协方差；
+  \item 第16章集体相位扩散；
+  \item 第17章随机条纹相位有限尺寸标度。
+\end{enumerate}
+汇总写入 \path{data/test_summary.json}。其中第17章是明确定义的统计玩具模型，只测试分析公式；不代表完成了具体实验参数的超固态模拟。
+
+\section{收敛表模板}
+
+每个生产结论至少保存以下表格字段：
+\begin{center}
+\begin{tabular}{lllll}
+\toprule
+运行号 & $L,M,\Delta x$ & $\Delta t$ & 轨迹数 & 目标量与误差 \\
+\midrule
+A & 固定 & $\Delta t$ & $N_s$ & $O_A\pm{\rm SE}_A$ \\
+B & 固定 & $\Delta t/2$ & $N_s$ & $O_B\pm{\rm SE}_B$ \\
+C & 改变截止 & 收敛步长 & $N_s$ & $O_C\pm{\rm SE}_C$ \\
+D & 固定 & 收敛步长 & $2N_s$ & $O_D\pm{\rm SE}_D$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+A/B 比较积分误差，A/D 比较抽样误差，B/C 比较表示/截止误差。不要同时改变多个因素后把差异归因于其中一个。
+
+\section{随机数与并行}
+
+为每个生产批次保存主种子 $s_0$，再由确定性子流函数生成轨迹种子。轨迹结果应由唯一整数 ID 标识，使失败任务可单独重跑而不改变其余随机数。并行归约时保存计数、和、平方和及必要的交叉积；浮点求和顺序变化会产生末位差异，对极端动态范围可采用成对求和或补偿求和。
+
+共同随机数比较应保存成对轨迹 ID。差值 $D_s=X_s-Y_s$ 的误差由 $D_s$ 的样本方差计算，而不是把两个均值标准误平方相加。
+
+\section{数据完整性与图形}
+
+每张图至少对应一个含以下信息的数据文件：
+\begin{enumerate}
+  \item 横纵坐标数值和单位；
+  \item 均值、误差条类型与有效样本数；
+  \item 生成数据的运行 ID 与分析版本；
+  \item 任何平滑、重采样、寻峰或归一化步骤；
+  \item 理论曲线是解析结果、拟合还是独立模拟。
+\end{enumerate}
+绘图程序不得用肉眼编辑数据点。示意图与计算结果要在图注中明确区分。
+
+\section{LaTeX 与 PDF 验收}
+
+推荐使用 XeLaTeX 处理中文，并把构建视为测试：
+\begin{enumerate}
+  \item 清查未定义引用、重复标签、缺图和文献错误；
+  \item 把 overfull box 视为需要定位的排版缺陷；
+  \item 检查目录、书签、公式编号和交叉引用；
+  \item 渲染抽查含长公式、表格、彩色框和图的页面；
+  \item 保存成功构建日志、页数和稳定 PDF 哈希。
+\end{enumerate}
+MiKTeX 的日志目录权限警告若不影响退出码与 PDF 生成，可作为环境警告记录，但不能掩盖真正的 LaTeX 错误。

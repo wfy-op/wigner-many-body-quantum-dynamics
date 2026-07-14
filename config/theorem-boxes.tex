@@ -1,0 +1,34 @@
+\newtheorem{definition}{定义}[chapter]
+\newtheorem{theorem}{定理}[chapter]
+\newtheorem{proposition}{命题}[chapter]
+\newtheorem{example}{例}[chapter]
+
+\newtcolorbox{learningobjectives}{
+  enhanced,breakable,colback=Blue!4,colframe=MidnightBlue,
+  title={本章目标},fonttitle=\bfseries
+}
+\newtcolorbox{intuitionbox}{
+  enhanced,breakable,colback=Green!4,colframe=ForestGreen,
+  title={物理直觉},fonttitle=\bfseries
+}
+\newtcolorbox{derivationbox}{
+  enhanced,breakable,colback=gray!4,colframe=black!65,
+  title={关键推导},fonttitle=\bfseries
+}
+\newtcolorbox{numericalbox}{
+  enhanced,breakable,colback=Cyan!4,colframe=TealBlue,
+  title={数值实验},fonttitle=\bfseries
+}
+\newtcolorbox{warningbox}{
+  enhanced,breakable,colback=Red!4,colframe=BrickRed,
+  title={有效性警告},fonttitle=\bfseries
+}
+\newtcolorbox{chaptercheck}{
+  enhanced,breakable,colback=Yellow!8,colframe=Orange,
+  title={章末检查},fonttitle=\bfseries
+}
+
+\newenvironment{exercises}
+  {\section*{习题}\addcontentsline{toc}{section}{习题}\begin{enumerate}[label=\textbf{\thechapter.\arabic*}]}
+  {\end{enumerate}}
+
