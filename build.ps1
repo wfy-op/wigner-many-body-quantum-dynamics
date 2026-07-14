@@ -16,6 +16,10 @@ try {
         (Get-Date -Format 'yyyy-MM-dd')
     Copy-Item -LiteralPath (Join-Path $Root 'main.pdf') `
         -Destination (Join-Path $OutputDir $DatedName) -Force
+    $GitHubAssetName = 'Wigner_Phase-Space_Methods_and_Bosonic_Many-Body_Quantum_Dynamics_{0}.pdf' -f `
+        (Get-Date -Format 'yyyy-MM-dd')
+    Copy-Item -LiteralPath (Join-Path $Root 'main.pdf') `
+        -Destination (Join-Path $OutputDir $GitHubAssetName) -Force
 }
 finally {
     Pop-Location

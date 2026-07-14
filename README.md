@@ -11,12 +11,14 @@
 ```text
 output/pdf/wigner_manybody_dynamics_draft.pdf
 output/pdf/维格纳相空间方法与玻色多体量子动力学_2026-07-14.pdf
+output/pdf/Wigner_Phase-Space_Methods_and_Bosonic_Many-Body_Quantum_Dynamics_2026-07-14.pdf
 ```
 
-[GitHub Release v0.1.0-2026-07-14](https://github.com/wfy-op/wigner-many-body-quantum-dynamics/releases/tag/v0.1.0-2026-07-14)
-是严格审阅前的 126 页历史快照，不包含本轮对 BdG 约定、端到端空间场案例、
-证据门禁、附录 E/F 和图目录的系统修订。本轮未重新推送或发布 GitHub Release；
-因此当前修订稿以本仓库的本地 PDF 和证据文件为准。
+[GitHub Release v0.2.0-2026-07-14](https://github.com/wfy-op/wigner-many-body-quantum-dynamics/releases/tag/v0.2.0-2026-07-14)
+是当前严格修订版，附件使用英文书名加日期的 ASCII 文件名，并以中文书名作为
+GitHub 显示标签。此前的
+[v0.1.0-2026-07-14](https://github.com/wfy-op/wigner-many-body-quantum-dynamics/releases/tag/v0.1.0-2026-07-14)
+是严格审阅前的126页历史快照。
 
 ## 构建
 
@@ -26,7 +28,8 @@ output/pdf/维格纳相空间方法与玻色多体量子动力学_2026-07-14.pdf
 pwsh -NoProfile -File .\build.ps1
 ```
 
-构建脚本依次运行 XeLaTeX、BibTeX 和最终 PDF 生成步骤，并复制上述两个稳定文件名。
+构建脚本依次运行 XeLaTeX、BibTeX 和最终 PDF 生成步骤，并复制上述三个稳定文件名；
+英文文件名用于避免 GitHub Release 截断中文附件名。
 
 ## 验证
 
