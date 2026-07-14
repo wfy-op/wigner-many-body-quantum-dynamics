@@ -5772,14 +5772,14 @@
     "version": 1
   },
   "run": {
-    "run_id": "a92c5441-a93f-4640-a813-086c70e978b5",
+    "run_id": "48e49903-6021-4291-a99d-556058331a1b",
     "script": "code/ch14_17_capstone/two_component_field_quench.py",
     "script_sha256": "65487ba7c207cb5a3f377611553172f492b3e58598954c67da95afe787f2c8d9",
     "script_sha256_at_start": "65487ba7c207cb5a3f377611553172f492b3e58598954c67da95afe787f2c8d9",
-    "started_at_unix_ns": 1784018346815633000,
-    "started_at_utc": "2026-07-14T08:39:06.815633+00:00",
-    "metrics_finalized_at_unix_ns": 1784018362834207000,
-    "metrics_finalized_at_utc": "2026-07-14T08:39:22.834207+00:00",
+    "started_at_unix_ns": 1784018628391767900,
+    "started_at_utc": "2026-07-14T08:43:48.391768+00:00",
+    "metrics_finalized_at_unix_ns": 1784018644074691400,
+    "metrics_finalized_at_utc": "2026-07-14T08:44:04.074691+00:00",
     "python_executable": "C:\\ProgramData\\anaconda3\\envs\\AI_group\\python.exe"
   }
 }

@@ -92,14 +92,14 @@
     "version": 1
   },
   "run": {
-    "run_id": "e7426d32-4d23-44d3-bdd3-6421b9b65374",
+    "run_id": "eb6b04b9-1b56-4aba-845d-4c9ad40c05d6",
     "script": "code/ch05_quadratic/harmonic_wigner.py",
     "script_sha256": "a343c282625d4d90f8fe53a79e3808924e21d68d7655fa4165d0d2173260de2b",
     "script_sha256_at_start": "a343c282625d4d90f8fe53a79e3808924e21d68d7655fa4165d0d2173260de2b",
-    "started_at_unix_ns": 1784018328165510300,
-    "started_at_utc": "2026-07-14T08:38:48.165510+00:00",
-    "metrics_finalized_at_unix_ns": 1784018329238380600,
-    "metrics_finalized_at_utc": "2026-07-14T08:38:49.238381+00:00",
+    "started_at_unix_ns": 1784018607516322400,
+    "started_at_utc": "2026-07-14T08:43:27.516322+00:00",
+    "metrics_finalized_at_unix_ns": 1784018608672966800,
+    "metrics_finalized_at_utc": "2026-07-14T08:43:28.672967+00:00",
     "python_executable": "C:\\ProgramData\\anaconda3\\envs\\AI_group\\python.exe"
   }
 }
