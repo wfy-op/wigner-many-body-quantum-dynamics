@@ -2,6 +2,10 @@
 
 本目录包含中文研究生教材的 LaTeX 初稿、逐章审核记录、数值程序和构建产物。
 
+## 下载 PDF
+
+编译好的 2026-07-14 初稿可从 [GitHub Release](https://github.com/wfy-op/wigner-many-body-quantum-dynamics/releases/tag/v0.1.0-2026-07-14) 下载。附件名为 `维格纳相空间方法与玻色多体量子动力学_2026-07-14.pdf`。
+
 ## 构建
 
 在项目根目录运行：
