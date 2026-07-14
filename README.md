@@ -58,8 +58,8 @@ SHA-256 改变。入口随后递归读取简单布尔检查和富结构中的 `p
 或判据不一致都会使总入口以失败退出，即使子程序返回码为零。
 
 汇总文件 [`data/test_summary.json`](data/test_summary.json) 保存每个脚本与 metrics
-的 SHA-256、metrics schema、新旧文件状态和递归判据，同时记录 Python/关键库
-版本、操作系统、Git 提交与工作区状态。Kerr 与二聚体曲线同时保存 Monte Carlo
+的 SHA-256、metrics schema、新旧文件状态和递归判据，同时在任何基准改写产物前
+记录 Python/关键库版本、操作系统、Git 提交与工作区起始状态。Kerr 与二聚体曲线同时保存 Monte Carlo
 标准误和独立子随机流稳定性结果；图中的阴影来自实际轨迹计算，而不是视觉示意。
 
 ## 目录约定

@@ -108,14 +108,14 @@
     "version": 1
   },
   "run": {
-    "run_id": "6a83f0a2-3fff-4d3f-bead-88c860c473d8",
+    "run_id": "71369756-a906-44db-8096-d8b3a039c2cf",
     "script": "code/ch15_quench/quench_covariance.py",
     "script_sha256": "db2c8658bd4239d708b3252dfcc6a8ef55b95ab82ae0a432c4aa51370b7b2044",
     "script_sha256_at_start": "db2c8658bd4239d708b3252dfcc6a8ef55b95ab82ae0a432c4aa51370b7b2044",
-    "started_at_unix_ns": 1784017227133393800,
-    "started_at_utc": "2026-07-14T08:20:27.133394+00:00",
-    "metrics_finalized_at_unix_ns": 1784017231488676300,
-    "metrics_finalized_at_utc": "2026-07-14T08:20:31.488676+00:00",
+    "started_at_unix_ns": 1784018212993358300,
+    "started_at_utc": "2026-07-14T08:36:52.993358+00:00",
+    "metrics_finalized_at_unix_ns": 1784018217052108900,
+    "metrics_finalized_at_utc": "2026-07-14T08:36:57.052109+00:00",
     "python_executable": "C:\\ProgramData\\anaconda3\\envs\\AI_group\\python.exe"
   }
 }

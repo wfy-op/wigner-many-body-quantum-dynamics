@@ -399,6 +399,10 @@ def run_benchmark(
 
 
 def main() -> None:
+    # Capture repository provenance before any benchmark rewrites tracked metrics or
+    # figures.  Recording it after the loop would make every clean-source run look
+    # dirty merely because the run produced its evidence artifacts.
+    environment_at_start = environment_metadata(ROOT)
     results = []
     for relative_script, relative_metrics in BENCHMARKS:
         result = run_benchmark(
@@ -414,8 +418,8 @@ def main() -> None:
         )
 
     summary = {
-        "schema_version": 3,
-        "environment": environment_metadata(ROOT),
+        "schema_version": 4,
+        "environment_at_start": environment_at_start,
         "benchmark_count": len(BENCHMARKS),
         "execution_passed_count": sum(item["execution_passed"] is True for item in results),
         "fresh_metrics_count": sum(item["fresh_metrics_written"] is True for item in results),

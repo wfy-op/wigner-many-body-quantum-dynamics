@@ -44,14 +44,14 @@
     "version": 1
   },
   "run": {
-    "run_id": "626877b7-24df-4a93-8f78-ccbcddeeaced",
+    "run_id": "f2fb2bd5-f2ea-4820-b5a8-b82023bd6b61",
     "script": "code/ch12_propagation/split_step_benchmark.py",
     "script_sha256": "b70b054d4c5f28312365e92b32b78fccc0ade3d0dbe688a9bf72dd35d4e2c501",
     "script_sha256_at_start": "b70b054d4c5f28312365e92b32b78fccc0ade3d0dbe688a9bf72dd35d4e2c501",
-    "started_at_unix_ns": 1784017202368886500,
-    "started_at_utc": "2026-07-14T08:20:02.368886+00:00",
-    "metrics_finalized_at_unix_ns": 1784017202603940500,
-    "metrics_finalized_at_utc": "2026-07-14T08:20:02.603940+00:00",
+    "started_at_unix_ns": 1784018190979412600,
+    "started_at_utc": "2026-07-14T08:36:30.979413+00:00",
+    "metrics_finalized_at_unix_ns": 1784018191241827100,
+    "metrics_finalized_at_utc": "2026-07-14T08:36:31.241827+00:00",
     "python_executable": "C:\\ProgramData\\anaconda3\\envs\\AI_group\\python.exe"
   }
 }

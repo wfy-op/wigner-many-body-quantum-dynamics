@@ -356,14 +356,14 @@
     "version": 1
   },
   "run": {
-    "run_id": "4a29f57b-6df1-4dd4-a90e-969c98e9ecb2",
+    "run_id": "fa4112ef-3e07-4d53-8884-9548364d3a33",
     "script": "code/ch16_phase/phase_diffusion.py",
     "script_sha256": "f8bb58bd347c5c6db1d10d47f33b03eac195699b9d94e60d8aa13fa357b91d7d",
     "script_sha256_at_start": "f8bb58bd347c5c6db1d10d47f33b03eac195699b9d94e60d8aa13fa357b91d7d",
-    "started_at_unix_ns": 1784017233919008400,
-    "started_at_utc": "2026-07-14T08:20:33.919008+00:00",
-    "metrics_finalized_at_unix_ns": 1784017238008910800,
-    "metrics_finalized_at_utc": "2026-07-14T08:20:38.008911+00:00",
+    "started_at_unix_ns": 1784018219491549700,
+    "started_at_utc": "2026-07-14T08:36:59.491550+00:00",
+    "metrics_finalized_at_unix_ns": 1784018223739907400,
+    "metrics_finalized_at_utc": "2026-07-14T08:37:03.739908+00:00",
     "python_executable": "C:\\ProgramData\\anaconda3\\envs\\AI_group\\python.exe"
   }
 }

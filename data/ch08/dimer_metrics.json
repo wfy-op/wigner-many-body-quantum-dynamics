@@ -59,14 +59,14 @@
     "version": 1
   },
   "run": {
-    "run_id": "d62c3327-cb7c-4347-9252-a154f915b5e5",
+    "run_id": "df8fd60a-4f34-4a07-84bf-90e0d0857436",
     "script": "code/ch08_dimer/dimer_exact_vs_twa.py",
     "script_sha256": "1f45d997383d7d51fdffae07efe82050c8af85729ee410dcc0348735cb05d466",
     "script_sha256_at_start": "1f45d997383d7d51fdffae07efe82050c8af85729ee410dcc0348735cb05d466",
-    "started_at_unix_ns": 1784017196188497600,
-    "started_at_utc": "2026-07-14T08:19:56.188498+00:00",
-    "metrics_finalized_at_unix_ns": 1784017198658131400,
-    "metrics_finalized_at_utc": "2026-07-14T08:19:58.658131+00:00",
+    "started_at_unix_ns": 1784018184863716800,
+    "started_at_utc": "2026-07-14T08:36:24.863717+00:00",
+    "metrics_finalized_at_unix_ns": 1784018187607924100,
+    "metrics_finalized_at_utc": "2026-07-14T08:36:27.607924+00:00",
     "python_executable": "C:\\ProgramData\\anaconda3\\envs\\AI_group\\python.exe"
   }
 }
