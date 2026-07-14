@@ -8,15 +8,11 @@
 
 \section{十个可运行案例}
 
-\begin{longtable}{>{\raggedright\arraybackslash}p{0.07\textwidth}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.30\textwidth}>{\raggedright\arraybackslash}p{0.32\textwidth}}
+\begin{center}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.07\textwidth}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.30\textwidth}>{\raggedright\arraybackslash}X}
 \toprule
 章节 & 案例 & 程序 & 主要验证范围 \\
 \midrule
-\endfirsthead
-\toprule
-章节 & 案例 & 程序 & 主要验证范围 \\
-\midrule
-\endhead
 5 & 谐振子 Wigner 旋转 &
 \path{code/ch05_quadratic/harmonic_wigner.py} &
 解析辛流、真空协方差、粒子数排序与 Monte Carlo 误差 \\
@@ -35,6 +31,17 @@ $Q$ 压缩号约定、正常/反常矩和协方差统计检验 \\
 13 & 排序估计器 &
 \path{code/ch13_observables/ordering_estimator_benchmark.py} &
 相干态/热态 $n$ 与 $g^{(2)}$、jackknife 比值误差 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\clearpage
+\noindent\textbf{十个可运行案例（续）}
+\begin{center}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.07\textwidth}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.30\textwidth}>{\raggedright\arraybackslash}X}
+\toprule
+章节 & 案例 & 程序 & 主要验证范围 \\
+\midrule
 14--17 & 双分量空间场淬火 &
 \path{code/ch14_17_capstone/two_component_field_quench.py} &
 有限温 BdG 抽样、双场传播、相干与自旋结构因子、步长/轨迹/有限截止窗 \\
@@ -48,7 +55,8 @@ $Q$ 压缩号约定、正常/反常矩和协方差统计检验 \\
 \path{code/ch17_order/stripe_scaling_toy.py} &
 有序全局相位与有限相关长度畴的有限尺寸分析管线 \\
 \bottomrule
-\end{longtable}
+\end{tabularx}
+\end{center}
 
 \section{按任务反查正文}
 

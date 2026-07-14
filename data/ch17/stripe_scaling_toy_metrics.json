@@ -69,14 +69,14 @@
     "version": 1
   },
   "run": {
-    "run_id": "e16d5381-7249-4e27-8cd4-200de90f970e",
+    "run_id": "38422bc8-e044-4434-8d26-f7dde0540978",
     "script": "code/ch17_order/stripe_scaling_toy.py",
     "script_sha256": "488ae56e370ca1d22f9c88284134c76913ef4802fce558e106bc8771caa32fb5",
     "script_sha256_at_start": "488ae56e370ca1d22f9c88284134c76913ef4802fce558e106bc8771caa32fb5",
-    "started_at_unix_ns": 1784018225710929300,
-    "started_at_utc": "2026-07-14T08:37:05.710929+00:00",
-    "metrics_finalized_at_unix_ns": 1784018227070810200,
-    "metrics_finalized_at_utc": "2026-07-14T08:37:07.070810+00:00",
+    "started_at_unix_ns": 1784018380762840500,
+    "started_at_utc": "2026-07-14T08:39:40.762841+00:00",
+    "metrics_finalized_at_unix_ns": 1784018384205886400,
+    "metrics_finalized_at_utc": "2026-07-14T08:39:44.205886+00:00",
     "python_executable": "C:\\ProgramData\\anaconda3\\envs\\AI_group\\python.exe"
   }
 }

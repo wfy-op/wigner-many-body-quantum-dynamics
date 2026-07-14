@@ -57,14 +57,14 @@
     "version": 1
   },
   "run": {
-    "run_id": "7e581341-742e-412e-a124-0a74b6cc187c",
+    "run_id": "2bb8b15f-f403-4c6e-aeba-2481c89da04d",
     "script": "code/ch11_sampling/gaussian_sampling.py",
     "script_sha256": "5a586f31bbcca2acd9073b33cf7b116009ed4daf8ce4cfc0dcd3b4149d9f9617",
     "script_sha256_at_start": "5a586f31bbcca2acd9073b33cf7b116009ed4daf8ce4cfc0dcd3b4149d9f9617",
-    "started_at_unix_ns": 1784018188548503100,
-    "started_at_utc": "2026-07-14T08:36:28.548503+00:00",
-    "metrics_finalized_at_unix_ns": 1784018188935844200,
-    "metrics_finalized_at_utc": "2026-07-14T08:36:28.935844+00:00",
+    "started_at_unix_ns": 1784018340614271500,
+    "started_at_utc": "2026-07-14T08:39:00.614271+00:00",
+    "metrics_finalized_at_unix_ns": 1784018340727226700,
+    "metrics_finalized_at_utc": "2026-07-14T08:39:00.727227+00:00",
     "python_executable": "C:\\ProgramData\\anaconda3\\envs\\AI_group\\python.exe"
   }
 }

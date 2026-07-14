@@ -59,14 +59,14 @@
     "version": 1
   },
   "run": {
-    "run_id": "3a5ab156-83d4-4df2-b230-1b471863e319",
+    "run_id": "1c89d08d-c1d4-42d3-9f95-64ba8e939e81",
     "script": "code/ch06_kerr/kerr_exact_vs_twa.py",
     "script_sha256": "ecfcb7fcec90a3447c3b9079a904ad1b5063e440b025c0fd362dfc7513f73bd1",
     "script_sha256_at_start": "ecfcb7fcec90a3447c3b9079a904ad1b5063e440b025c0fd362dfc7513f73bd1",
-    "started_at_unix_ns": 1784018179362547300,
-    "started_at_utc": "2026-07-14T08:36:19.362547+00:00",
-    "metrics_finalized_at_unix_ns": 1784018183418659800,
-    "metrics_finalized_at_utc": "2026-07-14T08:36:23.418660+00:00",
+    "started_at_unix_ns": 1784018330658967400,
+    "started_at_utc": "2026-07-14T08:38:50.658967+00:00",
+    "metrics_finalized_at_unix_ns": 1784018335694729600,
+    "metrics_finalized_at_utc": "2026-07-14T08:38:55.694730+00:00",
     "python_executable": "C:\\ProgramData\\anaconda3\\envs\\AI_group\\python.exe"
   }
 }
