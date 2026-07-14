@@ -3,10 +3,17 @@
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
+
+
+CODE_ROOT = Path(__file__).resolve().parents[1]
+if str(CODE_ROOT) not in sys.path:
+    sys.path.insert(0, str(CODE_ROOT))
+from benchmark_contract import begin_metrics_run, finalize_metrics
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -55,16 +62,24 @@ def summarize(alpha: np.ndarray, exact_n: float, exact_g2: float) -> dict[str, f
         "number_estimate": n_mean,
         "number_standard_error": n_se,
         "number_exact": exact_n,
+        "number_z": abs(n_mean - exact_n) / n_se,
         "factorial_second_estimate": f_mean,
         "factorial_second_standard_error": f_se,
         "factorial_second_exact": exact_g2 * exact_n**2,
+        "factorial_second_z": abs(f_mean - exact_g2 * exact_n**2) / f_se,
         "g2_estimate": g2_estimate,
         "g2_jackknife_standard_error": g2_se,
+        "g2_normal_95_percent_interval": [
+            g2_estimate - 1.96 * g2_se,
+            g2_estimate + 1.96 * g2_se,
+        ],
         "g2_exact": exact_g2,
+        "g2_z": abs(g2_estimate - exact_g2) / g2_se,
     }
 
 
 def main() -> None:
+    run_context = begin_metrics_run(__file__)
     seed = 20260714
     trajectories = 400_000
     rng = np.random.default_rng(seed)
@@ -81,16 +96,40 @@ def main() -> None:
 
     coherent_metrics = summarize(coherent, exact_n=coherent_n, exact_g2=1.0)
     thermal_metrics = summarize(thermal, exact_n=thermal_n, exact_g2=2.0)
+    thresholds = {
+        "max_number_z": 4.0,
+        "max_factorial_second_z": 4.0,
+        "max_g2_z": 4.0,
+    }
+    states = (coherent_metrics, thermal_metrics)
+    checks = {
+        "numbers_within_4se": bool(
+            max(state["number_z"] for state in states) <= thresholds["max_number_z"]
+        ),
+        "factorial_moments_within_4se": bool(
+            max(state["factorial_second_z"] for state in states)
+            <= thresholds["max_factorial_second_z"]
+        ),
+        "g2_ratios_within_4se": bool(
+            max(state["g2_z"] for state in states) <= thresholds["max_g2_z"]
+        ),
+    }
     metrics = {
         "seed": seed,
         "trajectories_per_state": trajectories,
         "jackknife_groups": 200,
         "coherent": coherent_metrics,
         "thermal": thermal_metrics,
+        "validation": {
+            "thresholds": thresholds,
+            "checks": checks,
+            "all_passed": bool(all(checks.values())),
+        },
     }
 
     FIGURE.parent.mkdir(parents=True, exist_ok=True)
     METRICS.parent.mkdir(parents=True, exist_ok=True)
+    metrics = finalize_metrics(metrics, run_context, __file__)
     METRICS.write_text(json.dumps(metrics, ensure_ascii=False, indent=2), encoding="utf-8")
 
     labels = ["coherent", "thermal"]
@@ -109,7 +148,7 @@ def main() -> None:
         fmt="o",
         capsize=4,
         color="#1f77b4",
-        label="Wigner estimator",
+        label=r"Wigner estimator ($\pm1$ SE)",
     )
     ax.scatter(positions, exact, marker="x", s=70, color="#d62728", label="exact")
     ax.set_xticks(positions, labels)
@@ -121,12 +160,9 @@ def main() -> None:
     fig.savefig(FIGURE)
     plt.close(fig)
 
-    for state in (coherent_metrics, thermal_metrics):
-        z = abs(state["g2_estimate"] - state["g2_exact"]) / state[
-            "g2_jackknife_standard_error"
-        ]
-        if z > 4.0:
-            raise RuntimeError(f"g2 estimator differs from exact value by {z:.2f} standard errors")
+    if not metrics["validation"]["all_passed"]:
+        failed = [name for name, passed in checks.items() if not passed]
+        raise RuntimeError(f"Ordering-estimator validation failed: {failed}")
     print(json.dumps(metrics, ensure_ascii=False, indent=2))
 
 

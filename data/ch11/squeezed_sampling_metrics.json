@@ -2,27 +2,69 @@
   "seed": 20260714,
   "trajectories": 100000,
   "squeeze_r": 0.8,
+  "squeezing_convention": "alpha=cosh(r) beta-sinh(r) beta*; r>0 squeezes Q and E[alpha^2]<0",
   "sample_covariance": [
     [
-      2.4725553204971535,
-      -0.0007363901278697166
+      0.10078680432189971,
+      -0.0007363901278697124
     ],
     [
-      -0.0007363901278697166,
-      0.1013176346068242
+      -0.0007363901278697124,
+      2.4855779304916084
     ]
   ],
   "exact_covariance": [
     [
-      2.4765162121975575,
+      0.10094825899732769,
       0.0
     ],
     [
       0.0,
-      0.10094825899732769
+      2.4765162121975575
     ]
   ],
-  "max_abs_covariance_error": 0.0039608917004039235,
-  "sample_anomalous_moment_real": 1.185612246456262,
-  "exact_anomalous_moment_real": 1.187783976600115
+  "covariance_standard_error": [
+    [
+      0.0004502304756820515,
+      0.0015808834076718543
+    ],
+    [
+      0.0015808834076718543,
+      0.011049197469436015
+    ]
+  ],
+  "max_covariance_z": 0.8201245673377787,
+  "max_abs_covariance_error": 0.009061718294050891,
+  "sample_anomalous_moment_real": -1.1923840740554135,
+  "anomalous_moment_standard_error": 0.005529460165912413,
+  "exact_anomalous_moment_real": -1.187783976600115,
+  "anomalous_moment_z": 0.8319252363289926,
+  "validation": {
+    "thresholds": {
+      "max_abs_covariance_error": 0.03,
+      "max_covariance_z": 5.0,
+      "max_anomalous_moment_z": 5.0
+    },
+    "checks": {
+      "covariance_absolute_error_below_cap": true,
+      "covariance_within_5se": true,
+      "anomalous_moment_within_5se": true
+    },
+    "all_passed": true
+  },
+  "schema": {
+    "name": "wigner-manybody-benchmark-metrics",
+    "version": 1
+  },
+  "run": {
+    "run_id": "b5b31816-e9f1-4f87-9a2a-15f8ee148e06",
+    "script": "code/ch11_sampling/gaussian_sampling.py",
+    "script_sha256": "5a586f31bbcca2acd9073b33cf7b116009ed4daf8ce4cfc0dcd3b4149d9f9617",
+    "script_sha256_at_start": "5a586f31bbcca2acd9073b33cf7b116009ed4daf8ce4cfc0dcd3b4149d9f9617",
+    "started_at_unix_ns": 1784017199834809000,
+    "started_at_utc": "2026-07-14T08:19:59.834809+00:00",
+    "metrics_finalized_at_unix_ns": 1784017200273246700,
+    "metrics_finalized_at_utc": "2026-07-14T08:20:00.273247+00:00",
+    "python_executable": "C:\\ProgramData\\anaconda3\\envs\\AI_group\\python.exe"
+  }
 }

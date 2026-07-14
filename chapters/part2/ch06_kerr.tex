@@ -4,7 +4,7 @@
 \begin{learningobjectives}
 完成本章后，读者应能：
 \begin{enumerate}
-  \item 求解相干态在 Kerr Hamiltonian 下的一阶相干性；
+  \item 求解相干态在 Kerr 哈密顿量下的一阶相干性；
   \item 从四次算符的 Weyl 符号推导 TWA 漂移；
   \item 区分相位剪切造成的塌缩和离散能谱造成的量子回复；
   \item 用精确解量化 TWA 的早期准确性与长时间失效。
@@ -13,13 +13,15 @@
 
 \section{最小的非线性多体模型}
 
-单模 Kerr Hamiltonian 为
+单模 Kerr 哈密顿量为
 \begin{equation}
   \Hhat=\frac{\hbar\chi}{2}\had\had\ha\ha
   =\frac{\hbar\chi}{2}\hat n(\hat n-1).
   \label{eq:kerr-hamiltonian}
 \end{equation}
 它保持粒子数，却使不同 Fock 分量积累不同相位。尽管只有一个模式，这个模型已经同时包含 TWA 最擅长和最难处理的现象：初期的相空间相位剪切可由经典轨迹描述，长时间的量子回复则依赖离散谱的相位重新对齐。
+把这一可解模型作为半经典动力学和 TWA 的短时基准，也与相空间展开的
+通用分析框架一致\cite{Polkovnikov2003,Polkovnikov2010}。
 
 设初态为相干态 $\ket{\alpha_0}$，平均占据 $N=|\alpha_0|^2$。Fock 展开为
 \begin{equation}
@@ -41,7 +43,7 @@
 \end{equation}
 在 $|\chi t|\ll1$ 时，\cref{eq:kerr-exact-coherence} 近似为 $\exp[-N(\chi t)^2/2]$，塌缩时间尺度约为 $(\chi\sqrt N)^{-1}$。在 $\chi t=2\pi$ 时，所有离散 Fock 分量重新对齐，出现完整回复。
 
-\section{Kerr Hamiltonian 的 Weyl 符号}
+\section{Kerr 哈密顿量的 Weyl 符号}
 
 利用第2章的四阶 Weyl 符号，
 \begin{equation}
@@ -63,6 +65,7 @@
   \exp[-\ii\chi(|\alpha(0)|^2-1)t].
   \label{eq:kerr-twa-trajectory}
 \end{equation}
+第7章将用 Bopp 算符把这里被省略的两个混合三阶导数完整展开，并给出其相对于领先漂移的 $1/N$ 计数。
 相干态初值仍按
 \begin{equation}
   \alpha(0)=\alpha_0+\frac{\xi_1+\ii\xi_2}{2}
@@ -75,16 +78,16 @@
 
 \section{精确解与 TWA 的实际比较}
 
-图\ref{fig:kerr-exact-vs-twa} 使用 $N=9$，以 $\tau=\chi t$ 为无量纲时间。精确曲线由\cref{eq:kerr-exact-mean} 计算，TWA 曲线由 $100000$ 个真实随机初值和\cref{eq:kerr-twa-trajectory} 计算。
+\cref{fig:kerr-exact-vs-twa} 使用 $N=9$，以 $\tau=\chi t$ 为无量纲时间。精确曲线由\cref{eq:kerr-exact-mean} 计算，TWA 曲线由 $100000$ 个真实随机初值和\cref{eq:kerr-twa-trajectory} 计算。
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.82\textwidth]{figures/ch06/kerr_exact_vs_twa.pdf}
-  \caption{相干态 Kerr 动力学的一阶相干性。TWA 准确再现早期塌缩，却未在 $\tau=2\pi$ 恢复量子回复。图由 \texttt{code/ch06\_kerr/kerr\_exact\_vs\_twa.py} 实际计算。}
+  \caption[Kerr 精确动力学与 TWA 的塌缩--回复对照]{相干态 Kerr 动力学的一阶相干性。黑线为 $N=9$ 的精确结果，蓝线为 $100000$ 条 TWA 轨迹的平均，阴影为 $\pm2$ 标准误。TWA 在所标早期窗口内再现塌缩，却不能在 $\tau=2\pi$ 重建量子回复；这张图检验的是该特定初态与观测量，不能据此宣称长时间 TWA 普遍有效。图由 \texttt{code/ch06\_kerr/kerr\_exact\_vs\_twa.py} 实际计算。}
   \label{fig:kerr-exact-vs-twa}
 \end{figure}
 
-在 $\tau\le0.25$ 的窗口内，归一化相干性最大绝对偏差为 $8.74\times10^{-3}$。在回复时刻，精确值为 $1$，TWA 仅为 $1.65\times10^{-3}$。正常排序粒子数的 TWA 初始估计为 $8.9943$，解析值为 $9$；粒子数随后在每条 TWA 轨迹上保持。
+在 $\tau\le0.25$ 的窗口内，归一化相干性最大绝对偏差为 $1.016\times10^{-2}$。在回复时刻，精确值为 $1$，TWA 为 $2.13\times10^{-3}$，其标准误为 $3.25\times10^{-3}$；即使计入 $4$ 个标准误，也与精确回复相差悬殊。正规排序粒子数的 TWA 初始估计为 $8.99958\pm0.00963$，解析值为 $9$；粒子数随后在每条 TWA 轨迹上保持。
 
 这里的长时间差异不是轨迹数不足。继续增加轨迹数只会使 TWA 曲线更精确地趋近其连续经典系综极限，不会产生缺失的量子回复。完整指标保存在
 \begin{center}
@@ -103,7 +106,7 @@ Kerr 模型只有一个守恒占据和一个相位自由度，不具备在大量
 \begin{equation}
   \ii\dot\alpha=\chi|\alpha|^2\alpha
 \end{equation}
-而忽略\cref{eq:kerr-twa-drift} 中的 $-1$，单条轨迹频率会整体偏移。对高占据 $N\gg1$，相对误差约为 $1/N$，短时间看似很小；但相位误差随时间积累，长时间比较会显著偏离。这个 $-1$ 来自 Hamiltonian 的 Weyl 符号，不应通过经验调参补偿。
+而忽略\cref{eq:kerr-twa-drift} 中的 $-1$，单条轨迹频率会整体偏移。对高占据 $N\gg1$，相对误差约为 $1/N$，短时间看似很小；但相位误差随时间积累，长时间比较会显著偏离。这个 $-1$ 来自哈密顿量的 Weyl 符号，不应通过经验调参补偿。
 
 \begin{warningbox}
 TWA 能准确描述塌缩，并不说明它也能描述随后的回复。判断有效性必须针对具体观测量和时间窗口，而不能只凭某个早期曲线吻合后把计算无限延长。

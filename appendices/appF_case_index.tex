@@ -1,0 +1,83 @@
+\chapter{案例、代码与任务地图}
+\label{app:case-index}
+
+本附录按“要完成的任务”而不是按章节顺序定位材料。代码路径指向可独立运行
+的程序；每个程序都把机器可读指标写入 \path{data/}，并由
+\path{code/run_all.py} 统一执行。表中的“验证范围”只说明该基准实际检查了
+什么，不把教学模型外推成未经计算的物理结论。
+
+\section{十个可运行案例}
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.07\textwidth}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.30\textwidth}>{\raggedright\arraybackslash}p{0.32\textwidth}}
+\toprule
+章节 & 案例 & 程序 & 主要验证范围 \\
+\midrule
+\endfirsthead
+\toprule
+章节 & 案例 & 程序 & 主要验证范围 \\
+\midrule
+\endhead
+5 & 谐振子 Wigner 旋转 &
+\path{code/ch05_quadratic/harmonic_wigner.py} &
+解析辛流、真空协方差、粒子数排序与 Monte Carlo 误差 \\
+6 & Kerr 精确解--TWA &
+\path{code/ch06_kerr/kerr_exact_vs_twa.py} &
+短时吻合、统计误差带、独立子流与量子回复失效 \\
+8 & 二聚体精确解--TWA &
+\path{code/ch08_dimer/dimer_exact_vs_twa.py} &
+相同初态协议、Fock 截断、轨迹守恒与短时误差 \\
+11 & 压缩高斯抽样 &
+\path{code/ch11_sampling/gaussian_sampling.py} &
+$Q$ 压缩号约定、正常/反常矩和协方差统计检验 \\
+12 & FFT 对称分裂 &
+\path{code/ch12_propagation/split_step_benchmark.py} &
+范数与能量、反向传播、连续步长差分的二阶收敛 \\
+13 & 排序估计器 &
+\path{code/ch13_observables/ordering_estimator_benchmark.py} &
+相干态/热态 $n$ 与 $g^{(2)}$、jackknife 比值误差 \\
+14--17 & 双分量空间场淬火 &
+\path{code/ch14_17_capstone/two_component_field_quench.py} &
+有限温 BdG 抽样、双场传播、相干与自旋结构因子、步长/轨迹/有限截止窗 \\
+15 & BdG 淬火协方差 &
+\path{code/ch15_quench/quench_covariance.py} &
+稳定模式的辛归一、正常矩和反常矩 \\
+16 & 集体相位扩散 &
+\path{code/ch16_phase/phase_diffusion.py} &
+高斯零模公式、抽样包络与解析协方差 \\
+17 & 随机条纹相位标度 &
+\path{code/ch17_order/stripe_scaling_toy.py} &
+有序全局相位与有限相关长度畴的有限尺寸分析管线 \\
+\bottomrule
+\end{longtable}
+
+\section{按任务反查正文}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.30\textwidth}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X}
+\toprule
+任务 & 首要位置 & 必须同时核对 \\
+\midrule
+固定 $(x,p_x)$、$(Q,P)$ 与测度 & 第2章、附录A & 卷首符号表 \\
+构造 Weyl 符号与排序修正 & 第2、4章 & 第10、13章的场论版本 \\
+识别被 TWA 删除的项 & 第3、7章 & 第6、8章的精确基准 \\
+判断高占据近似是否可控 & 第7、9章 & 第12章数值误差与第18章停止条件 \\
+选择有限模式与真空基线 & 第10章 & 附录C的截止扫描 \\
+抽样热态、压缩态或 BdG 态 & 第11、15章 & 附录B的辛协方差 \\
+实现 FFT 场传播 & 第12章 & 第10章归一化、附录C测试矩阵 \\
+计算密度、$g^{(2)}$ 与结构因子 & 第13章 & 第17章条纹乘积接触项 \\
+区分 Rabi 与 Raman SOC & 第14章 & 第17章对称性与钉扎诊断 \\
+区分去相位、预热化和热化 & 第16章 & 第9、18章的方法边界 \\
+检验条纹序与超固态候选 & 第17章 & 尺寸、刚度、钉扎和独立方法 \\
+选择开放系统或替代方法 & 第18章 & 附录E的分主题文献 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{证据文件的读取顺序}
+
+复核一个案例时，先读对应 JSON 的 \texttt{parameters} 与
+\texttt{validation.checks}，再核对图注使用的观测量和误差条，最后查看
+\path{data/test_summary.json} 中记录的环境、文件哈希和总入口状态。程序零退出
+只说明执行完成；阈值、实测值和通过条件均被保存，才构成结构化基准。对于
+双分量空间场案例，还应区分时间步长扫描、轨迹数敏感度和三档独立重新抽样的
+有限截止窗压力测试；三者回答不同问题，不能合并成一个“已收敛”的标签。

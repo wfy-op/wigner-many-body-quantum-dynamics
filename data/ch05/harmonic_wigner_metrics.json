@@ -9,11 +9,38 @@
     3.141592653589793
   ],
   "max_mean_error": 0.005510387493885585,
+  "sample_mean_real": [
+    1.9988865926452957,
+    0.5053967299724241,
+    -1.9988865926452957
+  ],
+  "sample_mean_imag": [
+    0.5053967299724241,
+    -1.9988865926452957,
+    -0.5053967299724244
+  ],
+  "mean_standard_error_real": [
+    0.0035536278580612425,
+    0.0035301262880079102,
+    0.0035536278580612425
+  ],
+  "mean_standard_error_imag": [
+    0.0035301262880079094,
+    0.0035536278580612425,
+    0.00353012628800791
+  ],
+  "max_mean_component_z": 1.5287639965621644,
   "number_estimates": [
     4.252749626118844,
     4.252749626118844,
     4.252749626118844
   ],
+  "number_standard_errors": [
+    0.015056038644494773,
+    0.015056038644494773,
+    0.015056038644494773
+  ],
+  "max_number_z": 0.1826261331927331,
   "exact_number": 4.25,
   "quadrature_variances": [
     [
@@ -29,5 +56,50 @@
       0.49847166437138024
     ]
   ],
-  "exact_quadrature_variance": 0.5
+  "quadrature_variance_standard_errors": [
+    [
+      0.005051434668880909,
+      0.004984841266303262
+    ],
+    [
+      0.004984841266303262,
+      0.005051434668880909
+    ],
+    [
+      0.005051434668880909,
+      0.004984841266303262
+    ]
+  ],
+  "max_quadrature_variance_z": 1.0157189946780203,
+  "exact_quadrature_variance": 0.5,
+  "validation": {
+    "thresholds": {
+      "max_mean_component_z": 5.0,
+      "max_number_z": 5.0,
+      "max_quadrature_variance_z": 5.0,
+      "max_absolute_mean_error": 0.03
+    },
+    "checks": {
+      "mean_components_within_5se": true,
+      "number_within_5se": true,
+      "quadrature_variances_within_5se": true,
+      "absolute_mean_error_below_cap": true
+    },
+    "all_passed": true
+  },
+  "schema": {
+    "name": "wigner-manybody-benchmark-metrics",
+    "version": 1
+  },
+  "run": {
+    "run_id": "28bfcc82-8a8a-4d89-8dbe-001c384ae6ca",
+    "script": "code/ch05_quadratic/harmonic_wigner.py",
+    "script_sha256": "a343c282625d4d90f8fe53a79e3808924e21d68d7655fa4165d0d2173260de2b",
+    "script_sha256_at_start": "a343c282625d4d90f8fe53a79e3808924e21d68d7655fa4165d0d2173260de2b",
+    "started_at_unix_ns": 1784017187394402600,
+    "started_at_utc": "2026-07-14T08:19:47.394403+00:00",
+    "metrics_finalized_at_unix_ns": 1784017188452707300,
+    "metrics_finalized_at_utc": "2026-07-14T08:19:48.452707+00:00",
+    "python_executable": "C:\\ProgramData\\anaconda3\\envs\\AI_group\\python.exe"
+  }
 }

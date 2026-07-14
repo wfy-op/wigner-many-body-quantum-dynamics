@@ -3,10 +3,17 @@
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
+
+
+CODE_ROOT = Path(__file__).resolve().parents[1]
+if str(CODE_ROOT) not in sys.path:
+    sys.path.insert(0, str(CODE_ROOT))
+from benchmark_contract import begin_metrics_run, finalize_metrics
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -74,6 +81,7 @@ def relative_l2(a: np.ndarray, b: np.ndarray) -> float:
 
 
 def main() -> None:
+    run_context = begin_metrics_run(__file__)
     seed = 20260714
     points = 64
     length = 20.0
@@ -134,6 +142,31 @@ def main() -> None:
     max_norm_drift = float(np.max(np.abs(norms - norms[0])) / abs(norms[0]))
     max_energy_drift = float(np.max(np.abs(energies - energies[0])) / abs(energies[0]))
     reversibility_error = relative_l2(back, initial)
+    thresholds = {
+        "observed_order_minimum": 1.8,
+        "observed_order_maximum": 2.2,
+        "max_relative_norm_drift": 1.0e-11,
+        "max_relative_energy_drift": 1.0e-5,
+        "max_reversibility_relative_l2_error": 1.0e-10,
+        "max_fine_pair_error": 1.0e-5,
+    }
+    checks = {
+        "observed_second_order": bool(
+            thresholds["observed_order_minimum"]
+            <= observed_order
+            <= thresholds["observed_order_maximum"]
+        ),
+        "norm_conserved": bool(max_norm_drift <= thresholds["max_relative_norm_drift"]),
+        "weyl_energy_converged": bool(
+            max_energy_drift <= thresholds["max_relative_energy_drift"]
+        ),
+        "time_reversal_recovers_initial_state": bool(
+            reversibility_error <= thresholds["max_reversibility_relative_l2_error"]
+        ),
+        "finest_pair_difference_below_cap": bool(
+            fine_error <= thresholds["max_fine_pair_error"]
+        ),
+    }
 
     metrics = {
         "seed": seed,
@@ -143,6 +176,7 @@ def main() -> None:
         "g": g,
         "trap_strength": trap_strength,
         "delta_c": delta_c,
+        "projection_basis": "uniform periodic Fourier-DVR; delta_c(x,x)=1/dx",
         "final_time": final_time,
         "step_sizes": step_sizes,
         "coarse_pair_error": coarse_error,
@@ -152,10 +186,16 @@ def main() -> None:
         "max_relative_norm_drift": max_norm_drift,
         "max_relative_energy_drift": max_energy_drift,
         "reversibility_relative_l2_error": reversibility_error,
+        "validation": {
+            "thresholds": thresholds,
+            "checks": checks,
+            "all_passed": bool(all(checks.values())),
+        },
     }
 
     FIGURE.parent.mkdir(parents=True, exist_ok=True)
     METRICS.parent.mkdir(parents=True, exist_ok=True)
+    metrics = finalize_metrics(metrics, run_context, __file__)
     METRICS.write_text(json.dumps(metrics, ensure_ascii=False, indent=2), encoding="utf-8")
 
     times = np.linspace(0.0, final_time, len(norms))
@@ -172,10 +212,9 @@ def main() -> None:
     fig.savefig(FIGURE)
     plt.close(fig)
 
-    if observed_order < 1.8:
-        raise RuntimeError(f"Second-order convergence check failed: {observed_order:.3f}")
-    if max_norm_drift > 1e-11 or reversibility_error > 1e-10:
-        raise RuntimeError("Unitary/reversibility check failed")
+    if not metrics["validation"]["all_passed"]:
+        failed = [name for name, passed in checks.items() if not passed]
+        raise RuntimeError(f"Split-step validation failed: {failed}")
     print(json.dumps(metrics, ensure_ascii=False, indent=2))
 
 

@@ -1,12 +1,72 @@
 {
   "seed": 20260714,
+  "child_stream_spawn_keys": [
+    [
+      0
+    ],
+    [
+      1
+    ],
+    [
+      2
+    ],
+    [
+      3
+    ]
+  ],
   "trajectories": 20000,
   "mean_particles": 8.0,
   "J": 1.0,
   "U": 0.15,
   "fock_cutoff_per_mode": 24,
   "retained_initial_norm_before_renormalization": 0.9999962745279244,
-  "max_early_imbalance_error_t_le_2": 0.008034778553375643,
-  "rms_full_window_error": 0.021309323532378757,
-  "twa_total_number_absolute_drift": 2.4518447450105896e-07
+  "max_early_imbalance_error_t_le_2": 0.008176888191364973,
+  "rms_full_window_error": 0.018835430621077023,
+  "max_twa_imbalance_standard_error": 0.005528004016774921,
+  "child_stream_max_early_errors": [
+    0.008770391470277694,
+    0.005471822131317805,
+    0.013300585032499979,
+    0.0093045510240507
+  ],
+  "child_stream_full_window_rms_errors": [
+    0.02461602170036275,
+    0.017719019018214658,
+    0.020055666039576973,
+    0.01751240426726217
+  ],
+  "twa_total_number_absolute_drift": 2.420512279499576e-07,
+  "uncertainty_note": "TWA imbalance is a ratio of ensemble means.  Its SE uses the paired delta-method influence function; the plotted band is plus/minus 2 SE.",
+  "validation": {
+    "thresholds": {
+      "minimum_retained_initial_norm": 0.99999,
+      "max_early_imbalance_error_t_le_2": 0.02,
+      "max_full_window_rms_error": 0.05,
+      "max_twa_number_absolute_drift": 1e-05,
+      "max_child_stream_early_error": 0.04
+    },
+    "checks": {
+      "exact_fock_cutoff_retains_initial_state": true,
+      "early_window_matches_exact": true,
+      "full_window_rms_below_cap": true,
+      "twa_number_conserved": true,
+      "independent_child_streams_stable_early": true
+    },
+    "all_passed": true
+  },
+  "schema": {
+    "name": "wigner-manybody-benchmark-metrics",
+    "version": 1
+  },
+  "run": {
+    "run_id": "d62c3327-cb7c-4347-9252-a154f915b5e5",
+    "script": "code/ch08_dimer/dimer_exact_vs_twa.py",
+    "script_sha256": "1f45d997383d7d51fdffae07efe82050c8af85729ee410dcc0348735cb05d466",
+    "script_sha256_at_start": "1f45d997383d7d51fdffae07efe82050c8af85729ee410dcc0348735cb05d466",
+    "started_at_unix_ns": 1784017196188497600,
+    "started_at_utc": "2026-07-14T08:19:56.188498+00:00",
+    "metrics_finalized_at_unix_ns": 1784017198658131400,
+    "metrics_finalized_at_utc": "2026-07-14T08:19:58.658131+00:00",
+    "python_executable": "C:\\ProgramData\\anaconda3\\envs\\AI_group\\python.exe"
+  }
 }

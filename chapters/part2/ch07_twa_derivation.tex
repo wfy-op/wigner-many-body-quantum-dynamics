@@ -4,14 +4,14 @@
 \begin{learningobjectives}
 完成本章后，读者应能：
 \begin{enumerate}
-  \item 从玻色 Hamiltonian 的 Wigner 方程识别一阶漂移和三阶量子项；
+  \item 从玻色哈密顿量的 Wigner 方程识别一阶漂移和三阶量子项；
   \item 推导 Bose--Hubbard 型模型的 TWA 轨迹方程；
-  \item 写出从初态抽样到正常排序观测量的算法；
+  \item 写出从初态抽样到正规排序观测量的算法；
   \item 说明高占据展开为何只提供有限时间、观测量相关的控制。
 \end{enumerate}
 \end{learningobjectives}
 
-\section{从多模玻色 Hamiltonian 出发}
+\section{从多模玻色哈密顿量出发}
 
 考虑 $M$ 个玻色模式，
 \begin{equation}
@@ -38,11 +38,45 @@
   +\mathcal{L}^{(3)}W,
   \label{eq:wigner-first-third}
 \end{equation}
-其中 $\mu$ 遍历所有模式的实部和虚部，$\mathcal{L}^{(3)}$ 收集三阶导数。对于闭合、幺正的四次玻色 Hamiltonian，不会出现代表普通扩散的二阶项。
+其中 $\mu$ 遍历所有模式的实部和虚部，$\mathcal{L}^{(3)}$ 收集三阶导数。对于闭合、幺正的四次玻色哈密顿量，不会出现代表普通扩散的二阶项。
+
+\section{把 Kerr 三阶项完整写出}
+
+只写 $\mathcal L^{(3)}$ 容易掩盖 TWA 实际删掉的内容。以第6章
+\begin{equation}
+  \Hhat_{\mathrm K}=\frac{\hbar\chi}{2}\had{}^2\ha^2
+\end{equation}
+为例，并把 $\alpha$ 与 $\alpha^*$ 当作 Wirtinger 意义下的独立变量。利用第3章 Bopp 对应，精确方程首先写成
+\begin{align}
+  \partial_tW=-\frac{\ii\chi}{2}\Bigg[&
+  \left(\alpha^*-\frac12\partial_\alpha\right)^2
+  \left(\alpha+\frac12\partial_{\alpha^*}\right)^2
+  \nonumber\\[-1mm]
+  &-\left(\alpha-\frac12\partial_{\alpha^*}\right)^2
+  \left(\alpha^*+\frac12\partial_\alpha\right)^2
+  \Bigg]W .
+  \label{eq:kerr-bopp-unexpanded}
+\end{align}
+式中每个导数作用于其右侧的完整表达式。逐项展开并重新整理成散度形式，得到
+\begin{align}
+  \partial_tW={}&\ii\chi\left\{
+  \partial_\alpha\!\left[(|\alpha|^2-1)\alpha W\right]
+  -\partial_{\alpha^*}\!\left[(|\alpha|^2-1)\alpha^*W\right]
+  \right\}
+  \nonumber\\
+  &-\frac{\ii\chi}{4}\left\{
+  \partial_\alpha^2\partial_{\alpha^*}(\alpha W)
+  -\partial_\alpha\partial_{\alpha^*}^2(\alpha^*W)
+  \right\}.
+  \label{eq:kerr-exact-wigner-pde}
+\end{align}
+第一行是漂移 $A_\alpha=-\ii\chi(|\alpha|^2-1)\alpha$ 的 Liouville 方程，正好给出第6章轨迹；第二行才是被 TWA 舍弃的三阶动力学量子项。两组混合导数互为复共轭组合，保证实初始 $W$ 的演化仍为实函数。
+
+从\cref{eq:kerr-bopp-unexpanded} 到\cref{eq:kerr-exact-wigner-pde} 的整理以及随后对归一化和矩的分部积分，都假定 $W$ 与所需导数在 $|\alpha|\to\infty$ 时衰减到边界通量为零。若使用有限相空间盒，必须检查边界概率质量和三阶通量，而不能把人工截断边界默认为无穷远。
 
 \section{截断操作}
 
-TWA 定义为舍弃\cref{eq:wigner-first-third} 中的 $\mathcal{L}^{(3)}$：
+TWA 定义为舍弃\cref{eq:wigner-first-third} 中的 $\mathcal{L}^{(3)}$；在 Kerr 例子中，这正是删去\cref{eq:kerr-exact-wigner-pde} 的第二行：
 \begin{equation}
   \pder{W_{\mathrm{TWA}}}{t}
   =-\sum_\mu\partial_\mu(A_\mu W_{\mathrm{TWA}}).
@@ -77,8 +111,8 @@ $-1$ 是每个局域模式的 Weyl 修正。若占据很大，它相对于 $|\al
 对给定 $\rhohat_0,\Hhat,\Ohat$，可执行的算法为：
 \begin{enumerate}
   \item 选择有限模式或空间网格，并固定对易关系和归一化；
-  \item 求 $W_0(\bm\alpha,\bm\alpha^*)$，或至少求目标近似所需的均值与协方差；
-  \item 生成 $N_s$ 个初值 $\bm\alpha^{(s)}(0)$；
+  \item 求 $W_0(\bm\alpha,\bm\alpha^*)$；只有目标态为高斯态时，均值与协方差才足以精确确定 $W_0$，否则必须把有限矩重构明确标为额外的状态近似；
+  \item 生成 $N_s$ 个初值 $\bm\alpha^{(s)}(0)$；若 $W_0$ 含负值，不能生成等权概率样本，而要使用可控的符号重加权、另一种表象或经验证的近似初态；
   \item 对每个样本独立积分\cref{eq:twa-bose-hubbard-drift}；
   \item 由 $O_W[\bm\alpha^{(s)}(t)]$ 计算样本均值和标准误差；
   \item 改变轨迹数、时间步长、模式截止和系统尺寸，并与独立基准比较。
@@ -91,7 +125,26 @@ $-1$ 是每个局域模式的 Weyl 修正。若占据很大，它相对于 $|\al
 
 \section{高占据展开的含义}
 
-若典型模式占据为 $N\gg1$，可写 $\alpha=\sqrt{N}\,\psi$，并在保持平均场非线性能标有限的方式下缩放相互作用。此时一阶漂移给出领先的经典场动力学，高阶 Moyal 导数在形式上受到 $1/N$ 幂次抑制\cite{Polkovnikov2010}。这解释了 TWA 在高占据、有限时间条件下常有效。
+若一个相关模式的典型占据为 $N\gg1$，令
+\begin{equation}
+  \alpha=\sqrt N\,\psi,
+  \qquad \chi=\frac{g}{N},
+  \label{eq:kerr-large-n-scaling}
+\end{equation}
+使平均场非线性频率 $\chi|\alpha|^2\sim g$ 在 $N\to\infty$ 时保持有限。由于 $\partial_\alpha=N^{-1/2}\partial_\psi$，\cref{eq:kerr-exact-wigner-pde} 中各项的相对阶数可以直接读出：
+\begin{align}
+  \chi\partial_\alpha(|\alpha|^2\alpha W)&\sim \order(N^0),\\
+  \chi\partial_\alpha(\alpha W)&\sim \order(N^{-1}),\\
+  \chi\partial_\alpha^2\partial_{\alpha^*}(\alpha W)&\sim \order(N^{-2}).
+\end{align}
+单模面积元满足 $\dd^2\alpha=N\dd^2\psi$，因此定义归一化的 $\widetilde W(\psi,\psi^*)=N W(\sqrt N\psi,\sqrt N\psi^*)$。把这一 Jacobian 一并计入后，可将精确方程概括为
+\begin{equation}
+  \partial_t\widetilde W=
+  \left(\mathcal L_0+\frac1N\mathcal L_{\mathrm{Weyl}}
+  +\frac1{N^2}\mathcal L_3\right)\widetilde W.
+  \label{eq:twa-large-n-hierarchy}
+\end{equation}
+TWA 保留 $\mathcal L_0$ 和来自 $-1$ 的 $\mathcal L_{\mathrm{Weyl}}/N$，只舍弃 $\mathcal L_3/N^2$；直接使用 $\ii\dot\alpha=\chi|\alpha|^2\alpha$ 则连领先的 Weyl 修正也丢掉了。多模情形的计数要求每个参与动力学的相关模式都具有相应的大占据，并按相同原则保持其平均场能标有限，而不能用总粒子数替代逐模条件\cite{Polkovnikov2010}。
 
 但这一计数不是无条件误差界。至少有四个例外：
 \begin{enumerate}
@@ -108,20 +161,23 @@ TWA 保留：
 \begin{itemize}
   \item 初态 Wigner 分布中的真空、热和压缩涨落；
   \item 模间协方差和反常关联；
-  \item Weyl Hamiltonian 中的排序修正；
+  \item Weyl 哈密顿量中的排序修正；
   \item 由非线性经典流把初始涨落转换成观测量涨落的过程。
 \end{itemize}
 它通常不保留由高阶 Moyal 项生成的完整量子干涉、负值细结构、晚时回复和所有高阶纠缠信息。Kerr 例子显示，初期量子涨落的影响可以正确，晚时离散谱干涉仍然缺失。
 
-“量子力学只存在于初始条件中”因而不是严格表述。更准确地说，TWA 把动力学近似为 Weyl Hamiltonian 产生的经典漂移，同时通过初态分布和观测量排序保留领先量子修正；被截去的是一类真正的动力学量子修正\cite{Steel1998,Sinatra2002}。
+“量子力学只存在于初始条件中”因而不是严格表述。更准确地说，TWA 把动力学近似为 Weyl 哈密顿量产生的经典漂移，同时通过初态分布和观测量排序保留领先量子修正；被截去的是一类真正的动力学量子修正\cite{Steel1998,Sinatra2002}。
 
 \section{守恒量与截断误差}
 
-若\cref{eq:twa-bose-hubbard-drift} 由时间无关的 $H_W$ 生成，连续时间轨迹保持 $H_W$。若 Hamiltonian 具有全局 $U(1)$ 对称性，还保持
+若\cref{eq:twa-bose-hubbard-drift} 由时间无关的 $H_W$ 生成，连续时间轨迹保持 $H_W$。若哈密顿量具有全局 $U(1)$ 对称性，还保持
 \begin{equation}
-  N_W=\sum_j(|\alpha_j|^2-1/2).
+  \mathcal N_{\mathrm{sym}}=\sum_j|\alpha_j|^2,
+  \qquad
+  N_W=(\hat N)_W=\mathcal N_{\mathrm{sym}}-\frac M2.
 \end{equation}
-数值程序明显破坏这些守恒量意味着积分误差，但守恒量保持并不证明 TWA 等于精确量子动力学。Kerr TWA 在回复时刻仍精确守恒粒子数和 $H_W$，却给出错误相干性。
+两者只相差模式数决定的常数，但含义不同：前者是原始对称范数，后者才是
+数算符的 Weyl 符号。数值程序明显破坏这些守恒量意味着积分误差，但守恒量保持并不证明 TWA 等于精确量子动力学。Kerr TWA 在回复时刻仍精确守恒粒子数和 $H_W$，却给出错误相干性。
 
 \begin{warningbox}
 轨迹守恒检查是必要条件，不是方法正确性的充分条件。系统误差需要精确小系统、Bogoliubov 极限、短时间展开或另一种受控方法来估计。
@@ -129,10 +185,11 @@ TWA 保留：
 
 \section*{本章小结}
 
-四次玻色 Hamiltonian 的精确 Wigner 方程含一阶和三阶导数。TWA 舍弃三阶项，得到由 Weyl Hamiltonian 驱动的确定性经典场轨迹。初态抽样、漂移中的排序修正和观测量估计器必须使用同一约定。高占据提供形式上的半经典展开，但实际可信度仍取决于模式占据、时间、稳定性和观测量。
+四次玻色哈密顿量的精确 Wigner 方程含一阶和三阶导数。Kerr 例子明确展示了被删除的两个混合三阶导数。TWA 舍弃它们，得到由 Weyl 哈密顿量驱动的确定性经典场轨迹。初态抽样、漂移中的排序修正和观测量估计器必须使用同一约定。按固定平均场能标进行的大占据展开中，Weyl 漂移修正和三阶项分别处于 $1/N$ 与 $1/N^2$ 阶；这只是有限时间的形式计数，实际可信度仍取决于逐模占据、稳定性和观测量。
 
 \begin{exercises}
   \item 从\cref{eq:bose-hubbard-weyl} 推导多模漂移\cref{eq:twa-bose-hubbard-drift}。
+  \item 从\cref{eq:kerr-bopp-unexpanded} 展开得到\cref{eq:kerr-exact-wigner-pde}，逐项检查系数与复共轭关系。
   \item 证明实对称跃迁矩阵下 $\sum_j|\alpha_j|^2$ 沿 TWA 轨迹守恒。
   \item 对两体非局域相互作用 $V_{jk}\hat n_j\hat n_k$，讨论 $j=k$ 与 $j\neq k$ 的 Weyl 修正差别。
   \item 解释为什么增加 $N_s$ 可以减小抽样误差，却不改变三阶导数被舍弃这一事实。

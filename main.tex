@@ -12,6 +12,10 @@
 \input{frontmatter/preface}
 \input{frontmatter/how-to-read}
 \tableofcontents
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{插图目录}
+\listoffigures
 \input{frontmatter/notation}
 
 \mainmatter
@@ -49,10 +53,15 @@
 \include{appendices/appB_gaussian}
 \include{appendices/appC_numerics}
 \include{appendices/appD_exercises}
+\include{appendices/appE_reading}
+\include{appendices/appF_case_index}
 
 \backmatter
 \addcontentsline{toc}{chapter}{参考文献}
+\begingroup
+\raggedright
 \bibliographystyle{unsrt}
 \bibliography{bibliography/references}
+\endgroup
 
 \end{document}

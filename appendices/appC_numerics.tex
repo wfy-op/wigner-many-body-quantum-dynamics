@@ -45,6 +45,9 @@ psi = exp(-1j * local * dt) * psi
 psi = ifft(kinetic_half * fft(psi))
 \end{lstlisting}
 必须用实际 FFT 库验证 Parseval 约定。若将场从实空间模式振幅 $\alpha_j$ 转为幺正动量振幅，NumPy 默认变换需要额外除以 $\sqrt M$。
+这里的 \texttt{delta\_c} 表示数组
+$\delta_{\mathcal C}(x_j,x_j)$；只有均匀 Fourier--DVR 才能安全地把它简化为
+标量 $1/\Delta x$。
 
 \section{最低测试矩阵}
 
@@ -54,13 +57,13 @@ psi = ifft(kinetic_half * fft(psi))
 测试 & 输入 & 通过标准 \\
 \midrule
 真空抽样 & 独立零均值模式 & 每模 $\ensavg{|\alpha|^2}=1/2$，正规粒子数为零 \\
-相干/热估计器 & 解析 Gaussian 态 & $n$ 与 $g^{(2)}$ 在统计区间内 \\
+相干/热估计器 & 解析高斯态 & $n$ 与 $g^{(2)}$ 在统计区间内 \\
 二次传播 & 谐振子或线性场 & Wigner 分布按解析辛流演化 \\
 时间步长 & $\Delta t,\Delta t/2,\Delta t/4$ & 误差比符合算法阶数 \\
 守恒与反演 & 时间无关闭合方程 & 范数、能量与反向误差低于预设阈值 \\
 BdG 模式 & 稳定均匀模型 & 辛范数、配对与解析色散一致 \\
 淬火协方差 & 稳定解析淬火 & 正常、反常矩与辛变换一致 \\
-精确小系统 & Kerr 或二聚体 & 预注册时间窗内误差低于阈值 \\
+精确小系统 & Kerr 或二聚体 & 预先固定的机器可读时间窗内误差低于显式阈值 \\
 截止稳定 & 至少三档物理截止 & 目标观测量存在稳定窗或报告失败 \\
 \bottomrule
 \end{tabularx}
@@ -77,31 +80,60 @@ Windows 本机推荐显式使用项目说明中的 \texttt{AI\_group} 环境 Pyt
   \item 第5章谐振子精确 Wigner 旋转；
   \item 第6章 Kerr 精确解与 TWA；
   \item 第8章 Bose--Hubbard 二聚体精确解与 TWA；
-  \item 第11章压缩 Gaussian 协方差；
+  \item 第11章压缩高斯协方差；
   \item 第12章分步法守恒、反演与阶数；
   \item 第13章排序估计器与 jackknife；
+  \item 第14--17章均匀 Rabi 双分量场的端到端淬火、误差条、步长与截止诊断；
   \item 第15章双分量稳定淬火协方差；
   \item 第16章集体相位扩散；
   \item 第17章随机条纹相位有限尺寸标度。
 \end{enumerate}
-汇总写入 \path{data/test_summary.json}。其中第17章是明确定义的统计玩具模型，只测试分析公式；不代表完成了具体实验参数的超固态模拟。
+汇总写入 \path{data/test_summary.json}。端到端场案例采用均匀 Rabi 耦合，
+不是 Raman SOC；第17章另一个程序是明确定义的统计玩具模型，只测试分析
+公式。两者都不代表完成了具体实验参数的超固态模拟。
+总入口把“进程零退出”“本轮确实产生了新 metrics”“运行来源可核验”和
+“结构化科学判据通过”分成四道门。每个子程序启动前，入口先保存墙钟起点，
+以及旧 metrics 的存在性、纳秒修改时间、字节数和 SHA-256；再通过环境变量
+传入唯一运行 ID。子程序必须在 JSON 根层写入统一 schema 和运行记录，其中
+包含运行 ID、相对脚本路径、启动前后脚本 SHA-256、启动与 metrics 定稿时间。
+
+子进程结束后，入口要求 metrics 存在且修改时间不早于本轮墙钟起点；若旧文件
+原已存在，还必须同时满足修改时间严格推进和 SHA-256 改变。因此，返回码为零
+却没有写新文件的脚本不能复用旧结果过关。入口随后核对 schema、运行 ID、脚本
+路径与哈希，并递归读取 \texttt{validation.checks}：既兼容以布尔值表示的简单
+检查，也读取富结构及其嵌套结构中的 \texttt{passed}。由这些叶级结果重新计算的
+总布尔值必须与 \texttt{validation.all\_passed} 完全一致，且该值为真，才称为
+结构化基准通过。
+
+当前清单共10项。缺失或陈旧 metrics、schema 或运行记录不匹配、没有机器可读
+检查、递归重算不一致以及任一显式阈值失败，都会使总入口失败；不能用脚本零
+退出替代科学判据。汇总为每项保存脚本和 metrics 的 SHA-256、metrics schema、
+新旧文件状态、递归判据与时间戳，并记录 Python 与关键库版本、操作系统、Git
+提交和工作区状态。
 
 \section{收敛表模板}
 
-每个生产结论至少保存以下表格字段：
+不要把时间步长、模式截止和轨迹数混在同一条比较链中。最低限度应保存
+三个独立的一因素扫描：
 \begin{center}
-\begin{tabular}{lllll}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.21\textwidth}>{\raggedright\arraybackslash}X}
 \toprule
-运行号 & $L,M,\Delta x$ & $\Delta t$ & 轨迹数 & 目标量与误差 \\
+扫描 & 固定量 & 改变量 & 判据 \\
 \midrule
-A & 固定 & $\Delta t$ & $N_s$ & $O_A\pm{\rm SE}_A$ \\
-B & 固定 & $\Delta t/2$ & $N_s$ & $O_B\pm{\rm SE}_B$ \\
-C & 改变截止 & 收敛步长 & $N_s$ & $O_C\pm{\rm SE}_C$ \\
-D & 固定 & 收敛步长 & $2N_s$ & $O_D\pm{\rm SE}_D$ \\
+时间 T0--T2 & $L,M,N_s$ 与同一初态样本 &
+$\Delta t,\Delta t/2,\Delta t/4$ & 差分比进入算法阶数的渐近区 \\
+截止 C0--C2 & $L$、物理初态与匹配协议 &
+至少三档 $M$ 或 $\Lambda$；各档时间已收敛 & 目标量在物理截止窗内稳定，或明确报告不稳定 \\
+抽样 S0--S2 & 已收敛的有限模式模型与 $\Delta t$ &
+$N_s,2N_s,4N_s$ & SE 近似按 $N_s^{-1/2}$ 缩小且独立种子相容 \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{center}
-A/B 比较积分误差，A/D 比较抽样误差，B/C 比较表示/截止误差。不要同时改变多个因素后把差异归因于其中一个。
+截止扫描改变 $M$ 时也改变半量子总数，不能与单纯空间离散误差混称为
+“网格收敛”。若要测试离散算符，应另做无噪声、同一带限光滑初态的空间
+扫描；若要测试完整 TWA，则各截止必须重新抽样，并使用各自正确的排序
+估计器。共同随机数只能在存在明确模式嵌套映射时使用，且误差应由逐轨迹
+差值计算。
 
 \section{随机数与并行}
 

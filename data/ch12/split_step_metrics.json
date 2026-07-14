@@ -6,6 +6,7 @@
   "g": 0.05,
   "trap_strength": 0.02,
   "delta_c": 3.2,
+  "projection_basis": "uniform periodic Fourier-DVR; delta_c(x,x)=1/dx",
   "final_time": 0.5,
   "step_sizes": [
     0.004,
@@ -19,5 +20,38 @@
   "observed_order_from_two_finest_pairs": 2.000648110968519,
   "max_relative_norm_drift": 1.3102298113357883e-13,
   "max_relative_energy_drift": 5.611008498719457e-07,
-  "reversibility_relative_l2_error": 2.286527900893808e-13
+  "reversibility_relative_l2_error": 2.286527900893808e-13,
+  "validation": {
+    "thresholds": {
+      "observed_order_minimum": 1.8,
+      "observed_order_maximum": 2.2,
+      "max_relative_norm_drift": 1e-11,
+      "max_relative_energy_drift": 1e-05,
+      "max_reversibility_relative_l2_error": 1e-10,
+      "max_fine_pair_error": 1e-05
+    },
+    "checks": {
+      "observed_second_order": true,
+      "norm_conserved": true,
+      "weyl_energy_converged": true,
+      "time_reversal_recovers_initial_state": true,
+      "finest_pair_difference_below_cap": true
+    },
+    "all_passed": true
+  },
+  "schema": {
+    "name": "wigner-manybody-benchmark-metrics",
+    "version": 1
+  },
+  "run": {
+    "run_id": "626877b7-24df-4a93-8f78-ccbcddeeaced",
+    "script": "code/ch12_propagation/split_step_benchmark.py",
+    "script_sha256": "b70b054d4c5f28312365e92b32b78fccc0ade3d0dbe688a9bf72dd35d4e2c501",
+    "script_sha256_at_start": "b70b054d4c5f28312365e92b32b78fccc0ade3d0dbe688a9bf72dd35d4e2c501",
+    "started_at_unix_ns": 1784017202368886500,
+    "started_at_utc": "2026-07-14T08:20:02.368886+00:00",
+    "metrics_finalized_at_unix_ns": 1784017202603940500,
+    "metrics_finalized_at_utc": "2026-07-14T08:20:02.603940+00:00",
+    "python_executable": "C:\\ProgramData\\anaconda3\\envs\\AI_group\\python.exe"
+  }
 }

@@ -11,13 +11,17 @@
 \end{enumerate}
 \end{learningobjectives}
 
+本章的实变量公式继续使用有量纲正则对 $(x,p_x)$，满足 $[\hat x,\hat p_x]=\ii\hbar$；进入复变量公式时，则使用第2章的无量纲 $\alpha=(Q+\ii P)/\sqrt2$。
+星积与 Moyal 括号的原始表述见\cite{Moyal1949}；本章固定采用第2章的
+归一化，避免把不同文献中的 $\hbar$ 与面积元约定混用。
+
 \section{普通乘积为什么不够}
 
 Weyl 映射保持线性，却不把算符乘积直接映射为普通函数乘积。记
 \begin{equation*}
-  \hat A\leftrightarrow A_W(q,p),
+  \hat A\leftrightarrow A_W(x,p_x),
   \qquad
-  \hat B\leftrightarrow B_W(q,p),
+  \hat B\leftrightarrow B_W(x,p_x),
 \end{equation*}
 则
 \begin{equation}
@@ -30,16 +34,16 @@ Weyl 映射保持线性，却不把算符乘积直接映射为普通函数乘积
   =A\exp\!\left[
   \frac{\ii\hbar}{2}
   \left(
-  \overleftarrow{\partial_q}\overrightarrow{\partial_p}
-  -\overleftarrow{\partial_p}\overrightarrow{\partial_q}
+  \overleftarrow{\partial_x}\overrightarrow{\partial_{p_x}}
+  -\overleftarrow{\partial_{p_x}}\overrightarrow{\partial_x}
   \right)\right]B.
   \label{eq:star-product}
 \end{equation}
 箭头说明导数作用在哪一侧。定义双向微分算符
 \begin{equation}
   \Lambda=
-  \overleftarrow{\partial_q}\overrightarrow{\partial_p}
-  -\overleftarrow{\partial_p}\overrightarrow{\partial_q},
+  \overleftarrow{\partial_x}\overrightarrow{\partial_{p_x}}
+  -\overleftarrow{\partial_{p_x}}\overrightarrow{\partial_x},
 \end{equation}
 则 $A\star B=A\exp(\ii\hbar\Lambda/2)B$。
 
@@ -52,19 +56,19 @@ Weyl 映射保持线性，却不把算符乘积直接映射为普通函数乘积
 其中
 \begin{equation}
   \{A,B\}_{\mathrm{PB}}
-  =\pder{A}{q}\pder{B}{p}
-  -\pder{A}{p}\pder{B}{q}
+  =\pder{A}{x}\pder{B}{p_x}
+  -\pder{A}{p_x}\pder{B}{x}
 \end{equation}
 是 Poisson 括号。星积由普通乘积、Poisson 几何和更高阶导数共同组成。
 
 \begin{example}
-取 $A=q$、$B=p$。因为二阶以上导数全部为零，
+取 $A=x$、$B=p_x$。因为二阶以上导数全部为零，
 \begin{equation}
-  q\star p=qp+\frac{\ii\hbar}{2},
+  x\star p_x=x p_x+\frac{\ii\hbar}{2},
   \qquad
-  p\star q=pq-\frac{\ii\hbar}{2}.
+  p_x\star x=p_x x-\frac{\ii\hbar}{2}.
 \end{equation}
-因此 $(\comm{\hat q}{\hat p})_W=q\star p-p\star q=\ii\hbar$。不对易性没有消失，而是进入星积。
+因此 $(\comm{\hat x}{\hat p_x})_W=x\star p_x-p_x\star x=\ii\hbar$。不对易性没有消失，而是进入星积。
 \end{example}
 
 \section{Moyal 括号}
@@ -103,33 +107,35 @@ Weyl 映射保持线性，却不把算符乘积直接映射为普通函数乘积
 
 对
 \begin{equation}
-  H_W(q,p)=\frac{p^2}{2m}+V(q),
+  H_W(x,p_x)=\frac{p_x^2}{2m}+V(x),
 \end{equation}
 \cref{eq:moyal-evolution} 可写成
 \begin{equation}
   \pder{W}{t}
-  =-\frac{p}{m}\pder{W}{q}
+  =-\frac{p_x}{m}\pder{W}{x}
   +\sum_{\ell=0}^{\infty}
   \frac{(-1)^\ell}{(2\ell+1)!}
   \left(\frac{\hbar}{2}\right)^{2\ell}
-  \frac{\dd^{2\ell+1}V}{\dd q^{2\ell+1}}
-  \frac{\partial^{2\ell+1}W}{\partial p^{2\ell+1}}.
+  \frac{\dd^{2\ell+1}V}{\dd x^{2\ell+1}}
+  \frac{\partial^{2\ell+1}W}{\partial p_x^{2\ell+1}}.
   \label{eq:moyal-potential-series}
 \end{equation}
-当 $V$ 至多为二次多项式时，$V^{(3)}$ 及更高导数全部为零，精确量子传播便与经典 Liouville 传播一致。准确条件是 Hamiltonian 的 Weyl 符号对全部相空间变量至多二次，而不只是“势能看起来像抛物线”。
+当 $V$ 至多为二次多项式时，$V^{(3)}$ 及更高导数全部为零，精确量子传播便与经典 Liouville 传播一致。准确条件是哈密顿量的 Weyl 符号对全部相空间变量至多二次，而不只是“势能看起来像抛物线”。
+
+把 Moyal 方程写成守恒流形式、检验归一化或推导矩方程时都使用了分部积分。对无界相空间，必须要求 $W$ 及所需阶数的导数在无穷远衰减得足够快，使边界通量为零；对周期相空间，边界项因周期性相消。若数值计算只保留有限相空间盒，则吸收、反射或周期边界会改变方程，不能在未检查边界概率质量的情况下沿用这些推导。
 
 \section{非线性怎样产生高阶导数}
 
 考虑四次势
 \begin{equation}
-  V(q)=\frac{\lambda}{4}q^4.
+  V(x)=\frac{\lambda}{4}x^4.
 \end{equation}
-因为 $V'''(q)=6\lambda q$ 且五阶以上导数为零，精确方程为
+因为 $V'''(x)=6\lambda x$ 且五阶以上导数为零，精确方程为
 \begin{equation}
   \pder{W}{t}
-  =-\frac{p}{m}\pder{W}{q}
-  +\lambda q^3\pder{W}{p}
-  -\frac{\hbar^2\lambda q}{4}\frac{\partial^3W}{\partial p^3}.
+  =-\frac{p_x}{m}\pder{W}{x}
+  +\lambda x^3\pder{W}{p_x}
+  -\frac{\hbar^2\lambda x}{4}\frac{\partial^3W}{\partial p_x^3}.
   \label{eq:quartic-wigner-evolution}
 \end{equation}
 前两项沿经典非线性轨迹剪切分布，第三项不能表示成普通确定性轨迹的概率守恒流。舍弃第三项便得到这一模型的截断 Wigner 演化。
@@ -142,14 +148,14 @@ Weyl 映射保持线性，却不把算符乘积直接映射为普通函数乘积
 
 与其每次显式展开星积，也可以用 Bopp 对应规则。对坐标变量，
 \begin{align}
-  \hat q\rhohat&\leftrightarrow
-  \left(q+\frac{\ii\hbar}{2}\partial_p\right)W,
-  &\rhohat\hat q&\leftrightarrow
-  \left(q-\frac{\ii\hbar}{2}\partial_p\right)W,\\
-  \hat p\rhohat&\leftrightarrow
-  \left(p-\frac{\ii\hbar}{2}\partial_q\right)W,
-  &\rhohat\hat p&\leftrightarrow
-  \left(p+\frac{\ii\hbar}{2}\partial_q\right)W.
+  \hat x\rhohat&\leftrightarrow
+  \left(x+\frac{\ii\hbar}{2}\partial_{p_x}\right)W,
+  &\rhohat\hat x&\leftrightarrow
+  \left(x-\frac{\ii\hbar}{2}\partial_{p_x}\right)W,\\
+  \hat p_x\rhohat&\leftrightarrow
+  \left(p_x-\frac{\ii\hbar}{2}\partial_x\right)W,
+  &\rhohat\hat p_x&\leftrightarrow
+  \left(p_x+\frac{\ii\hbar}{2}\partial_x\right)W.
   \label{eq:bopp-real}
 \end{align}
 对玻色复振幅，令 $\alpha$ 与 $\alpha^*$ 在微分时相互独立，则
@@ -164,7 +170,7 @@ Weyl 映射保持线性，却不把算符乘积直接映射为普通函数乘积
   \left(\alpha^*+\frac12\partial_\alpha\right)W.
   \label{eq:bopp-complex}
 \end{align}
-把 Hamiltonian 或 Lindblad 主方程左右两侧的算符依次替换为\cref{eq:bopp-real,eq:bopp-complex}，即可得到 Wigner 偏微分方程。
+把哈密顿量或 Lindblad 主方程左右两侧的算符依次替换为\cref{eq:bopp-real,eq:bopp-complex}，即可得到 Wigner 偏微分方程。
 
 \section{从偏微分方程到随机过程}
 
@@ -183,20 +189,20 @@ Weyl 映射保持线性，却不把算符乘积直接映射为普通函数乘积
 
 \section{矩方程为何有时比整个分布更可靠}
 
-高阶导数对低阶多项式矩的直接贡献可能因分部积分而消失。例如\cref{eq:quartic-wigner-evolution} 中的三阶 $p$ 导数不直接改变 $p^0,p^1,p^2$ 矩。然而，非线性会使低阶矩与更高阶矩耦合，高阶结构随后仍可能反馈回来。因此，某个低阶观测量在一段时间内准确，不代表完整 Wigner 函数或所有高阶关联都同样准确。
+在上一节说明的零边界通量条件下，高阶导数对低阶多项式矩的直接贡献可能因分部积分而消失。例如\cref{eq:quartic-wigner-evolution} 中的三阶 $p_x$ 导数不直接改变 $p_x^0,p_x^1,p_x^2$ 矩。然而，非线性会使低阶矩与更高阶矩耦合，高阶结构随后仍可能反馈回来。因此，某个低阶观测量在一段时间内准确，不代表完整 Wigner 函数或所有高阶关联都同样准确。
 
 \begin{chaptercheck}
-看到“经典轨迹”时，检查它来自精确的二次 Hamiltonian，还是来自对高阶 Moyal 导数的截断；看到“随机轨迹”时，检查噪声只在初态出现，还是由二阶扩散在演化中持续产生。
+看到“经典轨迹”时，检查它来自精确的二次哈密顿量，还是来自对高阶 Moyal 导数的截断；看到“随机轨迹”时，检查噪声只在初态出现，还是由二阶扩散在演化中持续产生。
 \end{chaptercheck}
 
 \section*{本章小结}
 
-星积保存了算符乘法和不对易性，Moyal 括号把 von Neumann 方程精确转写为相空间演化。Poisson 括号是其领先项，非线性 Hamiltonian 产生高阶导数。TWA 的核心数学操作正是舍弃无法由普通轨迹表示的高阶项，而 Bopp 算符提供了对具体玻色 Hamiltonian 进行这一推导的实用途径。
+星积保存了算符乘法和不对易性，Moyal 括号把 von Neumann 方程精确转写为相空间演化。Poisson 括号是其领先项，非线性哈密顿量产生高阶导数。TWA 的核心数学操作正是舍弃无法由普通轨迹表示的高阶项，而 Bopp 算符提供了对具体玻色哈密顿量进行这一推导的实用途径。
 
 \begin{exercises}
-  \item 使用\cref{eq:star-product} 计算 $q^2\star p^2$，保留全部非零项。
-  \item 证明 Moyal 括号满足反对称性，并验证 $\{q,p\}_{\mathrm{M}}=1$。
+  \item 使用\cref{eq:star-product} 计算 $x^2\star p_x^2$，保留全部非零项。
+  \item 证明 Moyal 括号满足反对称性，并验证 $\{x,p_x\}_{\mathrm{M}}=1$。
   \item 从\cref{eq:moyal-potential-series} 推导四次势的\cref{eq:quartic-wigner-evolution}。
   \item 使用 Bopp 规则重新推导 $(\had\ha)_W=|\alpha|^2-1/2$。
-  \item 对六次势 $V(q)=gq^6/6$，写出 Wigner 演化中最高阶的 $p$ 导数。
+  \item 对六次势 $V(x)=gx^6/6$，写出 Wigner 演化中最高阶的 $p_x$ 导数。
 \end{exercises}

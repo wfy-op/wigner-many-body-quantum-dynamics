@@ -1,14 +1,72 @@
 \chapter*{符号与约定}
 \addcontentsline{toc}{chapter}{符号与约定}
 
-全书采用 $\comm{\hat x}{\hat p}=\ii\hbar$。单模相干振幅定义为
+本书同时使用有量纲的正则坐标与无量纲的模式正交分量。为避免把两者的
+相空间测度、真空方差或 $\hbar$ 因子混在一起，统一采用
 \begin{equation*}
-  \alpha=\frac{1}{\sqrt{2}}(q+\ii p),
-  \qquad \comm{\ha}{\had}=1,
+  \comm{\hat x}{\hat p_x}=\ii\hbar,
+  \qquad
+  \comm{\hat Q}{\hat P}=\ii,
+  \qquad
+  \ha=\frac{\hat Q+\ii\hat P}{\sqrt2},
+  \qquad
+  \alpha=\frac{Q+\ii P}{\sqrt2}.
 \end{equation*}
-其中无量纲正交分量满足 $\comm{\hat q}{\hat p}=\ii$。场算符在连续表象中满足
+其中 $x,p_x$ 只表示有量纲的粒子坐标与动量，$Q,P$ 只表示单个正则玻色
+模式的无量纲正交分量；因此 $\comm{\ha}{\had}=1$，且真空满足
+$\Var(Q)=\Var(P)=1/2$。若某一局部推导令 $\hbar=1$，正文会明确说明。
+
+场算符在连续表象中满足
 \begin{equation*}
   \comm{\hpsi(x)}{\hpsid(x')}=\delta(x-x').
 \end{equation*}
-离散网格的归一化将在第10章固定。星号表示复共轭，$\dagger$ 表示 Hermitian 共轭，粗体表示有限维向量或矩阵。
+实际计算始终先选定有限模式子空间 $\mathcal C$，并以
+$\mathcal P_{\mathcal C}$ 表示投影、以
+$\delta_{\mathcal C}(x,x')$ 表示投影核。$M$ 表示保留模式数，$N_s$
+表示独立 Wigner 轨迹数；周期均匀格点的长度、点数和间距分别为
+$L,M,\Delta x=L/M$。离散模式、胞元模式与点值场的关系在第10章严格
+固定。
 
+全书把未扣除半量子的原始对称范数和粒子数算符的 Weyl 符号严格区分：
+\begin{equation*}
+  \mathcal N_{\mathrm{sym}}=\sum_{j=1}^{M}|\alpha_j|^2,
+  \qquad
+  N_W=(\hat N)_W=\mathcal N_{\mathrm{sym}}-\frac M2.
+\end{equation*}
+对正交格点的点值场，第一式等价于
+$\mathcal N_{\mathrm{sym}}=\Delta x\sum_j|\psi_j|^2$。因此
+$\mathcal N_{\mathrm{sym}}$ 可以是轨迹方程保持的原始模方和，物理粒子数则由
+$\qavg{\hat N}=\ensavg{N_W}$ 给出；两者不得都简写为 $N_W$。
+
+三类平均必须区分：
+\begin{equation*}
+  \qavg{\Ohat}=\Tr(\rhohat\Ohat),
+  \qquad
+  \ensavg{F}=\frac1{N_s}\sum_{r=1}^{N_s}F_r,
+  \qquad
+  \overline{F}^{\,x}=\frac1L\int_0^L F(x)\dd x .
+\end{equation*}
+前两者分别是量子期望和 Wigner 样本平均，最后一个仅表示空间平均。
+一条轨迹的场值不是一次完整量子测量结果。
+
+双分量章节采用自旋量
+$\bm\psi=(\psi_L,\psi_R)^T$，总密度与自旋密度分别为
+$n=|\psi_L|^2+|\psi_R|^2$ 和
+$s=|\psi_L|^2-|\psi_R|^2$。为与场展开
+$\delta\bm\psi=U\bm b-V^*\bm b^*$ 的负号一致，Bogoliubov--de Gennes（BdG）正能 Nambu 列统一写成
+\begin{equation*}
+  \bm w_\nu=\begin{pmatrix}\bm u_\nu\\-\bm v_\nu\end{pmatrix},
+  \qquad
+  \bar{\bm w}_\nu=\tau_x\bm w_\nu^*
+  =\begin{pmatrix}-\bm v_\nu^*\\\bm u_\nu^*\end{pmatrix},
+  \qquad
+  S=\begin{pmatrix}U&-V^*\\-V&U^*\end{pmatrix}.
+\end{equation*}
+其中 $U=(\bm u_1,\ldots,\bm u_M)$、$V=(\bm v_1,\ldots,\bm v_M)$，
+$\bar{\bm w}_\nu$ 是粒子--空穴伙伴，辛度量为
+$\Sigma_z=\diag(\identity,-\identity)$。普通转置、Hermitian 共轭和复共轭
+分别记为 $T$、$\dagger$ 和 $*$；粗体表示有限维向量或矩阵。
+
+Fourier 变换在解析推导中采用连续归一化，在程序中采用附录A列出的幺正
+离散约定。不同约定可以等价，但同一公式中的正变换、反变换、Parseval
+关系和投影核必须成套使用。

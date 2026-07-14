@@ -7,7 +7,7 @@
   \item 写出相干态、热态、压缩高斯态和 Fock 态的 Wigner 函数；
   \item 根据协方差矩阵抽样多模高斯态；
   \item 区分 Wigner 负值、量子性和普通概率可抽样性；
-  \item 把等时正常排序观测量转换为 Wigner 样本估计量。
+  \item 把等时正规排序观测量转换为 Wigner 样本估计量。
 \end{enumerate}
 \end{learningobjectives}
 
@@ -48,9 +48,12 @@
 
 \section{高斯态与协方差矩阵}
 
+连续变量高斯态的辛空间形式、物理性条件与 Williamson 分解可参见综述
+\cite{Weedbrook2012}；这里仅保留后续 Wigner 抽样直接需要的结果。
+
 对 $M$ 个模式，把正交分量排列为
 \begin{equation}
-  \hat{\bm R}=(\hat q_1,\hat p_1,\ldots,\hat q_M,\hat p_M)^{\mathsf T}.
+  \hat{\bm R}=(\hat Q_1,\hat P_1,\ldots,\hat Q_M,\hat P_M)^{\mathsf T}.
 \end{equation}
 定义均值和对称协方差
 \begin{align}
@@ -59,7 +62,7 @@
   \acomm{\hat R_j-d_j}{\hat R_k-d_k}}.
   \label{eq:gaussian-covariance}
 \end{align}
-采用 $\comm{\hat q_j}{\hat p_k}=\ii\delta_{jk}$ 时，物理协方差必须满足
+采用第2章的无量纲约定 $\comm{\hat Q_j}{\hat P_k}=\ii\delta_{jk}$ 时，物理协方差必须满足
 \begin{equation}
   V+\frac{\ii}{2}\Omega\succeq0,
   \qquad
@@ -80,11 +83,11 @@
   \qquad \bm\xi\sim\mathcal{N}(\bm0,I)
   \label{eq:gaussian-cholesky-sampling}
 \end{equation}
-给出直接抽样。$L$ 可以取 Cholesky 因子；当 $V$ 半正定但数值上接近奇异时，可使用特征分解并设置与机器精度相容的容差。
+给出直接抽样。对合法的有限能量量子协方差，$V$ 是正定矩阵，通常可取 Cholesky 因子。纯高斯态只意味着所有辛本征值等于 $1/2$，并不意味着 $V$ 奇异；真正的数值病态来自强压缩或变量尺度失衡，使普通特征值跨越很多数量级。此时可使用对称特征分解构造平方根，但任何特征值裁剪都必须记录并回测其对目标矩的影响。
 
 \subsection{单模压缩真空}
 
-若压缩轴与 $q$ 轴重合，实压缩参数为 $r$，则
+本书固定约定：$r>0$ 时 $Q$ 正交分量被压缩。此时
 \begin{equation}
   V=\frac12
   \begin{pmatrix}
@@ -103,6 +106,12 @@
 高斯抽样至少检查三项：样本均值与 $\bm d$ 的偏差、样本协方差与 $V$ 的矩阵范数误差，以及 $V+\ii\Omega/2$ 的最小特征值。只检查每个对角方差不能发现模间关联丢失。
 \end{numericalbox}
 
+\subsection{高斯矩匹配的适用边界}
+
+若目标态本身是高斯态，均值 $\bm d$ 与协方差 $V$ 唯一确定其全部等时矩，\cref{eq:gaussian-cholesky-sampling} 是精确初态抽样。若目标态非高斯，用相同的 $\bm d,V$ 构造高斯分布只保证一、二阶对称矩一致；它不保证粒子数分布、四阶关联、稀有尾部、Wigner 负值或相位干涉一致。
+
+这种差别在非线性演化中不会停留在高阶矩。四次哈密顿量会使低阶矩方程与更高阶矩耦合，所以初始时一、二阶矩相同的两个状态，随后的一、二阶观测量也可能分离。采用高斯矩匹配时必须同时声明：匹配了哪些矩、目标观测量和时间窗口、与精确小系统的比较，以及结论对替代匹配方案是否稳定。不能把“协方差回测通过”写成“目标非高斯态已被精确表示”。
+
 \section{Fock 态与 Wigner 负值}
 
 粒子数态 $\ket{n}$ 的单模 Wigner 函数为
@@ -111,9 +120,26 @@
   L_n(4|\alpha|^2)\ee^{-2|\alpha|^2},
   \label{eq:fock-wigner}
 \end{equation}
-其中 $L_n$ 是 Laguerre 多项式。除真空外，分布通常含正负交替的环。普通 Monte Carlo 需要非负抽样权重，因此不能把\cref{eq:fock-wigner} 直接当作概率密度。
+其中 $L_n$ 是 Laguerre 多项式。除真空外，分布通常含正负交替的环，因此不能把\cref{eq:fock-wigner} 直接当作概率密度生成等权样本。
 
-实际工作中有三种选择：使用能够处理复权重或扩展相空间的表示；构造只匹配目标低阶矩的近似正分布；或者在小系统中直接使用精确态作为基准。第二种选择不是精确表示，必须说明匹配了哪些矩，以及结论是否对未匹配的高阶矩敏感。
+若 $Z_W=\int\dd^2\alpha\,|W(\alpha)|$ 有限，可定义
+\begin{equation}
+  P_{|W|}(\alpha)=\frac{|W(\alpha)|}{Z_W},
+  \qquad s(\alpha)=\operatorname{sgn}W(\alpha),
+\end{equation}
+相应的积分估计器为
+\begin{equation}
+  \int\dd^2\alpha\,W(\alpha)O_W(\alpha)
+  =Z_W\mathbb{E}_{|W|}[sO_W].
+\end{equation}
+这在数学上是无偏的符号重加权，却不是正 Wigner 抽样。平均符号满足
+\begin{equation}
+  \mathbb{E}_{|W|}[s]=\frac{1}{Z_W};
+\end{equation}
+当它很小时，所需样本数会急剧增加。更重要的是，这一重加权只处理初态
+积分的负权重，并不会补回 TWA 随后舍弃的高阶 Moyal 动力学。
+
+实际工作中有四种选择：在符号问题可控的小系统中使用上述重加权；使用能够处理复权重或扩展相空间的表示；构造只匹配目标低阶矩的近似正分布；或者直接使用精确态作为基准。矩匹配不是精确表示，必须按上一小节说明其边界。
 
 猫态
 \begin{equation}
@@ -130,13 +156,15 @@
 \toprule
 表示 & 典型排序 & 主要特征 \\
 \midrule
-Glauber--Sudarshan $P$ & 正常排序 & 可能比普通函数更奇异 \\
+Glauber--Sudarshan $P$ & 正规排序 & 可能比普通函数更奇异 \\
 Wigner $W$ & 对称排序 & 实函数，但可为负 \\
-Husimi $Q$ & 反正常排序 & 始终非负，但额外平滑 \\
+Husimi $Q$ & 反正规排序 & 始终非负，但额外平滑 \\
 \bottomrule
 \end{tabular}
 \end{center}
 不存在对所有问题都最优的表示。Wigner 表象的优势是漂移方程常接近经典场动力学，且高占据玻色系统的半量子修正清楚；它的限制是非正初态难以直接抽样，非线性演化又会产生高阶导数。
+更一般的高斯算符表示可以扩展普通正概率抽样的范围，但其变量、权重和
+稳定性条件与本章的 Wigner 高斯抽样不同\cite{Corney2003}。
 
 \section{等时观测量的估计器}
 
@@ -164,7 +192,7 @@ Husimi $Q$ & 反正常排序 & 始终非负，但额外平滑 \\
 
 \section*{本章小结}
 
-相干态和热态可以逐模直接抽样，一般高斯态应由完整协方差矩阵抽样。压缩态说明正 Wigner 函数仍能代表量子态，Fock 态和猫态则展示普通概率抽样的限制。等时观测量必须从 Weyl 符号构造；正常排序、多时排序和连续场极限需要分别处理。
+相干态和热态可以逐模直接抽样，一般高斯态应由完整协方差矩阵抽样。压缩态说明正 Wigner 函数仍能代表量子态，Fock 态和猫态则展示普通概率抽样的限制。等时观测量必须从 Weyl 符号构造；正规排序、多时排序和连续场极限需要分别处理。
 
 \begin{exercises}
   \item 用\cref{eq:thermal-sampling} 计算 $\ensavg{|\alpha|^2}$ 和 $\ensavg{|\alpha|^4}$，验证热态的 $g^{(2)}=2$。

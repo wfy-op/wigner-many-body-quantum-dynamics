@@ -23,13 +23,60 @@
     0.0225,
     0.0225
   ],
+  "ordered_mean_abs_mq_squared_standard_error": [
+    8.303792914603549e-19,
+    3.592194747130939e-19,
+    4.753697744274794e-19,
+    4.98850939576637e-19
+  ],
   "finite_domain_mean_abs_mq_squared": [
     0.002858894321220879,
     0.0014101344362029119,
     0.000689419547537452,
     0.00035460978915474717
   ],
+  "finite_domain_mean_abs_mq_squared_standard_error": [
+    5.9271298450099814e-05,
+    3.138236591555195e-05,
+    1.5163720892497915e-05,
+    8.204192142418588e-06
+  ],
   "ordered_loglog_slope": -5.828427276698152e-16,
+  "ordered_loglog_slope_standard_error": 1.3590987623281454e-15,
   "finite_domain_loglog_slope": -1.0065837670792221,
-  "exact_ordered_plateau": 0.0225
+  "finite_domain_loglog_slope_standard_error": 0.011331153670440372,
+  "exact_ordered_plateau": 0.0225,
+  "ordered_plateau_max_relative_error": 0.0,
+  "symmetry_restored_mean_fraction": 0.02975572665895351,
+  "validation": {
+    "thresholds": {
+      "max_abs_ordered_loglog_slope": 0.08,
+      "finite_domain_slope_minimum": -1.12,
+      "finite_domain_slope_maximum": -0.88,
+      "max_ordered_plateau_relative_error": 0.02,
+      "max_symmetry_restored_mean_fraction": 0.06
+    },
+    "checks": {
+      "ordered_ensemble_approaches_plateau": true,
+      "finite_domains_show_inverse_length_scaling": true,
+      "ordered_plateau_matches_exact_amplitude": true,
+      "random_global_phase_restores_mean_order_parameter": true
+    },
+    "all_passed": true
+  },
+  "schema": {
+    "name": "wigner-manybody-benchmark-metrics",
+    "version": 1
+  },
+  "run": {
+    "run_id": "d33a3bcb-63b0-4f6d-9f02-09d829013c1f",
+    "script": "code/ch17_order/stripe_scaling_toy.py",
+    "script_sha256": "488ae56e370ca1d22f9c88284134c76913ef4802fce558e106bc8771caa32fb5",
+    "script_sha256_at_start": "488ae56e370ca1d22f9c88284134c76913ef4802fce558e106bc8771caa32fb5",
+    "started_at_unix_ns": 1784017239933353900,
+    "started_at_utc": "2026-07-14T08:20:39.933354+00:00",
+    "metrics_finalized_at_unix_ns": 1784017241066219900,
+    "metrics_finalized_at_utc": "2026-07-14T08:20:41.066220+00:00",
+    "python_executable": "C:\\ProgramData\\anaconda3\\envs\\AI_group\\python.exe"
+  }
 }

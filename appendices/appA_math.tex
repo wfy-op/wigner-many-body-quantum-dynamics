@@ -1,33 +1,33 @@
 \chapter{相空间计算公式}
 \label{app:math}
 
-本附录集中列出正文反复使用的变换、对应规则与排序公式。除特别说明外，单模复振幅满足
-$\alpha=(q+\ii p)/\sqrt2$，从而 $\comm{\hat q}{\hat p}=\ii$。
+本附录集中列出正文反复使用的变换、对应规则与排序公式。为避免量纲混淆，前两节用 $(x,p_x)$ 表示满足 $[\hat x,\hat p_x]=\ii\hbar$ 的有量纲坐标--动量；从“复变量 Bopp 对应”开始，玻色模式使用无量纲正交分量 $(Q,P)$，满足
+$\alpha=(Q+\ii P)/\sqrt2$ 与 $[\hat Q,\hat P]=\ii$。两套变量的测度和 $\hbar$ 因子不能交叉套用。
 
 \section{Weyl 符号与反变换}
 
 对一维正则坐标，算符 $\Ohat$ 的 Weyl 符号为
 \begin{equation}
-  O_W(q,p)=\int_{-\infty}^{\infty}\dd y\,
-  \ee^{-\ii py/\hbar}
-  \mel{q+y/2}{\Ohat}{q-y/2}.
+  O_W(x,p_x)=\int_{-\infty}^{\infty}\dd y\,
+  \ee^{-\ii p_x y/\hbar}
+  \mel{x+y/2}{\Ohat}{x-y/2}.
 \end{equation}
 反变换写成
 \begin{equation}
   \mel{x}{\Ohat}{x'}=
-  \int\frac{\dd p}{2\pi\hbar}\,
-  \ee^{\ii p(x-x')/\hbar}
-  O_W\!\left(\frac{x+x'}2,p\right).
+  \int\frac{\dd p_x}{2\pi\hbar}\,
+  \ee^{\ii p_x(x-x')/\hbar}
+  O_W\!\left(\frac{x+x'}2,p_x\right).
 \end{equation}
 密度算符的 Wigner 函数采用
 \begin{equation}
-  W(q,p)=\frac{1}{2\pi\hbar}
-  \int\dd y\,\ee^{-\ii py/\hbar}
-  \mel{q+y/2}{\rhohat}{q-y/2},
+  W(x,p_x)=\frac{1}{2\pi\hbar}
+  \int\dd y\,\ee^{-\ii p_x y/\hbar}
+  \mel{x+y/2}{\rhohat}{x-y/2},
 \end{equation}
-于是 $\int\dd q\dd p\,W=1$，且
+于是 $\int\dd x\dd p_x\,W=1$，且
 \begin{equation}
-  \qavg{\Ohat}=\int\dd q\dd p\,W(q,p)O_W(q,p).
+  \qavg{\Ohat}=\int\dd x\dd p_x\,W(x,p_x)O_W(x,p_x).
 \end{equation}
 不同文献会把 $2\pi\hbar$ 放在 $W$ 或相空间测度中；只要正反变换、归一化和求迹公式成套一致即可。
 
@@ -39,8 +39,8 @@ $\alpha=(q+\ii p)/\sqrt2$，从而 $\comm{\hat q}{\hat p}=\ii$。
   \exp\!\left[
   \frac{\ii\hbar}{2}
   \left(
-  \overleftarrow\partial_q\overrightarrow\partial_p-
-  \overleftarrow\partial_p\overrightarrow\partial_q
+  \overleftarrow\partial_x\overrightarrow\partial_{p_x}-
+  \overleftarrow\partial_{p_x}\overrightarrow\partial_x
   \right)\right]B_W.
 \end{equation}
 算符乘积、对易子和反对易子分别映射为
@@ -52,8 +52,8 @@ $\alpha=(q+\ii p)/\sqrt2$，从而 $\comm{\hat q}{\hat p}=\ii$。
   &=A_W\cos\!\left(\frac{\hbar\Lambda}{2}\right)B_W,
 \end{align}
 其中
-$\Lambda=\overleftarrow\partial_q\overrightarrow\partial_p-
-\overleftarrow\partial_p\overrightarrow\partial_q$。Moyal 括号的低阶展开为
+$\Lambda=\overleftarrow\partial_x\overrightarrow\partial_{p_x}-
+\overleftarrow\partial_{p_x}\overrightarrow\partial_x$。Moyal 括号的低阶展开为
 \begin{equation}
   \{A,B\}_{\rm M}=\{A,B\}_{\rm P}
   -\frac{\hbar^2}{24}A\Lambda^3B+\order(\hbar^4).
@@ -86,8 +86,8 @@ $\hat n=\had\ha$ & $|\alpha|^2-1/2$ \\
 $\hat n^2$ & $|\alpha|^4-|\alpha|^2$ \\
 $\had{}^2\ha^2=\hat n(\hat n-1)$
 & $|\alpha|^4-2|\alpha|^2+1/2$ \\
-$\hat q^2$，$\hat p^2$ & $q^2$，$p^2$ \\
-$\tfrac12(\hat q\hat p+\hat p\hat q)$ & $qp$ \\
+$\hat Q^2$，$\hat P^2$ & $Q^2$，$P^2$ \\
+$\tfrac12(\hat Q\hat P+\hat P\hat Q)$ & $QP$ \\
 \bottomrule
 \end{tabular}
 \end{center}

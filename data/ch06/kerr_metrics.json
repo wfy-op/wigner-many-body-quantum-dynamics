@@ -1,10 +1,72 @@
 {
   "seed": 20260714,
+  "child_stream_spawn_keys": [
+    [
+      0
+    ],
+    [
+      1
+    ],
+    [
+      2
+    ],
+    [
+      3
+    ]
+  ],
   "trajectories": 100000,
   "initial_occupation": 9.0,
-  "max_early_coherence_error_tau_le_0.25": 0.00874148014241849,
+  "max_early_coherence_error_tau_le_0.25": 0.010159170765639214,
   "exact_revival_coherence": 1.0,
-  "twa_revival_coherence": 0.0016491893251474113,
-  "twa_number_estimate_initial": 8.99431259410505,
-  "exact_number": 9.0
+  "twa_revival_coherence": 0.0021333370253980477,
+  "twa_revival_amplitude_standard_error": 0.0032488688382397743,
+  "child_stream_max_early_errors": [
+    0.008472485533141616,
+    0.013567153484221772,
+    0.0077595100440408515,
+    0.010822505578425567
+  ],
+  "child_stream_revival_coherences": [
+    0.001348498777670539,
+    0.0026104772260542655,
+    0.0055818272626761735,
+    0.0023701672466967336
+  ],
+  "twa_number_estimate_initial": 8.999579819080138,
+  "twa_number_standard_error_initial": 0.009629136209941994,
+  "twa_number_z": 0.043636408365317,
+  "exact_number": 9.0,
+  "uncertainty_note": "Amplitude error uses a delta-method projected SE away from zero and the complex-mean RMS SE near zero; the plotted band is plus/minus 2 SE.",
+  "validation": {
+    "thresholds": {
+      "max_early_coherence_error_tau_le_0.25": 0.02,
+      "revival_upper_4se": 0.05,
+      "initial_number_z": 5.0,
+      "max_child_stream_early_error": 0.04,
+      "exact_revival_minimum": 0.999
+    },
+    "checks": {
+      "early_window_matches_exact": true,
+      "twa_misses_revival_beyond_sampling_noise": true,
+      "initial_number_within_5se": true,
+      "independent_child_streams_stable_early": true,
+      "exact_solution_revival_present": true
+    },
+    "all_passed": true
+  },
+  "schema": {
+    "name": "wigner-manybody-benchmark-metrics",
+    "version": 1
+  },
+  "run": {
+    "run_id": "ad6813c3-b1f8-4298-bef4-bc4b5f1d8f9f",
+    "script": "code/ch06_kerr/kerr_exact_vs_twa.py",
+    "script_sha256": "ecfcb7fcec90a3447c3b9079a904ad1b5063e440b025c0fd362dfc7513f73bd1",
+    "script_sha256_at_start": "ecfcb7fcec90a3447c3b9079a904ad1b5063e440b025c0fd362dfc7513f73bd1",
+    "started_at_unix_ns": 1784017189614788100,
+    "started_at_utc": "2026-07-14T08:19:49.614788+00:00",
+    "metrics_finalized_at_unix_ns": 1784017194391361200,
+    "metrics_finalized_at_utc": "2026-07-14T08:19:54.391361+00:00",
+    "python_executable": "C:\\ProgramData\\anaconda3\\envs\\AI_group\\python.exe"
+  }
 }

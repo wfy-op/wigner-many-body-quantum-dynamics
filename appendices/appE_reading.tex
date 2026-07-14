@@ -1,0 +1,74 @@
+\chapter{分章文献导读}
+\label{app:further-reading}
+
+本附录不是把参考文献重复排列一次，而是说明每组文献在学习链中的作用。
+正文负责给出本书采用的约定与推导；这里的原始论文和综述用于追溯来源、
+比较其他约定，并继续进入本书没有展开的方向。阅读时应先核对研究对象、
+初态、观测量和时间窗，再比较不同文献对“有效”或“失效”的定义。
+
+\section{第2--4章：Weyl--Wigner 表示与高斯态}
+
+Wigner 与 Moyal 的原始工作分别奠定了准概率分布和相空间动力学的基础
+\cite{Wigner1932,Moyal1949}；Hillery 等的综述适合查找不同归一化、排序与
+量子光学实例\cite{Hillery1984}。连续变量高斯态、协方差矩阵、
+Williamson 分解和辛本征值可由综述\cite{Weedbrook2012}继续学习；需要处理
+非正普通概率或更一般高斯算符表示时，可比较
+文献\cite{Corney2003}与本书的正 Wigner 抽样范围。
+
+\section{第5--9章：TWA 的推导、基准与有效范围}
+
+凝聚气体中的早期随机场实现和失效讨论见
+\cite{Steel1998,Sinatra2002}。相空间半经典展开、响应修正及超越最低阶 TWA
+的系统表述见\cite{Polkovnikov2003,Polkovnikov2010}；经典场方法的模式
+截止、热平衡与数值实践可查阅\cite{Blakie2008}。Bose--Hubbard 二聚体的
+Josephson 方程、自俘获与相图应与原始工作
+\cite{Smerzi1997,Raghavan1999}对照，特别注意固定粒子数态与相干态直积的
+差别。
+
+\section{第10--13章：有限模式量子场与数值观测量}
+
+弱相互作用凝聚体、Gross--Pitaevskii 方程和 Bogoliubov 理论的标准背景可由
+综述\cite{Dalfovo1999}补充。数守恒的时变 BdG 构造见
+\cite{Castin1998}。投影场、半量子基线、非线性损耗与多分量 functional
+Wigner 推导可与\cite{Opanchuk2013}逐项核对；其适用条件仍应与
+\cite{Sinatra2002,Blakie2008}中的截止与占据要求联合使用。Gross--Pitaevskii
+方程的时间分裂谱离散、时空网格选择与数值实例见\cite{Bao2003}。
+
+\section{第14--15章：相干耦合、Raman SOC 与 BdG 淬火}
+
+Raman 合成自旋轨道耦合的实验起点见\cite{Lin2011}，平均场相图和三临界
+结构见\cite{Li2012}，较广的物理背景见综述\cite{Zhai2015}。均匀 Rabi
+耦合与 Raman 动量转移、磁性相变、激发谱及超流性质的统一导读可参见
+\cite{Recati2022}。这些文献采用的 Raman 频率、耦合常数和反冲能约定并不
+完全相同，比较临界条件前必须先换算哈密顿量。
+
+\section{第16章：去相位、预热化与热化}
+
+一维分裂凝聚体中的实验预热化见\cite{Gring2012}，局域关联的光锥式建立见
+\cite{Langen2013}。预热化、量子热化及其证据标准的现代综述见
+\cite{Ueda2020}。这些工作共同说明：表观稳态、高斯去相位平台和真正
+碰撞热化不是同一命题，也不应仅凭一条衰减曲线互相替代。
+
+\section{第17章：条纹序、刚度与超固态证据}
+
+一维有限温长程序的限制应先与 Hohenberg 定理\cite{Hohenberg1967}对照；
+零温 Luttinger 液体的相位与密度幂律关联见\cite{Haldane1981,Cazalilla2004}。
+超固态概念和历史判据可先读\cite{Boninsegni2012}；超流密度与边界扭转的
+路径积分联系可追溯至\cite{Pollock1987}。SOC 条纹候选的实验实例见
+\cite{Li2017}。偶极量子气体中的液滴与超固态实验发展可由
+\cite{Bottcher2021,Chomaz2023}补充。上述体系的相互作用机制不同，因此
+文献中的“超固态”证据不能脱离各自的有限尺寸、钉扎和刚度测量直接移植。
+
+\section{第18章：开放系统、positive-P 与张量网络}
+
+Markov 主方程的生成元结构见\cite{Lindblad1976}。positive-$P$ 的加倍相空间
+和 gauge-$P$ 的边界项处理分别见\cite{Drummond1980,Deuar2002}；它们能够
+保留 TWA 舍弃的量子项，但会引入抽样爆炸、权重离群或边界项风险。驱动耗散
+多体系统的物理与 Keldysh 语言可由\cite{Carusotto2013,Sieberer2016}继续
+学习。
+
+一维低纠缠动力学的另一条路线是矩阵乘积态。DMRG、TEBD/tDMRG 与 TDVP 的
+代表性入口依次为\cite{White1992,Vidal2003,Schollwock2011,Daley2004,
+Haegeman2011}。张量网络误差由局域截断、Trotter 或投影误差及纠缠增长控制，
+与 TWA 的占据和 Moyal 截断条件不同；交叉验证时应比较同一初态、观测量和
+时间窗口，而不是只比较两张外观相似的曲线。

@@ -5,13 +5,14 @@
 完成本章后，读者应能：
 \begin{enumerate}
   \item 区分均匀 Josephson/Rabi 耦合双组分模型与具有动量转移的 Raman 自旋轨道耦合模型；
-  \item 从 Hamilton 量识别全局相位、相对相位、粒子数和平移对称性；
+  \item 由 Raman 单粒子哈密顿量求两条能带，并判断下带何时出现两个简并极小值；
+  \item 从哈密顿量识别全局相位、相对相位、粒子数和平移对称性；
   \item 写出双分量接触相互作用的 TWA 场方程及正确 Weyl 修正；
   \item 判断参数淬火改变了哪些守恒量，以及哪些“条纹”结论不能由模型自动推出。
 \end{enumerate}
 \end{learningobjectives}
 
-\section{最小双分量 Hamilton 量}
+\section{最小双分量哈密顿量}
 
 考虑准一维赝自旋分量 $L,R$，场算符满足
 \begin{equation}
@@ -48,14 +49,54 @@
   \right).
   \label{eq:raman-lab-coupling}
 \end{equation}
-通过自旋依赖规范变换去掉该相位后，单粒子 Hamilton 量可写成
+通过自旋依赖规范变换去掉该相位后，单粒子哈密顿量可写成
 \begin{equation}
   h_{\rm soc}=
   \frac{(p_x-\hbar k_R\sigma_z)^2}{2m}
   +\frac{\delta}{2}\sigma_z-J\sigma_x+V(x).
   \label{eq:raman-soc-hamiltonian}
 \end{equation}
-这里 $k_R$ 提供有限动量尺度，低能带可以具有两个极小值。两个不同准动量凝聚分量的相干叠加才可能在密度或自旋密度中产生有限 $Q$ 的干涉条纹；这一模型结构和相图可参见实验与综述文献\cite{Lin2011,Li2012,Zhai2015}。
+令 $E_R=\hbar^2k_R^2/(2m)$。在均匀空间中取 $p_x=\hbar k$，可把式\eqref{eq:raman-soc-hamiltonian}写成
+\begin{equation}
+  h_{\rm soc}(k)=\epsilon_0(k)\identity_2+d_z(k)\sigma_z-J\sigma_x,
+  \quad
+  \epsilon_0(k)=\frac{\hbar^2(k^2+k_R^2)}{2m},
+  \quad
+  d_z(k)=\frac{\delta}{2}-\frac{\hbar^2kk_R}{m}.
+  \label{eq:soc-bloch-vector}
+\end{equation}
+因此两条单粒子能带为
+\begin{equation}
+  E_\pm(k)=\epsilon_0(k)\pm\sqrt{J^2+d_z(k)^2}.
+  \label{eq:soc-single-particle-bands}
+\end{equation}
+这一步也固定了本书 $J$ 约定下的临界因子。零失谐时，$E_-(k)$ 在
+\begin{equation}
+  J<2E_R
+  \label{eq:soc-double-minimum-condition}
+\end{equation}
+具有两个简并极小值
+\begin{equation}
+  k=\pm k_0,
+  \qquad
+  k_0=k_R\sqrt{1-\left(\frac{J}{2E_R}\right)^2};
+  \label{eq:soc-minimum-wavevector}
+\end{equation}
+在 $J\geq2E_R$ 时两个极小值并合到 $k=0$。若采用实验文献常见的 $\Omega=2J$，同一条件写成 $\Omega<4E_R$。非零失谐一般使两个极小值不再简并，不能继续套用式\eqref{eq:soc-minimum-wavevector}。
+
+设下带两个极小值的归一化自旋量为 $\chi_\pm$。相干叠加
+\begin{equation}
+  \bm\psi(x)=c_+\chi_+\ee^{\ii k_0x}
+  +c_-\chi_-\ee^{-\ii k_0x}
+  \label{eq:soc-two-minimum-superposition}
+\end{equation}
+在总密度中产生交叉项
+\begin{equation}
+  2\Re\!\left[c_+^*c_-\chi_+^\dagger\chi_-
+  \ee^{-2\ii k_0x}\right].
+  \label{eq:soc-stripe-overlap}
+\end{equation}
+故候选条纹波矢为 $Q=2k_0$，但振幅还取决于两个极小值是否同时宏观占据以及自旋量重叠 $\chi_+^\dagger\chi_-$。如果两自旋量正交，总密度交叉项消失，自旋密度仍可能调制。相互作用最终决定单极小值、双极小值相干叠加或其他相，而不是式\eqref{eq:soc-single-particle-bands}单独决定；这一模型结构和相图可参见实验与综述文献\cite{Lin2011,Li2012,Zhai2015}。
 
 因此，后续章节将明确区分两条问题线：
 \begin{enumerate}
@@ -100,18 +141,18 @@ $J>0$ 把平衡相对相位钉扎在 $\phi=0$；相对密度 $s$ 是其共轭变
 
 \subsection{均匀线性耦合存在时}
 
-全局变换 $\hat\Psi_{L,R}\to\ee^{\ii\chi}\hat\Psi_{L,R}$ 保持 Hamilton 量不变，总粒子数
+全局变换 $\hat\Psi_{L,R}\to\ee^{\ii\chi}\hat\Psi_{L,R}$ 保持哈密顿量不变，总粒子数
 $\hat N=\hat N_L+\hat N_R$ 守恒。若 $J\neq0$，独立的相对相位旋转不是对称性，$N_L-N_R$ 不守恒。均匀无陷阱时还具有连续平移对称和总动量守恒。
 
 \subsection{淬火后关闭线性耦合}
 
-若没有其他自旋翻转项，Hamilton 量恢复
-$U(1)_L\times U(1)_R$，$N_L$ 与 $N_R$ 分别守恒。相对相位不再被显式势能钉扎，但其空间梯度和相互作用仍产生动力学。一个瞬时淬火改变 Hamilton 量而不改变 $t=0$ 的量子态；新能量
+若没有其他自旋翻转项，哈密顿量恢复
+$U(1)_L\times U(1)_R$，$N_L$ 与 $N_R$ 分别守恒。相对相位不再被显式势能钉扎，但其空间梯度和相互作用仍产生动力学。一个瞬时淬火改变哈密顿量而不改变 $t=0$ 的量子态；对一般初始密度算符，新能量
 \begin{equation}
-  E_{\rm new}=\qavg{\psi_{\rm old}|\Hhat_{\rm new}|\psi_{\rm old}}
+  E_{\rm new}=\Tr(\rhohat_{\rm old}\Hhat_{\rm new})
   \label{eq:postquench-energy}
 \end{equation}
-随后守恒。它一般高于新 Hamilton 量基态能，差值是淬火注入能量，而不是与热浴交换的热量。
+随后守恒。纯态时才可把它写成相应的 bra--ket。它一般高于新哈密顿量基态能，差值是淬火注入能量，而不是与热浴交换的热量。
 
 \subsection{Raman SOC 的对称性}
 
@@ -142,9 +183,32 @@ $\delta_{\mathcal C}=1/\Delta x$，则均匀耦合模型的闭合系统 TWA 为
    \left(|\alpha_R|^2-\frac12\right)
   \label{eq:cross-interaction-weyl}
 \end{equation}
-直接求导得到。双线性 $J$ 项是二次 Hamilton 量，不产生额外排序修正。
+直接求导得到。双线性 $J$ 项是二次哈密顿量，不产生额外排序修正。
 
-对 SOC 模型，把单粒子矩阵 $h_{\rm soc}$ 代入式\eqref{eq:two-component-twa-l}--\eqref{eq:two-component-twa-r}即可，但传播器必须处理自旋依赖动量项。初态的噪声则要在同一个有限自旋--空间模式基中生成，每个保留正则玻色模式贡献半量子。
+对 SOC 模型，记 $\bm\psi=(\psi_L,\psi_R)^T$，则两式可合写为
+\begin{equation}
+  \ii\hbar\partial_t\bm\psi
+  =\left[h_{\rm soc}+\mathcal V_W(\bm\psi)\right]\bm\psi,
+  \label{eq:soc-spinor-twa}
+\end{equation}
+其中 $\mathcal V_W$ 是由式\eqref{eq:two-component-twa-l}--\eqref{eq:two-component-twa-r}两个非线性对角元组成的矩阵。SOC 是二次单粒子项，不另产生 Weyl 修正；排序基线仍由实际保留的空间--自旋模式投影决定。
+
+\subsection{可直接实现的 SOC 傅里叶传播器}
+
+在均匀周期系统中，式\eqref{eq:soc-bloch-vector}给出每个 $k$ 上的精确单粒子步进
+\begin{align}
+  U_k(\Delta t)={}&\exp[-\ii\epsilon_0(k)\Delta t/\hbar]
+  \left[
+  \cos\!\left(\frac{\lambda_k\Delta t}{\hbar}\right)\identity_2
+  -\ii\frac{\sin(\lambda_k\Delta t/\hbar)}{\lambda_k}
+  \left(d_z(k)\sigma_z-J\sigma_x\right)
+  \right],
+  \label{eq:soc-fourier-propagator}\\
+  \lambda_k={}&\sqrt{J^2+d_z(k)^2}.
+\end{align}
+$\lambda_k\to0$ 时应以解析极限或数值稳定的 $\operatorname{sinc}$ 实现第二项。一个 Strang 步可依次执行半个 $U_k$、完整的局域势与相互作用步、再半个 $U_k$。若局域步中还有不与密度矩阵对易的自旋翻转，需对相应 $2\times2$ 矩阵指数化，不能把两个分量各自乘相位。
+
+规范变换也改变边界条件。实验室表象的场严格周期时，式\eqref{eq:raman-lab-coupling}在环上首先要求 $2k_RL\in2\pi\mathbb Z$；规范表象的两个自旋分量随后带相反的扭转因子 $\exp(\mp\ii k_RL)$。只有更强的条件 $k_RL\in2\pi\mathbb Z$ 成立时，两分量才同时适用普通周期 FFT；$k_RL$ 为奇数倍 $\pi$ 时则是反周期边界。一般情形应显式使用对应的扭曲动量网格，或直接在实验室表象传播式\eqref{eq:raman-lab-coupling}。初态噪声必须在同一个有限自旋--空间基中生成；若用 BdG 模抽样，正能模式、自旋量、粒子--空穴伙伴与传播器采用的规范和边界必须一致。
 
 \section{无量纲控制参数}
 
@@ -187,4 +251,6 @@ $E_n=n(g+g_{12})/2$ 建立尺度。常见无量纲量包括
   \item 从式\eqref{eq:cross-interaction-weyl}推导式\eqref{eq:two-component-twa-l}中的跨分量修正。
   \item 列出 $J\neq0$ 与 $J=0$ 时所有连续对称性及对应守恒量。
   \item 说明实验室表象式\eqref{eq:raman-lab-coupling}怎样通过自旋依赖规范变换产生式\eqref{eq:raman-soc-hamiltonian}。
+  \item 从式\eqref{eq:soc-single-particle-bands}求导，推导零失谐双极小值条件\eqref{eq:soc-double-minimum-condition}和位置\eqref{eq:soc-minimum-wavevector}。
+  \item 证明式\eqref{eq:soc-fourier-propagator}是幺正矩阵，并实现 $\lambda_k\to0$ 时无除零误差的版本。
 \end{exercises}

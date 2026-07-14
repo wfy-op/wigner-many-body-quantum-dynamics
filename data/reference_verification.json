@@ -1,0 +1,380 @@
+{
+  "generated_at_utc": "2026-07-14T08:14:41.512331+00:00",
+  "source": "Crossref REST API",
+  "bibliography": "bibliography/references.bib",
+  "entry_count_with_doi": 41,
+  "status_counts": {
+    "verified": 41
+  },
+  "results": [
+    {
+      "key": "Wigner1932",
+      "doi": "10.1103/PhysRev.40.749",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "On the Quantum Correction For Thermodynamic Equilibrium",
+      "publisher": "American Physical Society (APS)",
+      "type": "journal-article"
+    },
+    {
+      "key": "Moyal1949",
+      "doi": "10.1017/S0305004100000487",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Quantum mechanics as a statistical theory",
+      "publisher": "Cambridge University Press (CUP)",
+      "type": "journal-article"
+    },
+    {
+      "key": "Hillery1984",
+      "doi": "10.1016/0370-1573(84)90160-1",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Distribution functions in physics: Fundamentals",
+      "publisher": "Elsevier BV",
+      "type": "journal-article"
+    },
+    {
+      "key": "Steel1998",
+      "doi": "10.1103/PhysRevA.58.4824",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Dynamical quantum noise in trapped Bose-Einstein condensates",
+      "publisher": "American Physical Society (APS)",
+      "type": "journal-article"
+    },
+    {
+      "key": "Sinatra2002",
+      "doi": "10.1088/0953-4075/35/17/301",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "The truncated Wigner method for Bose-condensed gases: limits of validity and applications",
+      "publisher": "IOP Publishing",
+      "type": "journal-article"
+    },
+    {
+      "key": "Polkovnikov2010",
+      "doi": "10.1016/j.aop.2010.02.006",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Phase space representation of quantum dynamics",
+      "publisher": "Elsevier BV",
+      "type": "journal-article"
+    },
+    {
+      "key": "Blakie2008",
+      "doi": "10.1080/00018730802564254",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Dynamics and statistical mechanics of ultra-cold Bose gases using c-field techniques",
+      "publisher": "Informa UK Limited",
+      "type": "journal-article"
+    },
+    {
+      "key": "Lin2011",
+      "doi": "10.1038/nature09887",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Spin–orbit-coupled Bose–Einstein condensates",
+      "publisher": "Springer Science and Business Media LLC",
+      "type": "journal-article"
+    },
+    {
+      "key": "Li2012",
+      "doi": "10.1103/PhysRevLett.108.225301",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Quantum Tricriticality and Phase Transitions in Spin-Orbit Coupled Bose-Einstein Condensates",
+      "publisher": "American Physical Society (APS)",
+      "type": "journal-article"
+    },
+    {
+      "key": "Zhai2015",
+      "doi": "10.1088/0034-4885/78/2/026001",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Degenerate quantum gases with spin–orbit coupling: a review",
+      "publisher": "IOP Publishing",
+      "type": "journal-article"
+    },
+    {
+      "key": "Li2017",
+      "doi": "10.1038/nature21431",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "A stripe phase with supersolid properties in spin–orbit-coupled Bose–Einstein condensates",
+      "publisher": "Springer Science and Business Media LLC",
+      "type": "journal-article"
+    },
+    {
+      "key": "Boninsegni2012",
+      "doi": "10.1103/RevModPhys.84.759",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "<i>Colloquium</i>: Supersolids: What and where are they?",
+      "publisher": "American Physical Society (APS)",
+      "type": "journal-article"
+    },
+    {
+      "key": "Hohenberg1967",
+      "doi": "10.1103/PhysRev.158.383",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Existence of Long-Range Order in One and Two Dimensions",
+      "publisher": "American Physical Society (APS)",
+      "type": "journal-article"
+    },
+    {
+      "key": "Gring2012",
+      "doi": "10.1126/science.1224953",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Relaxation and Prethermalization in an Isolated Quantum System",
+      "publisher": "American Association for the Advancement of Science (AAAS)",
+      "type": "journal-article"
+    },
+    {
+      "key": "Lindblad1976",
+      "doi": "10.1007/BF01608499",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "On the generators of quantum dynamical semigroups",
+      "publisher": "Springer Science and Business Media LLC",
+      "type": "journal-article"
+    },
+    {
+      "key": "Drummond1980",
+      "doi": "10.1088/0305-4470/13/7/018",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Generalised P-representations in quantum optics",
+      "publisher": "IOP Publishing",
+      "type": "journal-article"
+    },
+    {
+      "key": "Vidal2003",
+      "doi": "10.1103/PhysRevLett.91.147902",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Efficient Classical Simulation of Slightly Entangled Quantum Computations",
+      "publisher": "American Physical Society (APS)",
+      "type": "journal-article"
+    },
+    {
+      "key": "Dalfovo1999",
+      "doi": "10.1103/RevModPhys.71.463",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Theory of Bose-Einstein condensation in trapped gases",
+      "publisher": "American Physical Society (APS)",
+      "type": "journal-article"
+    },
+    {
+      "key": "Weedbrook2012",
+      "doi": "10.1103/RevModPhys.84.621",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Gaussian quantum information",
+      "publisher": "American Physical Society (APS)",
+      "type": "journal-article"
+    },
+    {
+      "key": "Corney2003",
+      "doi": "10.1103/PhysRevA.68.063822",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Gaussian quantum operator representation for bosons",
+      "publisher": "American Physical Society (APS)",
+      "type": "journal-article"
+    },
+    {
+      "key": "Opanchuk2013",
+      "doi": "10.1063/1.4801781",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Functional Wigner representation of quantum dynamics of Bose-Einstein condensate",
+      "publisher": "AIP Publishing",
+      "type": "journal-article"
+    },
+    {
+      "key": "Polkovnikov2003",
+      "doi": "10.1103/PhysRevA.68.053604",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Quantum corrections to the dynamics of interacting bosons: Beyond the truncated Wigner approximation",
+      "publisher": "American Physical Society (APS)",
+      "type": "journal-article"
+    },
+    {
+      "key": "Smerzi1997",
+      "doi": "10.1103/PhysRevLett.79.4950",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Quantum Coherent Atomic Tunneling between Two Trapped Bose-Einstein Condensates",
+      "publisher": "American Physical Society (APS)",
+      "type": "journal-article"
+    },
+    {
+      "key": "Raghavan1999",
+      "doi": "10.1103/PhysRevA.59.620",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Coherent oscillations between two weakly coupled Bose-Einstein condensates: Josephson effects,<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mml:mi>π</mml:mi></mml:math>oscillations, and macroscopic quantum self-trapping",
+      "publisher": "American Physical Society (APS)",
+      "type": "journal-article"
+    },
+    {
+      "key": "Castin1998",
+      "doi": "10.1103/PhysRevA.57.3008",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Low-temperature Bose-Einstein condensates in time-dependent traps: Beyond the<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mml:mi>U</mml:mi><mml:mo>(</mml:mo><mml:mn>1</mml:mn><mml:mo>)</mml:mo><mml:mn/></mml:math>symmetry-breaking approach",
+      "publisher": "American Physical Society (APS)",
+      "type": "journal-article"
+    },
+    {
+      "key": "Langen2013",
+      "doi": "10.1038/nphys2739",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Local emergence of thermal correlations in an isolated quantum many-body system",
+      "publisher": "Springer Science and Business Media LLC",
+      "type": "journal-article"
+    },
+    {
+      "key": "Ueda2020",
+      "doi": "10.1038/s42254-020-0237-x",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Quantum equilibration, thermalization and prethermalization in ultracold atoms",
+      "publisher": "Springer Science and Business Media LLC",
+      "type": "journal-article"
+    },
+    {
+      "key": "Recati2022",
+      "doi": "10.1146/annurev-conmatphys-031820-121316",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Coherently Coupled Mixtures of Ultracold Atomic Gases",
+      "publisher": "Annual Reviews",
+      "type": "journal-article"
+    },
+    {
+      "key": "Bottcher2021",
+      "doi": "10.1088/1361-6633/abc9ab",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "New states of matter with fine-tuned interactions: quantum droplets and dipolar supersolids",
+      "publisher": "IOP Publishing",
+      "type": "journal-article"
+    },
+    {
+      "key": "Chomaz2023",
+      "doi": "10.1088/1361-6633/aca814",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Dipolar physics: a review of experiments with magnetic quantum gases",
+      "publisher": "IOP Publishing",
+      "type": "journal-article"
+    },
+    {
+      "key": "Pollock1987",
+      "doi": "10.1103/PhysRevB.36.8343",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Path-integral computation of superfluid densities",
+      "publisher": "American Physical Society (APS)",
+      "type": "journal-article"
+    },
+    {
+      "key": "White1992",
+      "doi": "10.1103/PhysRevLett.69.2863",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Density matrix formulation for quantum renormalization groups",
+      "publisher": "American Physical Society (APS)",
+      "type": "journal-article"
+    },
+    {
+      "key": "Schollwock2011",
+      "doi": "10.1016/j.aop.2010.09.012",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "The density-matrix renormalization group in the age of matrix product states",
+      "publisher": "Elsevier BV",
+      "type": "journal-article"
+    },
+    {
+      "key": "Daley2004",
+      "doi": "10.1088/1742-5468/2004/04/P04005",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Time-dependent density-matrix renormalization-group using adaptive effective Hilbert\nspaces",
+      "publisher": "IOP Publishing",
+      "type": "journal-article"
+    },
+    {
+      "key": "Haegeman2011",
+      "doi": "10.1103/PhysRevLett.107.070601",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Time-Dependent Variational Principle for Quantum Lattices",
+      "publisher": "American Physical Society (APS)",
+      "type": "journal-article"
+    },
+    {
+      "key": "Deuar2002",
+      "doi": "10.1103/PhysRevA.66.033812",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Gauge<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mml:mi>P</mml:mi></mml:math>representations for quantum-dynamical problems: Removal of boundary terms",
+      "publisher": "American Physical Society (APS)",
+      "type": "journal-article"
+    },
+    {
+      "key": "Carusotto2013",
+      "doi": "10.1103/RevModPhys.85.299",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Quantum fluids of light",
+      "publisher": "American Physical Society (APS)",
+      "type": "journal-article"
+    },
+    {
+      "key": "Sieberer2016",
+      "doi": "10.1088/0034-4885/79/9/096001",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Keldysh field theory for driven open quantum systems",
+      "publisher": "IOP Publishing",
+      "type": "journal-article"
+    },
+    {
+      "key": "Bao2003",
+      "doi": "10.1016/S0021-9991(03)00102-5",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Numerical solution of the Gross–Pitaevskii equation for Bose–Einstein condensation",
+      "publisher": "Elsevier BV",
+      "type": "journal-article"
+    },
+    {
+      "key": "Haldane1981",
+      "doi": "10.1103/PhysRevLett.47.1840",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Effective Harmonic-Fluid Approach to Low-Energy Properties of One-Dimensional Quantum Fluids",
+      "publisher": "American Physical Society (APS)",
+      "type": "journal-article"
+    },
+    {
+      "key": "Cazalilla2004",
+      "doi": "10.1088/0953-4075/37/7/051",
+      "status": "verified",
+      "title_similarity": 1.0,
+      "crossref_title": "Bosonizing one-dimensional cold atomic gases",
+      "publisher": "IOP Publishing",
+      "type": "journal-article"
+    }
+  ]
+}

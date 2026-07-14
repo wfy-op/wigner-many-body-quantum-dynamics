@@ -12,8 +12,11 @@ try {
     New-Item -ItemType Directory -Path $OutputDir -Force | Out-Null
     Copy-Item -LiteralPath (Join-Path $Root 'main.pdf') `
         -Destination (Join-Path $OutputDir 'wigner_manybody_dynamics_draft.pdf') -Force
+    $DatedName = '维格纳相空间方法与玻色多体量子动力学_{0}.pdf' -f `
+        (Get-Date -Format 'yyyy-MM-dd')
+    Copy-Item -LiteralPath (Join-Path $Root 'main.pdf') `
+        -Destination (Join-Path $OutputDir $DatedName) -Force
 }
 finally {
     Pop-Location
 }
-
